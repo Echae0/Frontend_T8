@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Sidebar from './components/mypage/Sidebar';
+import ReservationHistory from './components/mypage/ReservationHistory';
+import EditProfile from './components/mypage/EditProfile';
+import FavoriteStores from './components/mypage/FavoriteStores';
+import MyReviews from './components/mypage/MyReviews';
+import Wishlist from './components/mypage/Wishlist';
+import Home from './components/mypage/Home';
 
-function App() {
-  const [count, setCount] = useState(0)
+import './App.css';
+
+export default function App() {
+  const [view, setView] = useState('reservation');
+
+  const renderView = () => {
+  switch (view) {
+    case 'home':
+      return <Home />;
+    case 'edit':
+      return <EditProfile />;
+    case 'reservation':
+      return <ReservationHistory />;
+    case 'favorite':
+      return <FavoriteStores />;
+    case 'review':
+      return <MyReviews />;
+    case 'wishlist':
+      return <Wishlist />;
+    default:
+      return <Home />;
+  }
+};
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="layout">
+      {/* 사이드바 */}
+      <div className="sidebar">
+        <Sidebar setView={setView} currentView={view} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
 
-export default App
+      {/* 메인 콘텐츠 */}
+      <div className="main-content">
+        {/* 상단바 */}
+        <div className="top-bar">
+          <h1 className="page-title">마이페이지</h1>
+          <div className="top-icons">
+            <button className="icon-button">👤</button>
+            <button className="icon-button">💬</button>
+          </div>
+        </div>
+
+        {/* 본문 영역 */}
+        <div className="content-box">
+          {renderView()}
+        </div>
+      </div>
+    </div>
+  );
+}

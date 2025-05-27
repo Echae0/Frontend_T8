@@ -1,42 +1,106 @@
-#root {
-  max-width: 1280px;
+/* App.css - 통합 레이아웃 및 마이페이지 구조 (원래대로 복원: 좌우 균형감 있는 구조) */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #f0f0f0;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.sidebar button {
+  display: block;
+  width: 120%;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #ccc;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.sidebar button:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar button.active {
+  background-color: #dcd7ff;
+  font-weight: bold;
+  border-color: #888;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.top-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-button {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.content-box {
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  padding: 40px;
+  box-sizing: border-box;
 }
