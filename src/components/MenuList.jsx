@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './MenuList.module.css';
 
 const MenuList = ({ setSelectedMenu }) => {
@@ -14,6 +15,12 @@ const MenuList = ({ setSelectedMenu }) => {
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
   };
+
+  useEffect(() => {
+    if (menus.length > 0) {
+      setSelectedMenu(menus[0]); // 배열의 첫 번째 메뉴
+    }
+  }, [setSelectedMenu]);
 
   return (
     <div className={styles.menuListContainer}>
