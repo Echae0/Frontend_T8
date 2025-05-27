@@ -1,0 +1,54 @@
+.waiting-container {
+  width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.waiting-container h2 {
+  margin-bottom: 10px;
+}
+
+.waiting-container p {
+  margin: 5px 0;
+}
+
+.waiting-container label {
+  display: block;
+  font-weight: bold;
+  margin: 15px 0 5px;
+}
+
+.waiting-container input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.waiting-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.waiting-buttons button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 8px 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.waiting-buttons button:hover {
+  background-color: #357ab8;
+}
