@@ -1,9 +1,13 @@
+import styles from './RestaurantImageSlider.module.css';
+
 const RestaurantImageSlider = () => {
   return (
-    <div className="grid grid-cols-4 gap-2 my-4">
-      {[...Array(4)].map((_, i) => (
-        <img key={i} src={`/assets/sample-images/restaurant${i + 1}.jpg`} alt="식당" className="rounded" />
-      ))}
+    <div className={styles.singleImageContainer}>
+      <img
+        src="/assets/sample-images/restaurant1.jpg"
+        alt="식당 대표 사진"
+        className={styles.singleImage}
+      />
     </div>
   );
 };

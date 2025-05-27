@@ -1,0 +1,35 @@
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #fff;
+}
+
+.content {
+  display: flex;
+  gap: 12px;
+}
+
+.menuImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.textContainer {
+  flex: 1;
+}
+
+.nickname {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.reviewText {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}

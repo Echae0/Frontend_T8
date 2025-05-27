@@ -1,11 +1,30 @@
+import styles from './MenuList.module.css';
+
 const MenuList = () => {
-  const menus = Array(6).fill('/assets/sample-images/menu-thumb.jpg');
+  // 메뉴 데이터 예시 (이미지 URL과 이름)
+  const menus = [
+    { img: '/assets/sample-images/열탄불고기된장찌개세트.jpg', name: '열탄불고기된장찌개세트' },
+    { img: '/assets/sample-images/열탄불고기김치찌개세트.jpg', name: '열탄불고기김치찌개세트' },
+    { img: '/assets/sample-images/menu-thumb.jpg', name: '김치찜' },
+    { img: '/assets/sample-images/menu-thumb.jpg', name: '제육볶음' },
+    { img: '/assets/sample-images/menu-thumb.jpg', name: '비빔밥' },
+    { img: '/assets/sample-images/menu-thumb.jpg', name: '갈비탕' }
+  ];
 
   return (
-    <div className="grid grid-cols-3 gap-2 mt-2">
-      {menus.map((src, i) => (
-        <img key={i} src={src} alt={`메뉴 ${i}`} className="rounded" />
-      ))}
+    <div className={styles.menuListContainer}>
+      <div className={styles.menuList}>
+        {menus.map((menu, i) => (
+          <div key={i} className={styles.menuItem}>
+            <img 
+              src={menu.img} 
+              alt={menu.name} 
+              className={styles.menuImage}
+            />
+            <p className={styles.menuName}>{menu.name}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
