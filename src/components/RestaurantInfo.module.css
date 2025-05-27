@@ -1,20 +1,55 @@
 .container {
-  padding: 16px;
   background-color: #fff;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* 넘칠 경우 가로 스크롤 */
+
+}
+
+.column_section {
+  flex: 1;
+  min-width: 100%;
+}
+
+.row_section {
+  display: grid;
+  grid-auto-flow: column; /* 가로 방향으로 배치 */
 }
 
 .title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #333;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #2c3e50;
 }
 
-.address,
-.hours {
+.address {
+  font-size: 15px;
+  color: #555;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.detail {
   font-size: 14px;
   color: #666;
-  margin-bottom: 4px;
+}
+
+.divider {
+  height: 100%;
+  width: 1px;
+  background-color: #ddd;
+  margin: 0 8px;
 }

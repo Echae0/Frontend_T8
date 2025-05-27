@@ -5,6 +5,7 @@ const MenuPreview = ({ menu }) => {
     <div className={styles.menuPreview}>
       <img src={menu.img} alt={menu.name} className={styles.menuMainImg} />
       <p className={styles.menuCaption}>{menu.name}</p>
+      <p className={styles.menuPrice}>{menu.price?.toLocaleString()}원</p>
     </div>
   );
 };

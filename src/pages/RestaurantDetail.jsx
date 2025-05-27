@@ -4,7 +4,7 @@ import RestaurantInfo from '../components/RestaurantInfo';
 import MenuPreview from '../components/MenuPreview';
 import MenuList from '../components/MenuList';
 import ReviewList from '../components/ReviewList';
-import WaitingButton from '../components/WaitingButton';
+import WaitingInfo from '../components/WaitingInfo';
 import { useState } from 'react';
 
 
@@ -19,7 +19,7 @@ const RestaurantDetail = () => {
       
       <div className={styles.infoSection}>
         <RestaurantInfo />
-        <WaitingButton />
+        {/* <WaitingInfo /> */}
       </div>
 
       <div className={styles.contentWrapper}>
