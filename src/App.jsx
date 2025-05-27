@@ -10,7 +10,7 @@ import Home from './components/mypage/Home';
 import './App.css';
 
 export default function App() {
-  const [view, setView] = useState('reservation');
+  const [view, setView] = useState('Home');
 
   const renderView = () => {
   switch (view) {
@@ -44,8 +44,8 @@ export default function App() {
         <div className="top-bar">
           <h1 className="page-title">마이페이지</h1>
           <div className="top-icons">
-            <button className="icon-button">👤</button>
             <button className="icon-button">💬</button>
+            <button className="icon-button">👤</button>
           </div>
         </div>
 
