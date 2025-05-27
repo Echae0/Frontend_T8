@@ -4,6 +4,7 @@ import RestaurantInfo from '../components/RestaurantInfo';
 import MenuPreview from '../components/MenuPreview';
 import MenuList from '../components/MenuList';
 import ReviewList from '../components/ReviewList';
+import ReviewList_select from '../components/ReviewList_select';
 import WaitingInfo from '../components/WaitingInfo';
 import { useState } from 'react';
 
@@ -29,7 +30,7 @@ const RestaurantDetail = () => {
         </div>
 
         <div className={styles.rightColumn}>
-          <ReviewList />
+          <ReviewList_select />
         </div>
       </div>
 

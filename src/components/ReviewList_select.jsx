@@ -1,7 +1,7 @@
-import styles from './ReviewList.module.css';
-import ReviewCard from './ReviewCard';
+import styles from './ReviewList_select.module.css';
+import ReviewCard_select from './ReviewCard_select';
 
-const ReviewList = () => {
+const ReviewList_select = () => {
   const reviews = [
     {
       nickname: 'nickname1',
@@ -10,7 +10,7 @@ const ReviewList = () => {
       waitingTime: '1시간 10분',
       visitTime: '12시 45분',
       visitCount: '8번째',
-      imageList: ['/assets/sample-images/review1.jpg']
+      image: '/assets/sample-images/review1.jpg'
     },
     {
       nickname: 'nickname2',
@@ -19,7 +19,7 @@ const ReviewList = () => {
       waitingTime: '30분',
       visitTime: '18시 20분',
       visitCount: '2번째',
-      imageList: ['/assets/sample-images/review2.jpg']
+      image: '/assets/sample-images/review2.jpg'
     },
     {
       nickname: 'nickname3',
@@ -28,7 +28,7 @@ const ReviewList = () => {
       waitingTime: '45분',
       visitTime: '19시 00분',
       visitCount: '4번째',
-      imageList: ['/assets/sample-images/review3.jpg']
+      image: '/assets/sample-images/review3.jpg'
     },
     {
       nickname: 'nickname4',
@@ -37,7 +37,7 @@ const ReviewList = () => {
       waitingTime: '20분',
       visitTime: '13시 10분',
       visitCount: '6번째',
-      imageList: ['/assets/sample-images/review4.jpg']
+      image: '/assets/sample-images/review4.jpg'
     },
     {
       nickname: 'nickname5',
@@ -46,7 +46,7 @@ const ReviewList = () => {
       waitingTime: '50분',
       visitTime: '17시 30분',
       visitCount: '1번째',
-      imageList: ['/assets/sample-images/review5.jpg']
+      image: '/assets/sample-images/review5.jpg'
     },
     {
       nickname: 'nickname6',
@@ -55,7 +55,7 @@ const ReviewList = () => {
       waitingTime: '1시간',
       visitTime: '20시 15분',
       visitCount: '3번째',
-      imageList: ['/assets/sample-images/review6.jpg']
+      image: '/assets/sample-images/review6.jpg'
     },
     {
       nickname: 'nickname7',
@@ -64,7 +64,7 @@ const ReviewList = () => {
       waitingTime: '25분',
       visitTime: '14시 50분',
       visitCount: '2번째',
-      imageList: ['/assets/sample-images/review7.jpg']
+      image: '/assets/sample-images/review7.jpg'
     },
     {
       nickname: 'nickname8',
@@ -73,7 +73,7 @@ const ReviewList = () => {
       waitingTime: '35분',
       visitTime: '18시 40분',
       visitCount: '5번째',
-      imageList: ['/assets/sample-images/review8.jpg']
+      image: '/assets/sample-images/review8.jpg'
     },
     {
       nickname: 'nickname9',
@@ -82,7 +82,7 @@ const ReviewList = () => {
       waitingTime: '40분',
       visitTime: '15시 20분',
       visitCount: '1번째',
-      imageList: ['/assets/sample-images/review9.jpg']
+      image: '/assets/sample-images/review9.jpg'
     },
     {
       nickname: 'nickname10',
@@ -91,20 +91,20 @@ const ReviewList = () => {
       waitingTime: '1시간 20분',
       visitTime: '19시 45분',
       visitCount: '10번째',
-      imageList: ['/assets/sample-images/review10.jpg']
+      image: '/assets/sample-images/review10.jpg'
     },
   ];
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>전체 리뷰</h2>
+      <h2 className={styles.title}>선택 메뉴 포함 리뷰</h2>
       <div className={styles.reviewsList}>
         {reviews.map((review, index) => (
-          <ReviewCard key={index} {...review} />
+          <ReviewCard_select key={index} {...review} />
         ))}
       </div>
     </div>
   );
 };
 
-export default ReviewList;
+export default ReviewList_select;

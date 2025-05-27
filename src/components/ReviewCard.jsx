@@ -1,32 +1,43 @@
 import styles from './ReviewCard.module.css';
 
-const ReviewCard = ({ 
-  nickname = 'nickname', 
-  rating = 3, 
-  reviewText = '', 
-  waitingTime = '', 
-  visitTime = '', 
-  visitCount = '' 
+const ReviewCard = ({
+  nickname = 'nickname',
+  reviewText = '',
+  waitingTime = '',
+  visitTime = '',
+  visitCount = '',
+  waitingScore = '',
+  imageList = [],
 }) => {
-  // 별점 렌더링 함수
-  const renderStars = () => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  };
-
   return (
     <div className={styles.card}>
+      {/* 상단: 프로필 + 닉네임 */}
       <div className={styles.header}>
-        <span className={styles.nickname}>{nickname}</span>
-        <span className={styles.rating}>{renderStars()}</span>
+        <div className={styles.profile}>
+          <div className={styles.avatar} />
+          <span className={styles.nickname}>{nickname}</span>
+        </div>
       </div>
-      
-      <p className={styles.reviewText}>{reviewText}</p>
-      
+
+      {/* 이미지 영역 */}
+      {imageList.length > 0 && (
+        <div className={styles.imageScroll}>
+          {imageList.map((src, i) => (
+            <img key={i} src={src} alt={`리뷰 이미지 ${i + 1}`} className={styles.image} />
+          ))}
+        </div>
+      )}
+
+      {/* 정보: 대기 시간, 방문 시각 등 */}
       <div className={styles.details}>
-        {waitingTime && <span>대기 시간: {waitingTime}</span>}
-        {visitTime && <span>방문 시간: {visitTime}</span>}
-        {visitCount && <span>방문 횟수: {visitCount}</span>}
+        <span>대기 시간 : {waitingTime}</span>
+        <span>방문 시각 : {visitTime}</span>
+        <span>방문 횟수 : {visitCount}</span>
+        <span>웨이팅 점수 : {waitingScore}</span>
       </div>
+
+      {/* 리뷰 텍스트 */}
+      <p className={styles.reviewText}>{reviewText}</p>
     </div>
   );
 };
