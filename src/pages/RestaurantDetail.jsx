@@ -5,8 +5,14 @@ import MenuPreview from '../components/MenuPreview';
 import MenuList from '../components/MenuList';
 import ReviewList from '../components/ReviewList';
 import WaitingButton from '../components/WaitingButton';
+import { useState } from 'react';
+
+
 
 const RestaurantDetail = () => {
+
+  const [selectedMenu, setSelectedMenu] = useState(null);
+
   return (
     <div className={styles.container}>
       <RestaurantImageSlider />
@@ -18,8 +24,8 @@ const RestaurantDetail = () => {
 
       <div className={styles.contentWrapper}>
         <div className={styles.leftColumn}>
-          <MenuPreview />
-          <MenuList />
+          {selectedMenu && <MenuPreview menu={selectedMenu} />}
+          <MenuList setSelectedMenu={setSelectedMenu} />
         </div>
 
         <div className={styles.rightColumn}>

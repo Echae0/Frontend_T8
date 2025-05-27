@@ -1,10 +1,10 @@
-import './MenuPreview.module.css';
+import styles from './MenuPreview.module.css';
 
-const MenuPreview = () => {
+const MenuPreview = ({ menu }) => {
   return (
-    <div className="menu-preview">
-      <img src="/assets/sample-images/menu-main.jpg" alt="대표 메뉴" className="menu-main-img" />
-      <p className="menu-caption">얼큰불고기김치세트 31,000원</p>
+    <div className={styles.menuPreview}>
+      <img src={menu.img} alt={menu.name} className={styles.menuMainImg} />
+      <p className={styles.menuCaption}>{menu.name}</p>
     </div>
   );
 };
