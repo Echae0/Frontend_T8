@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ReviewFormPage.module.css';
+import { FaBell, FaUser } from 'react-icons/fa';
 
 export default function ReviewFormPage() {
   const [reviewContent, setReviewContent] = useState('');
@@ -10,7 +11,7 @@ export default function ReviewFormPage() {
 
   const restaurantInfo = {
     name: '새마을 식당',
-    address: '신천동 400-2번지 동구 대구광역시 KR',
+    address: '신천동 400-2번지 동구 대구광역시',
     openingHours: '영업시간 : 11:00 ~ 22:00 주차 : 가능',
     image: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Restaurant',
     visitInfo: {
@@ -98,8 +99,19 @@ export default function ReviewFormPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.header}>
-        <h1 className={styles.headerTitle}>리뷰 남기기</h1>
+      <div className={styles.mainHeader}>
+        <div className={styles.headerLeft}>
+          <span className={styles.locationText}>강남구</span>
+          <input
+            type="text"
+            placeholder="식당을 검색해 보세요..."
+            className={styles.searchInput}
+          />
+        </div>
+        <div className={styles.headerRight}>
+          <FaBell className={styles.headerIcon} />
+          <FaUser className={styles.headerIcon} />
+        </div>
       </div>
 
       <div className={styles.contentArea}>
@@ -135,7 +147,6 @@ export default function ReviewFormPage() {
         </div>
 
         <div className={styles.reviewSection}>
-          {/* 새롭게 추가된 reviewCard로 nickname과 ReviewContent를 감쌈 */}
           <div className={styles.reviewCard}>
             <div className={styles.profileHeader}>
               <div className={styles.avatar}></div>
@@ -174,7 +185,7 @@ export default function ReviewFormPage() {
               </div>
             </div>
             {errors.image && <p className={`${styles.errorMessage} ${styles.imageErrorMessage}`}>{errors.image}</p>}
-          </div> {/* reviewCard 끝 */}
+          </div>
 
           <div className={styles.waitingScoreSection}>
             <div className={styles.scoreIcons}>
@@ -191,7 +202,7 @@ export default function ReviewFormPage() {
             <div className={styles.scoreLabel}>웨이팅 점수</div>
             {errors.score && <p className={styles.errorMessage}>{errors.score}</p>}
           </div>
-        </div> {/* reviewSection 끝 */}
+        </div>
 
         <button className={styles.submitButton} onClick={handleSubmit}>작성 완료</button>
       </div>
