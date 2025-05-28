@@ -36,7 +36,7 @@
 }
 
 .restaurantInfoSection,
-.amountSelectSection { /* reviewSection은 아래 reviewCard로 대체됨 */
+.amountSelectSection {
   background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
@@ -44,23 +44,18 @@
   text-align: left;
 }
 
-/* Review Section 전체를 감싸는 부분 (가게 정보와는 다르게 그림자 제거) */
 .reviewSection {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* reviewCard와 waitingScoreSection 사이 간격 */
-  /* padding은 reviewCard 내부에서 처리 */
-  /* 그림자는 reviewCard와 waitingScoreSection에서 각각 가짐 */
+  gap: 2rem;
 }
 
-/* 닉네임과 리뷰 내용을 담는 카드 */
 .reviewCard {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding-bottom: 1.5rem; /* 하단 패딩 조정 */
+    padding-bottom: 1.5rem;
 }
-
 
 .restaurantInfoSection {
   display: flex;
@@ -154,23 +149,22 @@
   font-weight: bold;
 }
 
-/* 닉네임과 아바타를 포함하는 헤더 */
 .profileHeader {
   display: flex;
   align-items: center;
-  background: #f5f5f5; /* 제공된 이미지의 배경색 */
+  background: #f5f5f5;
   padding: 12px 20px;
-  border-top-left-radius: 8px; /* reviewCard의 상단 라운드 유지 */
-  border-top-right-radius: 8px; /* reviewCard의 상단 라운드 유지 */
-  margin-bottom: 1rem; /* 하단 contentArea와의 간격 */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .avatar {
   width: 40px;
   height: 40px;
-  background: #ccc; /* 회색 아바타 */
+  background: #ccc;
   border-radius: 50%;
-  flex-shrink: 0; /* 축소 방지 */
+  flex-shrink: 0;
   margin-right: 12px;
 }
 
@@ -178,15 +172,14 @@
   font-weight: bold;
   font-size: 1.1rem;
   color: #333;
-  /* margin-bottom: 1rem; 기존 reviewSection의 닉네임 마진 제거 */
 }
 
 .reviewContentArea {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1rem;
-  padding: 0 2rem; /* reviewCard 내부의 좌우 패딩 */
-  position: relative; /* 이미지 오류 메시지 위치 기준 */
+  padding: 0 2rem;
+  position: relative;
 }
 
 .imageUploadContainer {
@@ -249,8 +242,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 2rem 1.5rem; /* 좌우 패딩 추가 */
-  background-color: #fff; /* 별도의 카드 배경 */
+  padding: 1rem 2rem 1.5rem;
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -322,7 +315,7 @@
 
 .reviewTextareaWrapper .errorMessage {
   position: absolute;
-  bottom: -2.5rem;
+  bottom: -2rem;
   left: 0;
   width: 100%;
 }
@@ -330,16 +323,8 @@
 .imageErrorMessage {
   text-align: center;
   margin-top: 0.5rem;
-  position: absolute; /* reviewContentArea의 하단에 맞춰 위치 */
-  bottom: -1.5rem; /* 이미지 아래 오류 메시지 위치 */
+  position: absolute;
+  bottom: -1.5rem;
   left: 0;
-  width: 150px; /* 이미지 너비에 맞춤 */
+  width: 150px;
 }
-
-/* reviewSection 내부의 오류 메시지 (이제 reviewCard 내부에만 존재하므로 조정) */
-/* .reviewSection .errorMessage:not(.imageErrorMessage) {
-  text-align: left;
-  padding-left: 2rem;
-  margin-top: 0.2rem;
-  margin-bottom: 1rem;
-} */

@@ -184,7 +184,7 @@ export default function ReviewFormPage() {
                   className={`${styles.scoreIcon} ${waitingScore >= score ? styles.filledScore : ''}`}
                   onClick={() => handleScoreClick(score)}
                 >
-                  &#127939;
+                  &#128340;
                 </span>
               ))}
             </div>
