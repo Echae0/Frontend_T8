@@ -10,7 +10,7 @@ export default function ReviewFormPage() {
 
   const restaurantInfo = {
     name: '새마을 식당',
-    address: '신천동 400-2번지 동구 대구광역시 KR',
+    address: '신천동 400-2번지 동구 대구광역시',
     openingHours: '영업시간 : 11:00 ~ 22:00 주차 : 가능',
     image: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Restaurant',
     visitInfo: {
