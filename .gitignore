@@ -22,3 +22,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 모든 이미지 파일 무시
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+
+# public/images 폴더 아래 모든 파일 무시
+public/images/*
+
+# src/assets 폴더 아래 이미지 무시
+src/assets/*.png
+src/assets/*.jpg
+src/assets/*.jpeg
+src/assets/*.gif
