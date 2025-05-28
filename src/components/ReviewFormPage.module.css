@@ -46,7 +46,6 @@
   text-align: left;
 }
 
-/* 가게 정보 섹션 */
 .restaurantInfoSection {
   display: flex;
   align-items: center;
@@ -91,7 +90,6 @@
   margin-left: 1.5rem;
 }
 
-/* 대략적인 주문 금액 선택 섹션 */
 .amountSelectSection {
   display: flex;
   flex-direction: column;
@@ -140,7 +138,6 @@
   font-weight: bold;
 }
 
-/* 리뷰 작성 섹션 */
 .reviewSection {
   padding-bottom: 0.5rem;
 }
@@ -170,13 +167,13 @@
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .uploadPlaceholder {
   text-align: center;
   color: #888;
   font-size: 0.9rem;
-  cursor: pointer;
 }
 
 .fileInput {
@@ -206,7 +203,6 @@
   min-height: 150px;
 }
 
-/* 웨이팅 점수 섹션 */
 .waitingScoreSection {
   display: flex;
   flex-direction: column;
@@ -217,17 +213,26 @@
 
 .scoreIcons {
   font-size: 2.5rem;
-  cursor: pointer;
   margin-bottom: 0.5rem;
+  display: flex;
+  gap: 5px;
 }
 
 .scoreIcon {
-  color: #ccc;
-  transition: color 0.2s ease-in-out;
+  /* 초기 투명도 적용 */
+  color: #ccc; /* 기본 회색 */
+  opacity: 0.4; /* 초기 투명도 */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out; /* 트랜지션에 opacity 추가 */
+}
+
+.scoreIcon:hover {
+    opacity: 0.7; /* 호버 시 약간 선명하게 */
 }
 
 .scoreIcon.filledScore {
-  color: #FFD700;
+  color: #FFD700; /* 채워진 별색 (노란색) */
+  opacity: 1; /* 선택 시 불투명하게 */
 }
 
 .scoreLabel {
@@ -236,7 +241,6 @@
   font-weight: bold;
 }
 
-/* 작성 완료 버튼 */
 .submitButton {
   background-color: #FFD700;
   color: #333;
@@ -255,7 +259,6 @@
   background-color: #E0B800;
 }
 
-/* 유효성 검사 오류 메시지 */
 .errorMessage {
   color: red;
   font-size: 0.85rem;
