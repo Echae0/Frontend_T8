@@ -12,7 +12,7 @@
 
 .mainHeader {
   width: 100%;
-  background-color: #FFD700; /* 노란색 계열로 변경 */
+  background-color: #FFD700; /* 노란색 계열 유지 */
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -33,7 +33,7 @@
 
 .locationText {
   font-weight: bold;
-  color: #333; /* 노란색 배경에 어울리도록 어두운 색상 유지 */
+  color: #333; /* 글씨색 유지 */
   font-size: 1rem;
   white-space: nowrap;
 }
@@ -60,7 +60,7 @@
 
 .headerIcon {
   font-size: 1.5rem;
-  color: #333; /* 노란색 배경에 어울리도록 어두운 색상 유지 */
+  color: #333; /* 아이콘 색상 유지 */
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -267,7 +267,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: relative; /* 자식 absolute 위치 지정을 위해 relative로 설정 */
 }
 
 .reviewTextarea {
@@ -350,16 +350,24 @@
   border-color: red !important;
 }
 
-.amountSelectSection .errorMessage,
-.waitingScoreSection .errorMessage {
-  text-align: center;
+.amountErrorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-align: left; 
   width: 100%;
 }
 
-.reviewTextareaWrapper .errorMessage {
-  position: absolute;
-  bottom: -2.5rem;
-  left: 0;
+.reviewContentErrorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.5rem; 
+  text-align: left;
+  width: 100%;
+}
+
+.waitingScoreSection .errorMessage {
+  text-align: center;
   width: 100%;
 }
 

@@ -11,7 +11,7 @@ export default function ReviewFormPage() {
 
   const restaurantInfo = {
     name: '새마을 식당',
-    address: '신천동 400-2번지 동구 대구광역시',
+    address: '신천동 400-2번지 동구 대구광역시 KR',
     openingHours: '영업시간 : 11:00 ~ 22:00 주차 : 가능',
     image: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Restaurant',
     visitInfo: {
@@ -143,7 +143,7 @@ export default function ReviewFormPage() {
               </button>
             ))}
           </div>
-          {errors.amount && <p className={styles.errorMessage}>{errors.amount}</p>}
+          {errors.amount && <p className={styles.amountErrorMessage}>{errors.amount}</p>}
         </div>
 
         <div className={styles.reviewSection}>
@@ -181,7 +181,7 @@ export default function ReviewFormPage() {
                   }}
                   rows="8"
                 ></textarea>
-                {errors.reviewContent && <p className={styles.errorMessage}>{errors.reviewContent}</p>}
+                {errors.reviewContent && <p className={styles.reviewContentErrorMessage}>{errors.reviewContent}</p>}
               </div>
             </div>
             {errors.image && <p className={`${styles.errorMessage} ${styles.imageErrorMessage}`}>{errors.image}</p>}
