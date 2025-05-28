@@ -140,6 +140,7 @@
 
 .reviewSection {
   padding-bottom: 0.5rem;
+  position: relative;
 }
 
 .nickname {
@@ -193,14 +194,22 @@
   border-radius: 8px;
 }
 
-.reviewTextarea {
+.reviewTextareaWrapper {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.reviewTextarea {
+  width: calc(100% - 20px);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
   resize: vertical;
   min-height: 150px;
+  margin-bottom: 0;
 }
 
 .waitingScoreSection {
@@ -219,20 +228,19 @@
 }
 
 .scoreIcon {
-  /* 초기 투명도 적용 */
-  color: #ccc; /* 기본 회색 */
-  opacity: 0.4; /* 초기 투명도 */
+  color: #ccc;
+  opacity: 0.4;
   cursor: pointer;
-  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out; /* 트랜지션에 opacity 추가 */
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
 .scoreIcon:hover {
-    opacity: 0.7; /* 호버 시 약간 선명하게 */
+    opacity: 0.7;
 }
 
 .scoreIcon.filledScore {
-  color: #FFD700; /* 채워진 별색 (노란색) */
-  opacity: 1; /* 선택 시 불투명하게 */
+  color: #FFD700;
+  opacity: 1;
 }
 
 .scoreLabel {
@@ -262,10 +270,9 @@
 .errorMessage {
   color: red;
   font-size: 0.85rem;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
   text-align: left;
-  padding-left: 2rem;
 }
 
 .inputError {
@@ -275,8 +282,26 @@
 .amountSelectSection .errorMessage,
 .waitingScoreSection .errorMessage {
   text-align: center;
+  width: 100%;
 }
 
-.reviewSection .errorMessage {
+.reviewTextareaWrapper .errorMessage {
+  position: absolute;
+  bottom: -2.5rem; 
+  left: 0;
+  width: 100%;
+}
+
+.imageErrorMessage {
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-left: 0;
+  width: 150px;
+}
+
+.reviewSection .errorMessage:not(.imageErrorMessage) {
   text-align: left;
+  padding-left: 2rem;
+  margin-top: 0.2rem;
+  margin-bottom: 1rem;
 }

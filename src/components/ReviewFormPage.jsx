@@ -135,7 +135,7 @@ export default function ReviewFormPage() {
         </div>
 
         <div className={styles.reviewSection}>
-          <div className={styles.nickname}>nickname</div>
+          <div className={styles.nickname}>닉네임</div> {/* 닉네임 텍스트 변경 */}
           <div className={styles.reviewContentArea}>
             <div className={styles.imageUploadContainer} onClick={uploadedImage ? handleImageCancel : null}>
               {uploadedImage ? (
@@ -153,19 +153,22 @@ export default function ReviewFormPage() {
                 </div>
               )}
             </div>
-            {errors.image && <p className={styles.errorMessage}>{errors.image}</p>}
-            <textarea
-              className={`${styles.reviewTextarea} ${errors.reviewContent ? styles.inputError : ''}`}
-              placeholder="리뷰 내용을 작성해주세요."
-              value={reviewContent}
-              onChange={(e) => {
-                setReviewContent(e.target.value);
-                setErrors((prev) => ({ ...prev, reviewContent: '' }));
-              }}
-              rows="8"
-            ></textarea>
+            {/* 이미지 아래 오류 메시지 위치 조정 위해 별도 div 추가 */}
+            <div className={styles.reviewTextareaWrapper}>
+              <textarea
+                className={`${styles.reviewTextarea} ${errors.reviewContent ? styles.inputError : ''}`}
+                placeholder="리뷰 내용을 작성해주세요."
+                value={reviewContent}
+                onChange={(e) => {
+                  setReviewContent(e.target.value);
+                  setErrors((prev) => ({ ...prev, reviewContent: '' }));
+                }}
+                rows="8"
+              ></textarea>
+              {errors.reviewContent && <p className={styles.errorMessage}>{errors.reviewContent}</p>}
+            </div>
           </div>
-          {errors.reviewContent && <p className={styles.errorMessage}>{errors.reviewContent}</p>}
+          {errors.image && <p className={`${styles.errorMessage} ${styles.imageErrorMessage}`}>{errors.image}</p>}
         </div>
 
         <div className={styles.waitingScoreSection}>
@@ -176,7 +179,7 @@ export default function ReviewFormPage() {
                 className={`${styles.scoreIcon} ${waitingScore >= score ? styles.filledScore : ''}`}
                 onClick={() => handleScoreClick(score)}
               >
-                &#127939; {/* 🏃*/}
+                &#127939;
               </span>
             ))}
           </div>
