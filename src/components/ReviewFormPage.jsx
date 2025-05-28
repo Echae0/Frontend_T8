@@ -10,7 +10,7 @@ export default function ReviewFormPage() {
 
   const restaurantInfo = {
     name: '새마을 식당',
-    address: '신천동 400-2번지 동구 대구광역시',
+    address: '신천동 400-2번지 동구 대구광역시 KR',
     openingHours: '영업시간 : 11:00 ~ 22:00 주차 : 가능',
     image: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Restaurant',
     visitInfo: {
@@ -135,57 +135,63 @@ export default function ReviewFormPage() {
         </div>
 
         <div className={styles.reviewSection}>
-          <div className={styles.nickname}>닉네임</div> {/* 닉네임 텍스트 변경 */}
-          <div className={styles.reviewContentArea}>
-            <div className={styles.imageUploadContainer} onClick={uploadedImage ? handleImageCancel : null}>
-              {uploadedImage ? (
-                <img src={uploadedImage} alt="업로드된 이미지" className={styles.uploadedImagePreview} />
-              ) : (
-                <div className={styles.uploadPlaceholder}>
-                  <p>사진 업로드</p>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className={styles.fileInput}
-                    id="imageUploadInput"
-                  />
-                </div>
-              )}
+          {/* 새롭게 추가된 reviewCard로 nickname과 ReviewContent를 감쌈 */}
+          <div className={styles.reviewCard}>
+            <div className={styles.profileHeader}>
+              <div className={styles.avatar}></div>
+              <div className={styles.nickname}>닉네임</div>
             </div>
-            {/* 이미지 아래 오류 메시지 위치 조정 위해 별도 div 추가 */}
-            <div className={styles.reviewTextareaWrapper}>
-              <textarea
-                className={`${styles.reviewTextarea} ${errors.reviewContent ? styles.inputError : ''}`}
-                placeholder="리뷰 내용을 작성해주세요."
-                value={reviewContent}
-                onChange={(e) => {
-                  setReviewContent(e.target.value);
-                  setErrors((prev) => ({ ...prev, reviewContent: '' }));
-                }}
-                rows="8"
-              ></textarea>
-              {errors.reviewContent && <p className={styles.errorMessage}>{errors.reviewContent}</p>}
-            </div>
-          </div>
-          {errors.image && <p className={`${styles.errorMessage} ${styles.imageErrorMessage}`}>{errors.image}</p>}
-        </div>
 
-        <div className={styles.waitingScoreSection}>
-          <div className={styles.scoreIcons}>
-            {Array.from({ length: 5 }, (_, i) => i + 1).map((score) => (
-              <span
-                key={score}
-                className={`${styles.scoreIcon} ${waitingScore >= score ? styles.filledScore : ''}`}
-                onClick={() => handleScoreClick(score)}
-              >
-                &#127939;
-              </span>
-            ))}
+            <div className={styles.reviewContentArea}>
+              <div className={styles.imageUploadContainer} onClick={uploadedImage ? handleImageCancel : null}>
+                {uploadedImage ? (
+                  <img src={uploadedImage} alt="업로드된 이미지" className={styles.uploadedImagePreview} />
+                ) : (
+                  <div className={styles.uploadPlaceholder}>
+                    <p>사진 업로드</p>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className={styles.fileInput}
+                      id="imageUploadInput"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className={styles.reviewTextareaWrapper}>
+                <textarea
+                  className={`${styles.reviewTextarea} ${errors.reviewContent ? styles.inputError : ''}`}
+                  placeholder="리뷰 내용을 작성해주세요."
+                  value={reviewContent}
+                  onChange={(e) => {
+                    setReviewContent(e.target.value);
+                    setErrors((prev) => ({ ...prev, reviewContent: '' }));
+                  }}
+                  rows="8"
+                ></textarea>
+                {errors.reviewContent && <p className={styles.errorMessage}>{errors.reviewContent}</p>}
+              </div>
+            </div>
+            {errors.image && <p className={`${styles.errorMessage} ${styles.imageErrorMessage}`}>{errors.image}</p>}
+          </div> {/* reviewCard 끝 */}
+
+          <div className={styles.waitingScoreSection}>
+            <div className={styles.scoreIcons}>
+              {Array.from({ length: 5 }, (_, i) => i + 1).map((score) => (
+                <span
+                  key={score}
+                  className={`${styles.scoreIcon} ${waitingScore >= score ? styles.filledScore : ''}`}
+                  onClick={() => handleScoreClick(score)}
+                >
+                  &#127939;
+                </span>
+              ))}
+            </div>
+            <div className={styles.scoreLabel}>웨이팅 점수</div>
+            {errors.score && <p className={styles.errorMessage}>{errors.score}</p>}
           </div>
-          <div className={styles.scoreLabel}>웨이팅 점수</div>
-          {errors.score && <p className={styles.errorMessage}>{errors.score}</p>}
-        </div>
+        </div> {/* reviewSection 끝 */}
 
         <button className={styles.submitButton} onClick={handleSubmit}>작성 완료</button>
       </div>
