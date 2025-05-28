@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 수직 중앙 정렬 */
+  width: 100%;
+  padding: 16px 0;
+  gap: 30px;
+  max-height: 700px;
+  overflow-x: cover;
+  background-color: #fff;
+}
+
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  padding: 0 16px;
+}
+
+.reviewsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  gap: 16px;
+  padding: 0 16px;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.reviewsList::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
