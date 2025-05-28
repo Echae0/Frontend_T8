@@ -1,0 +1,279 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  max-width: 900px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.headerTitle {
+  margin: 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  gap: 2rem;
+}
+
+.restaurantInfoSection,
+.amountSelectSection,
+.reviewSection,
+.waitingScoreSection {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+/* 가게 정보 섹션 */
+.restaurantInfoSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.restaurantImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.restaurantDetails {
+  flex-grow: 1;
+}
+
+.restaurantName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.restaurantAddress,
+.restaurantHours {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.visitDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #555;
+  border-left: 1px solid #eee;
+  padding-left: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+/* 대략적인 주문 금액 선택 섹션 */
+.amountSelectSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.amountTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #555;
+  width: 100%;
+  text-align: left;
+}
+
+.amountOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.amountButton {
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 0.7rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.amountButton:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.amountButton.selectedAmount {
+  background-color: #FFD700;
+  color: #333;
+  border-color: #FFD700;
+  font-weight: bold;
+}
+
+/* 리뷰 작성 섹션 */
+.reviewSection {
+  padding-bottom: 0.5rem;
+}
+
+.nickname {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.reviewContentArea {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.imageUploadContainer {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.uploadPlaceholder {
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadedImagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.reviewTextarea {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* 웨이팅 점수 섹션 */
+.waitingScoreSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.scoreIcons {
+  font-size: 2.5rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.scoreIcon {
+  color: #ccc;
+  transition: color 0.2s ease-in-out;
+}
+
+.scoreIcon.filledScore {
+  color: #FFD700;
+}
+
+.scoreLabel {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: bold;
+}
+
+/* 작성 완료 버튼 */
+.submitButton {
+  background-color: #FFD700;
+  color: #333;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+}
+
+.submitButton:hover {
+  background-color: #E0B800;
+}
+
+/* 유효성 검사 오류 메시지 */
+.errorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding-left: 2rem;
+}
+
+.inputError {
+  border-color: red !important;
+}
+
+.amountSelectSection .errorMessage,
+.waitingScoreSection .errorMessage {
+  text-align: center;
+}
+
+.reviewSection .errorMessage {
+  text-align: left;
+}
