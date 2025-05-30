@@ -207,12 +207,12 @@
 
 .waitingNumber,
 .waitingTime {
-  color: #FFD700;
+  color: #FFB22C;
   font-size: 1.2rem;
 }
 
 .submitButton {
-  background-color: #FFD700;
+  background-color: #FFB22C;
   color: #333;
   border: none;
   padding: 1rem 2.5rem;
@@ -224,7 +224,7 @@
 }
 
 .submitButton:hover {
-  background-color: #E0B800;
+  background-color: #e39f28;
 }
 
 .errorMessage {
