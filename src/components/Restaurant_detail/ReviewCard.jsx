@@ -1,12 +1,11 @@
+import PropTypes from 'prop-types';
 import styles from './ReviewCard.module.css';
 
 const ReviewCard = ({
-  nickname = 'nickname',
+  nickname = '익명 사용자',
   reviewText = '',
-  waitingTime = '',
-  visitTime = '',
-  visitCount = '',
   waitingScore = '',
+  visitTime = '',
   imageList = [],
 }) => {
   return (
@@ -28,18 +27,24 @@ const ReviewCard = ({
         </div>
       )}
 
-      {/* 정보: 대기 시간, 방문 시각 등 */}
+      {/* 정보 */}
       <div className={styles.details}>
-        <span>대기 시간 : {waitingTime}</span>
-        <span>방문 시각 : {visitTime}</span>
-        <span>방문 횟수 : {visitCount}</span>
-        <span>웨이팅 점수 : {waitingScore}</span>
+        <span>리뷰 작성 시각 : {visitTime}</span>
+        <span>별점 : {waitingScore}점</span>
       </div>
 
-      {/* 리뷰 텍스트 */}
+      {/* 텍스트 */}
       <p className={styles.reviewText}>{reviewText}</p>
     </div>
   );
+};
+
+ReviewCard.propTypes = {
+  nickname: PropTypes.string,
+  reviewText: PropTypes.string,
+  waitingScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  visitTime: PropTypes.string,
+  imageList: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ReviewCard;

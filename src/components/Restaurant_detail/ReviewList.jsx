@@ -1,106 +1,46 @@
-import styles from './ReviewList.module.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
+import styles from './ReviewList.module.css';
 
 const ReviewList = () => {
-  const reviews = [
-    {
-      nickname: 'nickname1',
-      rating: 3,
-      reviewText: '먹국도 맛있고 캣알위에 불고기올리고 마늘올려서 왕하고 먹..',
-      waitingTime: '1시간 10분',
-      visitTime: '12시 45분',
-      visitCount: '8번째',
-      imageList: ['/assets/sample-images/review1.jpg']
-    },
-    {
-      nickname: 'nickname2',
-      rating: 2,
-      reviewText: '맛은 괜찮지만 서비스가 별로였습니다.',
-      waitingTime: '30분',
-      visitTime: '18시 20분',
-      visitCount: '2번째',
-      imageList: ['/assets/sample-images/review2.jpg']
-    },
-    {
-      nickname: 'nickname3',
-      rating: 5,
-      reviewText: '여기 진짜 인생 맛집이에요. 고기 질도 좋고 분위기도 굿!',
-      waitingTime: '45분',
-      visitTime: '19시 00분',
-      visitCount: '4번째',
-      imageList: ['/assets/sample-images/review3.jpg']
-    },
-    {
-      nickname: 'nickname4',
-      rating: 4,
-      reviewText: '양도 많고 맛도 좋아요. 다음에도 또 올 예정!',
-      waitingTime: '20분',
-      visitTime: '13시 10분',
-      visitCount: '6번째',
-      imageList: ['/assets/sample-images/review4.jpg']
-    },
-    {
-      nickname: 'nickname5',
-      rating: 1,
-      reviewText: '기대 이하였어요. 고기가 질기고 불친절했어요.',
-      waitingTime: '50분',
-      visitTime: '17시 30분',
-      visitCount: '1번째',
-      imageList: ['/assets/sample-images/review5.jpg']
-    },
-    {
-      nickname: 'nickname6',
-      rating: 5,
-      reviewText: '대기 오래했지만 그만한 가치가 있었어요!',
-      waitingTime: '1시간',
-      visitTime: '20시 15분',
-      visitCount: '3번째',
-      imageList: ['/assets/sample-images/review6.jpg']
-    },
-    {
-      nickname: 'nickname7',
-      rating: 3,
-      reviewText: '무난하게 괜찮은 편. 특별하진 않지만 재방문 의사는 있어요.',
-      waitingTime: '25분',
-      visitTime: '14시 50분',
-      visitCount: '2번째',
-      imageList: ['/assets/sample-images/review7.jpg']
-    },
-    {
-      nickname: 'nickname8',
-      rating: 4,
-      reviewText: '친구랑 갔는데 분위기 좋고, 고기 질도 꽤 괜찮았어요!',
-      waitingTime: '35분',
-      visitTime: '18시 40분',
-      visitCount: '5번째',
-      imageList: ['/assets/sample-images/review8.jpg']
-    },
-    {
-      nickname: 'nickname9',
-      rating: 2,
-      reviewText: '맛은 그냥저냥인데 너무 시끄럽고 자리도 좁았어요.',
-      waitingTime: '40분',
-      visitTime: '15시 20분',
-      visitCount: '1번째',
-      imageList: ['/assets/sample-images/review9.jpg']
-    },
-    {
-      nickname: 'nickname10',
-      rating: 5,
-      reviewText: '여기서 고기 먹고 다른 데 못 갑니다. 최고예요!',
-      waitingTime: '1시간 20분',
-      visitTime: '19시 45분',
-      visitCount: '10번째',
-      imageList: ['/assets/sample-images/review10.jpg']
-    },
-  ];
+  const { id: restaurantId } = useParams();
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!restaurantId) return;
+
+    axios.get(`http://localhost:8080/api/restaurants/${restaurantId}/reviews`)
+      .then((res) => {
+        setReviews(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('리뷰 불러오기 실패:', err);
+        setLoading(false);
+      });
+  }, [restaurantId]);
+
+  if (loading) return <p>리뷰를 불러오는 중...</p>;
+  if (reviews.length === 0) return <p>리뷰가 없습니다.</p>;
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>전체 리뷰</h2>
       <div className={styles.reviewsList}>
         {reviews.map((review, index) => (
-          <ReviewCard key={index} {...review} />
+          <ReviewCard
+            key={review.id || index}
+            nickname={review.memberName || '익명'}
+            reviewText={review.comment || ''}
+            // waitingTime={/* 서버에서 제공하지 않으므로 빈값 혹은 별도 처리 */}
+            visitTime={review.createdAt ? new Date(review.createdAt).toLocaleString() : ''}
+            visitCount={''} // DTO에 없으므로 빈 문자열 처리
+            waitingScore={review.rating || ''} // rating 점수로 사용
+            imageList={[]} // 이미지 정보 DTO에 없으므로 빈 배열 처리
+          />
         ))}
       </div>
     </div>
