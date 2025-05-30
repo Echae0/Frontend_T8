@@ -19,21 +19,23 @@ const ReviewCard = ({
       </div>
 
       {/* 이미지 영역 */}
-      {imageList.length > 0 && (
-        <div className={styles.imageScroll}>
-          {imageList.map((src, i) => (
+      <div className={styles.imageScroll}>
+        {imageList.length > 0 ? (
+          imageList.map((src, i) => (
             <img key={i} src={src} alt={`리뷰 이미지 ${i + 1}`} className={styles.image} />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <span className={styles.reviewText}>이미지 정보 없음</span>
+        )}
+      </div>
 
       {/* 정보 */}
       <div className={styles.details}>
-        <span>리뷰 작성 시각 : {visitTime}</span>
-        <span>별점 : {waitingScore}점</span>
+        <span>리뷰 작성 시각 : {visitTime || '정보 없음'}</span>
+        <span>별점 : {waitingScore || '정보 없음'}점</span>
       </div>
 
-      {/* 텍스트 */}
+      {/* 리뷰 텍스트 */}
       <p className={styles.reviewText}>{reviewText}</p>
     </div>
   );
@@ -48,3 +50,4 @@ ReviewCard.propTypes = {
 };
 
 export default ReviewCard;
+
