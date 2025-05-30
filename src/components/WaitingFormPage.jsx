@@ -29,7 +29,7 @@ export default function WaitingFormPage() {
     const [currentWaitingCount, setCurrentWaitingCount] = useState(0);
     const [estimatedWaitingTime, setEstimatedWaitingTime] = useState('0분');
 
-    const API_BASE_URL = 'http://localhost:8080/api/waitings'; // 백엔드 API 기본 URL
+    const API_BASE_URL = 'http://localhost:8080/api/reservations'; // 백엔드 API 기본 URL
 
     // 현재 대기열 정보 가져오기 (useCallback으로 최적화)
     const fetchWaitingInfo = useCallback(async () => {
