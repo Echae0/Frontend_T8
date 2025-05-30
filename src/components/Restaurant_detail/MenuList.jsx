@@ -1,43 +1,50 @@
-import { useEffect } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import styles from './MenuList.module.css';
+import { useParams } from 'react-router-dom';
 
 const MenuList = ({ setSelectedMenu }) => {
-  // 메뉴 데이터 예시 (이미지 URL, 이름, 가격)
-  const menus = [
-    { img: '/assets/sample-images/열탄불고기된장찌개세트.jpg', name: '열탄불고기된장찌개세트', price: 31000 },
-    { img: '/assets/sample-images/열탄불고기김치찌개세트.jpg', name: '열탄불고기김치찌개세트', price: 32000 },
-    { img: '/assets/sample-images/내맘대로 열탄불고기만.jpg', name: '내맘대로 열탄불고기만', price: 27000 },
-    { img: '/assets/sample-images/menu-thumb.jpg', name: '제육볶음', price: 10000 },
-    { img: '/assets/sample-images/menu-thumb.jpg', name: '비빔밥', price: 9000 },
-    { img: '/assets/sample-images/menu-thumb.jpg', name: '갈비탕', price: 11000 }
-  ];
+  const { restaurantId } = useParams();
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/restaurants/${restaurantId}/menus`)
+      .then(res => {
+        const menuList = res.data;
+        setMenus(menuList);
+
+        if (menuList.length > 0) {
+          setSelectedMenu(menuList[0]);
+        }
+      })
+      .catch(err => {
+        console.error("메뉴 불러오기 실패:", err);
+      });
+  }, [restaurantId, setSelectedMenu]);
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
   };
 
-  useEffect(() => {
-    if (menus.length > 0) {
-      setSelectedMenu(menus[0]); // 배열의 첫 번째 메뉴
-    }
-  }, [setSelectedMenu]);
-
   return (
     <div className={styles.menuListContainer}>
       <div className={styles.menuList}>
-        {menus.map((menu, i) => (
+        {menus.map((menu) => (
           <div 
-            key={i} 
+            key={menu.id} 
             className={styles.menuItem}
             onClick={() => handleMenuClick(menu)}
           >
             <img 
-              src={menu.img} 
+              src={menu.imageUrl || '/assets/sample-images/menu-thumb.jpg'} 
               alt={menu.name} 
               className={styles.menuImage}
             />
             <p className={styles.menuName}>{menu.name}</p>
-            <p className={styles.menuPrice}>{menu.price.toLocaleString()}원</p>
+            <p className={styles.menuPrice}>
+              {menu.price?.toLocaleString()}원
+            </p>
           </div>
         ))}
       </div>
@@ -46,3 +53,7 @@ const MenuList = ({ setSelectedMenu }) => {
 };
 
 export default MenuList;
+
+MenuList.propTypes = {
+  setSelectedMenu: PropTypes.func.isRequired,
+};
