@@ -15,7 +15,7 @@ function App() {
     }}>
       <h1>환영합니다!</h1>
       <p>원하는 페이지로 이동하세요:</p>
-      <nav style={{ marginTop: '20px' }}>
+      <nav style={{ marginTop: '30px' }}>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           <li style={{ marginBottom: '10px' }}>
             <a href="/WaitingForm" style={{
@@ -29,7 +29,7 @@ function App() {
               transition: 'all 0.2s ease-in-out'
             }}>대기 등록 페이지로 이동</a>
           </li>
-          <li style={{ marginBottom: '10px' }}> 
+          <li style={{ marginBottom: '20px' }}> 
             <a href="/review" style={{
               textDecoration: 'none',
               color: '#FFD700',
