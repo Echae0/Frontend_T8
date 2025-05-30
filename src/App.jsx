@@ -10,7 +10,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainDisplay />} />
-        <Route path="/restaurant" element={<RestaurantDetail />} />
+        <Route path="/restaurant/:restaurantId" element={<RestaurantDetail />} /> {/* ✅ 동적 파라미터 */}
         <Route path="/restaurant/waiting" element={<WaitingFormPage />} /> {/* ✅ 추가 */}
       </Routes>
     </BrowserRouter>
