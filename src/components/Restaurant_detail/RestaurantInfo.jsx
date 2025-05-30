@@ -1,38 +1,51 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styles from './RestaurantInfo.module.css';
+
 
 const RestaurantInfo = () => {
   
-  const restaurant = {
-    name: "새마을 식당",
-    address: "신천동 400-2번지 동구 대구광역시 KR",
-    hours: "매일 10:00 ~ 22:00",
-    parking: "건물 뒤편 주차장 이용 가능",
-    phone: "053-123-4567",
-    description: "열탄불고기로 유명한 식당으로, 다양한 정식 메뉴를 제공합니다."
-  };
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // const { name, address, hours, parking, phone, description } = restaurant;
-  
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/restaurants")
+      .then((res) => {
+        setRestaurants(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // 임시로 첫 번째 식당만 표시
+  const restaurant = restaurants.length > 0 ? restaurants[0] : null;
+
+  if (loading) return <p>불러오는 중...</p>;
+  if (!restaurant) return <p>식당 정보가 없습니다.</p>;
+    
   return (
     <div className={styles.container}>
       <div className={styles.column_section}>
-        <h2 className={styles.title}>{restaurant.name}</h2>
-        <p className={styles.address}>{restaurant.address}</p>
+        <h2 className={styles.title}>{restaurant.restaurantName}</h2>
+        <p className={styles.address}>{restaurant.location}</p>
       </div>
 
-      {/* <div className={styles.divider}></div> */}
-
-      <div className={styles.column_section}>
+      {/* <div className={styles.column_section}>
         <p className={styles.label}>소개</p>
-        <p className={styles.detail}>{restaurant.description}</p>
-      </div>
+        <p className={styles.detail}>{restaurant.description || "소개 정보 없음"}</p>
+      </div> */}
+
       <div className={styles.row_section}>
         <p className={styles.label}>영업시간</p>
-        <p className={styles.detail}>{restaurant.hours}</p>
+        <p className={styles.detail}>{restaurant.openingHours || "영업시간 정보 없음"}</p>
         <p className={styles.label}>전화번호</p>
-        <p className={styles.detail}>{restaurant.phone}</p>
+        <p className={styles.detail}>{restaurant.contactNumber || "전화번호 없음"}</p>
         <p className={styles.label}>주차</p>
-        <p className={styles.detail}>{restaurant.parking}</p>
+        <p className={styles.detail}>{restaurant.parking || "주차 정보 없음"}</p>
       </div>
     </div>
   );
