@@ -29,7 +29,7 @@ function App() {
               transition: 'all 0.2s ease-in-out'
             }}>대기 등록 페이지로 이동</a>
           </li>
-          <li>
+          <li style={{ marginBottom: '10px' }}> 
             <a href="/review" style={{
               textDecoration: 'none',
               color: '#FFD700',
@@ -40,6 +40,18 @@ function App() {
               borderRadius: '5px',
               transition: 'all 0.2s ease-in-out'
             }}>리뷰 작성 페이지로 이동</a>
+          </li>
+          <li>
+            <a href="/signUp" style={{
+              textDecoration: 'none',
+              color: '#FFD700',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              padding: '10px 20px',
+              border: '1px solid #FFD700',
+              borderRadius: '5px',
+              transition: 'all 0.2s ease-in-out'
+            }}>회원 가입 페이지로 이동</a>
           </li>
         </ul>
       </nav>
