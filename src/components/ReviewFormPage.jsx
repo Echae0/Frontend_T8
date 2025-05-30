@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ReviewFormPage.module.css';
-import { FaBell, FaUser } from 'react-icons/fa';
+// import { FaBell, FaUser } from 'react-icons/fa'; // These icons are no longer needed if the header is removed
 
 export default function ReviewFormPage() {
   const [reviewContent, setReviewContent] = useState('');
@@ -99,21 +99,6 @@ export default function ReviewFormPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.mainHeader}>
-        <div className={styles.headerLeft}>
-          <span className={styles.locationText}>강남구</span>
-          <input
-            type="text"
-            placeholder="식당을 검색해 보세요..."
-            className={styles.searchInput}
-          />
-        </div>
-        <div className={styles.headerRight}>
-          <FaBell className={styles.headerIcon} />
-          <FaUser className={styles.headerIcon} />
-        </div>
-      </div>
-
       <div className={styles.contentArea}>
         <div className={styles.restaurantInfoSection}>
           <img src={restaurantInfo.image} alt="가게 사진" className={styles.restaurantImage} />

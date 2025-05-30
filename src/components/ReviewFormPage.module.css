@@ -10,9 +10,11 @@
   box-sizing: border-box;
 }
 
+/* Remove the following header-related styles */
+/*
 .mainHeader {
   width: 100%;
-  background-color: #FFD700; /* 노란색 계열 유지 */
+  background-color: #FFD700;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -33,7 +35,7 @@
 
 .locationText {
   font-weight: bold;
-  color: #333; /* 글씨색 유지 */
+  color: #333;
   font-size: 1rem;
   white-space: nowrap;
 }
@@ -60,7 +62,7 @@
 
 .headerIcon {
   font-size: 1.5rem;
-  color: #333; /* 아이콘 색상 유지 */
+  color: #333;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -68,6 +70,7 @@
 .headerIcon:hover {
   color: #555;
 }
+*/
 
 .contentArea {
   display: flex;
@@ -75,7 +78,7 @@
   width: 100%;
   max-width: 900px;
   gap: 2rem;
-  margin-top: 5rem;
+  margin-top: 0; /* Change this from 5rem to 0 or a smaller value as needed */
 }
 
 .restaurantInfoSection,
@@ -94,10 +97,10 @@
 }
 
 .reviewCard {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding-bottom: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding-bottom: 1.5rem;
 }
 
 .restaurantInfoSection {
@@ -186,9 +189,9 @@
 }
 
 .amountButton.selectedAmount {
-  background-color: #FFD700;
+  background-color: #fdbe52;
   color: #333;
-  border-color: #FFD700;
+  border-color: #fdbe52;
   font-weight: bold;
 }
 
@@ -267,7 +270,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: relative; /* 자식 absolute 위치 지정을 위해 relative로 설정 */
+  position: relative;
 }
 
 .reviewTextarea {
@@ -306,7 +309,7 @@
 }
 
 .scoreIcon:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .scoreIcon.filledScore {
@@ -354,14 +357,14 @@
   color: red;
   font-size: 0.85rem;
   margin-top: 0.5rem;
-  text-align: left; 
+  text-align: left;
   width: 100%;
 }
 
 .reviewContentErrorMessage {
   color: red;
   font-size: 0.85rem;
-  margin-top: 0.5rem; 
+  margin-top: 0.5rem;
   text-align: left;
   width: 100%;
 }
