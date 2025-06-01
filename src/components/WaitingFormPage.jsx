@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import styles from './WaitingFormPage.module.css';
+import { useParams } from 'react-router-dom'; 
 
-const menuList = [
-  { id: 1, name: '메뉴 이름 1', price: 8000, image: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Menu1' },
-  { id: 2, name: '메뉴 이름 2', price: 7500, image: 'https://via.placeholder.com/150/ADD8E6/FFFFFF?text=Menu2' },
-  { id: 3, name: '메뉴 이름 3', price: 10000, image: 'https://via.placeholder.com/150/90EE90/FFFFFF?text=Menu3' },
-  { id: 4, name: '메뉴 이름 4', price: 9000, image: 'https://via.placeholder.com/150/FFD700/FFFFFF?text=Menu4' },
-  { id: 5, name: '메뉴 이름 5', price: 11000, image: 'https://via.placeholder.com/150/DDA0DD/FFFFFF?text=Menu5' },
-  { id: 6, name: '메뉴 이름 6', price: 8500, image: 'https://via.placeholder.com/150/AFEEEE/FFFFFF?text=Menu6' },
-  { id: 7, name: '메뉴 이름 7', price: 12000, image: 'https://via.placeholder.com/150/FF6347/FFFFFF?text=Menu7' },
-  { id: 8, name: '메뉴 이름 8', price: 7800, image: 'https://via.placeholder.com/150/4682B4/FFFFFF?text=Menu8' },
-  { id: 9, name: '메뉴 이름 9', price: 13000, image: 'https://via.placeholder.com/150/BA55D3/FFFFFF?text=Menu9' },
-  { id: 10, name: '메뉴 이름 10', price: 5000, image: 'https://via.placeholder.com/150/F08080/FFFFFF?text=Menu10' },
-  { id: 11, name: '메뉴 이름 11', price: 11000, image: 'https://via.placeholder.com/150/20B2AA/FFFFFF?text=Menu11' },
-  { id: 12, name: '메뉴 이름 12', price: 9500, image: 'https://via.placeholder.com/150/87CEEB/FFFFFF?text=Menu12' },
+const DUMMY_MENU_LIST = [
+  { id: 1, name: '메뉴 이름 1', price: 8000, imageUrl: 'https://via.placeholder.com/150/FFC0CB/FFFFFF?text=Menu1' },
+  { id: 2, name: '메뉴 이름 2', price: 7500, imageUrl: 'https://via.placeholder.com/150/ADD8E6/FFFFFF?text=Menu2' },
+  { id: 3, name: '메뉴 이름 3', price: 10000, imageUrl: 'https://via.placeholder.com/150/90EE90/FFFFFF?text=Menu3' },
+  { id: 4, name: '메뉴 이름 4', price: 9000, imageUrl: 'https://via.placeholder.com/150/FFD700/FFFFFF?text=Menu4' },
+  { id: 5, name: '메뉴 이름 5', price: 11000, imageUrl: 'https://via.placeholder.com/150/DDA0DD/FFFFFF?text=Menu5' },
+  { id: 6, name: '메뉴 이름 6', price: 8500, imageUrl: 'https://via.placeholder.com/150/AFEEEE/FFFFFF?text=Menu6' },
+  { id: 7, name: '메뉴 이름 7', price: 12000, imageUrl: 'https://via.placeholder.com/150/FF6347/FFFFFF?text=Menu7' },
+  { id: 8, name: '메뉴 이름 8', price: 7800, imageUrl: 'https://via.placeholder.com/150/4682B4/FFFFFF?text=Menu8' },
+  { id: 9, name: '메뉴 이름 9', price: 13000, imageUrl: 'https://via.placeholder.com/150/BA55D3/FFFFFF?text=Menu9' },
+  { id: 10, name: '메뉴 이름 10', price: 5000, imageUrl: 'https://via.placeholder.com/150/F08080/FFFFFF?text=Menu10' },
+  { id: 11, name: '메뉴 이름 11', price: 11000, imageUrl: 'https://via.placeholder.com/150/20B2AA/FFFFFF?text=Menu11' },
+  { id: 12, name: '메뉴 이름 12', price: 9500, imageUrl: 'https://via.placeholder.com/150/87CEEB/FFFFFF?text=Menu12' },
 ];
 
+
 export default function WaitingFormPage() {
+  const { restaurantId } = useParams();
+
   const [form, setForm] = useState({
     name: '',
-    people: 1, 
+    people: 1,
     request: '',
   });
 
@@ -43,7 +47,7 @@ export default function WaitingFormPage() {
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
 
     const newErrors = {};
@@ -68,15 +72,52 @@ export default function WaitingFormPage() {
       return;
     }
 
-    alert(`대기 등록 완료!\n성함: ${form.name}\n인원: ${form.people}명\n선택 메뉴: ${selectedMenus.map(m => m.name).join(', ')}\n총 가격: ${totalPrice.toLocaleString()}원\n요청 사항: ${form.request || '없음'}`);
+    // 백엔드로 전송할 대기 등록 데이터
+    const reservationData = {
+      customerName: form.name,
+      numberOfPeople: form.people,
+      requestedMenus: selectedMenus.map(menu => ({
+        menuId: menu.id,
+        menuName: menu.name,
+        price: menu.price
+      })),
+      specialRequests: form.request,
+      // createdDate는 백엔드에서 생성하도록 할 수 있지만, 필요하다면 여기에 추가
+      // 예를 들어, createdDate: new Date().toISOString().split('T')[0]
+    };
 
-    setForm({ name: '', people: 1, request: '' }); 
-    setSelectedMenus([]);
-    setErrors({});
+    console.log("백엔드로 전송될 대기 등록 데이터:", reservationData);
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/restaurants/${restaurantId}/reservations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 필요하다면 인증 토큰 등을 추가합니다.
+          // 'Authorization': `Bearer ${yourAuthToken}`
+        },
+        body: JSON.stringify(reservationData),
+      });
+
+      if (response.ok) {
+        alert('대기 등록이 성공적으로 완료되었습니다!');
+        // 폼 초기화
+        setForm({ name: '', people: 1, request: '' });
+        setSelectedMenus([]);
+        setErrors({});
+      } else {
+        const errorData = await response.json();
+        console.error('대기 등록 실패:', errorData);
+        alert(`대기 등록 실패: ${errorData.message || '서버 오류가 발생했습니다.'}`);
+      }
+    } catch (error) {
+      console.error('네트워크 오류 또는 요청 실패:', error);
+      alert('대기 등록 중 오류가 발생했습니다. 네트워크 상태를 확인하거나 잠시 후 다시 시도해주세요.');
+    }
   };
 
   const totalPrice = selectedMenus.reduce((sum, item) => sum + item.price, 0);
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0]; // 오늘 날짜 YYYY-MM-DD 형식
 
   return (
     <div className={styles.pageContainer}>
@@ -106,7 +147,6 @@ export default function WaitingFormPage() {
             onChange={handleFormChange}
             required
           >
-            {/* 인원수 선택 옵션을 1명부터 10명까지 생성 */}
             {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
               <option key={n} value={n}>{n}명</option>
             ))}
@@ -130,7 +170,8 @@ export default function WaitingFormPage() {
         <div className={styles.menuSection}>
           <h2 className={styles.sectionTitle}>메뉴</h2>
           <div className={styles.menuGrid}>
-            {menuList.map((menu) => (
+
+            {DUMMY_MENU_LIST.map((menu) => (
               <div
                 key={menu.id}
                 className={`${styles.menuItem} ${selectedMenus.some((item) => item.id === menu.id) ? styles.selected : ''}`}
@@ -145,7 +186,7 @@ export default function WaitingFormPage() {
                   />
                   <span className={styles.menuName}>{menu.name}</span>
                 </div>
-                <img src={menu.image} alt={menu.name} className={styles.menuImage} />
+                <img src={menu.imageUrl} alt={menu.name} className={styles.menuImage} /> {/* menu.image -> menu.imageUrl로 변경 */}
                 <div className={styles.menuPrice}>가격: {menu.price.toLocaleString()}원</div>
               </div>
             ))}
