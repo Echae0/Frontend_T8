@@ -31,14 +31,13 @@ export default function SignUpPage() {
     setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: '' }));
   };
 
-  // 월/일 자동 두 자리 포맷팅 핸들러
   const handleDateInputBlur = (setter, value) => {
     if (value && value.length === 1) {
       setter('0' + value);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { // async 키워드 추가
     e.preventDefault();
 
     const newErrors = {};
@@ -73,27 +72,51 @@ export default function SignUpPage() {
     const formattedDay = birthDay.padStart(2, '0');
     const birthDate = `${birthYear}-${formattedMonth}-${formattedDay}`;
 
+    // 백엔드로 전송할 데이터 객체 (요청하신 필드만 포함)
     const userData = {
       name,
       email,
-      password,
       phoneNumber,
       address,
-      birthDate,
+      birthDate, // YYYY-MM-DD 형식의 문자열
     };
 
-    console.log("전송될 회원가입 데이터:", userData);
-    alert('가입 요청이 제출되었습니다!');
+    console.log("백엔드로 전송될 회원가입 데이터:", userData);
 
-    setName('');
-    setEmail('');
-    setPassword('');
-    setPhoneNumber('');
-    setAddress('');
-    setBirthYear('');
-    setBirthMonth('');
-    setBirthDay('');
-    setErrors({});
+    try {
+      // 실제 API 호출 로직
+      const response = await fetch('http://localhost:8080/api/members', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 필요하다면 여기에 'Authorization' 등 추가 헤더를 넣을 수 있습니다.
+        },
+        body: JSON.stringify(userData), // JSON 문자열로 변환하여 전송
+      });
+
+      if (response.ok) { // 응답 상태 코드가 200-299 범위인 경우
+        alert('회원가입이 성공적으로 완료되었습니다!');
+        // 폼 초기화
+        setName('');
+        setEmail('');
+        setPassword(''); // 비밀번호 필드도 초기화
+        setPhoneNumber('');
+        setAddress('');
+        setBirthYear('');
+        setBirthMonth('');
+        setBirthDay('');
+        setErrors({}); // 에러 상태도 초기화
+      } else {
+        // 응답이 실패한 경우 (예: 4xx, 5xx 에러)
+        const errorData = await response.json(); // 백엔드에서 보낸 에러 메시지 파싱
+        console.error('회원가입 실패:', errorData);
+        alert(`회원가입 실패: ${errorData.message || '서버 오류가 발생했습니다.'}`);
+      }
+    } catch (error) {
+      // 네트워크 오류 또는 기타 예외 발생 시
+      console.error('네트워크 오류 또는 요청 실패:', error);
+      alert('회원가입 중 오류가 발생했습니다. 네트워크 상태를 확인하거나 잠시 후 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -185,7 +208,7 @@ export default function SignUpPage() {
                 placeholder="월 (MM)"
                 value={birthMonth}
                 onChange={(e) => { setBirthMonth(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, birthDate: '' })); }}
-                onBlur={(e) => handleDateInputBlur(setBirthMonth, e.target.value)} // onBlur 이벤트 추가
+                onBlur={(e) => handleDateInputBlur(setBirthMonth, e.target.value)}
                 min="1"
                 max="12"
                 required
@@ -198,7 +221,7 @@ export default function SignUpPage() {
                 placeholder="일 (DD)"
                 value={birthDay}
                 onChange={(e) => { setBirthDay(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, birthDate: '' })); }}
-                onBlur={(e) => handleDateInputBlur(setBirthDay, e.target.value)} // onBlur 이벤트 추가
+                onBlur={(e) => handleDateInputBlur(setBirthDay, e.target.value)}
                 min="1"
                 max="31"
                 required
