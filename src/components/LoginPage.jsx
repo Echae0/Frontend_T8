@@ -1,7 +1,10 @@
+// src/components/LoginPage.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';   // ← useNavigate 추가
 import styles from './LoginPage.module.css';
 
 export default function LoginPage() {
+  const navigate = useNavigate();                  // ← navigate 훅 선언
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -10,7 +13,6 @@ export default function LoginPage() {
     e.preventDefault();
 
     const newErrors = {};
-
     if (!email.trim()) {
       newErrors.email = '이메일을 입력해주세요.';
     }
@@ -21,7 +23,9 @@ export default function LoginPage() {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       const firstErrorField = Object.keys(newErrors)[0];
-      const element = document.getElementById(firstErrorField) || document.querySelector(`[name="${firstErrorField}"]`);
+      const element =
+        document.getElementById(firstErrorField) ||
+        document.querySelector(`[name="${firstErrorField}"]`);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -30,33 +34,30 @@ export default function LoginPage() {
 
     setErrors({});
 
-    const loginData = {
-      email,
-      password,
-    };
-
+    const loginData = { email, password };
     console.log('백엔드로 전송될 로그인 데이터:', loginData);
 
     try {
       const response = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
       });
 
       if (response.ok) {
-        // 로그인 성공 처리
-        const responseData = await response.json(); // 서버 응답 데이터 (예: 토큰 등)
+        const responseData = await response.json();
         alert('로그인이 성공적으로 완료되었습니다!');
         console.log('로그인 성공:', responseData);
-        // TODO: 로그인 성공 후 페이지 이동 로직 추가 (예: React Router의 useNavigate 훅 사용)
-        // navigate('/dashboard'); 
+        // 로그인 성공 후 이동할 경로 예시:
+        // navigate('/dashboard');
       } else {
         const errorData = await response.json();
         console.error('로그인 실패:', errorData);
-        alert(`로그인 실패: ${errorData.message || '이메일 또는 비밀번호가 올바르지 않습니다.'}`);
+        alert(
+          `로그인 실패: ${
+            errorData.message || '이메일 또는 비밀번호가 올바르지 않습니다.'
+          }`
+        );
       }
     } catch (error) {
       console.error('네트워크 오류 또는 요청 실패:', error);
@@ -78,13 +79,21 @@ export default function LoginPage() {
             <input
               id="email"
               type="email"
+              name="email"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, email: '' })); }} 
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors((prev) => ({ ...prev, email: '' }));
+              }}
               placeholder="이메일을 입력하세요"
-              className={`${styles['input-field']} ${errors.email ? styles.inputError : ''}`} 
+              className={`${styles['input-field']} ${
+                errors.email ? styles.inputError : ''
+              }`} 
               required 
             />
-            {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email}</p>
+            )}
           </div>
 
           <div className={styles['input-group']}>
@@ -92,17 +101,30 @@ export default function LoginPage() {
             <input
               id="password"
               type="password"
+              name="password"
               value={password}
-              onChange={(e) => { setPassword(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, password: '' })); }} 
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, password: '' }));
+              }}
               placeholder="비밀번호를 입력하세요"
-              className={`${styles['input-field']} ${errors.password ? styles.inputError : ''}`}
+              className={`${styles['input-field']} ${
+                errors.password ? styles.inputError : ''
+              }`}
               required 
             />
-            {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password}</p>
+            )}
           </div>
 
           <div className={styles['button-group']}>
-            <button type="button" className={styles['signup-btn']}>
+            {/* 회원가입 버튼 클릭 시 /signup 페이지로 이동 */}
+            <button
+              type="button"
+              className={styles['signup-btn']}
+              onClick={() => navigate('/signup')}
+            >
               회원가입
             </button>
             <button type="submit" className={styles['login-btn']}>
