@@ -1,19 +1,18 @@
-// src/components/MenuList.jsx
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import styles from './MenuList.module.css'; 
+import styles from './MenuList.module.css';
 import { useParams } from 'react-router-dom';
 
 const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
-  const { restaurantId } = useParams(); 
-  const [menus, setMenus] = useState([]); 
+  const { restaurantId } = useParams();
+  const [menus, setMenus] = useState([]);
 
   useEffect(() => {
     if (!restaurantId) {
       console.warn("restaurantId가 없어 메뉴를 불러올 수 없습니다. URL을 확인해주세요.");
       if (onMenusLoaded) {
-        onMenusLoaded([]); 
+        onMenusLoaded([]);
       }
       return;
     }
@@ -21,10 +20,11 @@ const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
     axios.get(`http://localhost:8080/api/restaurants/${restaurantId}/menus`)
       .then(res => {
         const menuList = res.data;
-        setMenus(menuList); 
+        setMenus(menuList);
         if (onMenusLoaded) {
-          onMenusLoaded(menuList); 
+          onMenusLoaded(menuList);
         }
+        console.log("받아온 메뉴 데이터:", menuList);
       })
       .catch(err => {
         console.error("메뉴 불러오기 실패:", err);
@@ -32,29 +32,29 @@ const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
           onMenusLoaded([]);
         }
       });
-  }, [restaurantId, onMenusLoaded]); 
+  }, [restaurantId, onMenusLoaded]);
 
   return (
     <div className={styles.menuListContainer}>
-      <div className={styles.menuGrid}>
+      <div className={styles.menuList}> {/* 이전에 menuGrid 였으나, CSS와 일치시키기 위해 menuList로 변경 */}
         {menus.length > 0 ? (
           menus.map((menu) => (
             <div
               key={menu.id}
               className={`${styles.menuItem} ${selectedMenus.some((item) => item.id === menu.id) ? styles.selected : ''}`}
-              onClick={() => onMenuToggle(menu)} 
+              onClick={() => onMenuToggle(menu)}
             >
               <div className={styles.checkboxContainer}>
                 <input
                   type="checkbox"
-                  checked={selectedMenus.some((item) => item.id === menu.id)} 
-                  readOnly 
+                  checked={selectedMenus.some((item) => item.id === menu.id)}
+                  readOnly
                   className={styles.checkbox}
                 />
                 <span className={styles.menuName}>{menu.name}</span>
               </div>
               <img
-                src={menu.imageUrl || '/assets/sample-images/menu-thumb.jpg'} 
+                src={menu.imageUrl || '/assets/sample-images/menu-thumb.jpg'}
                 alt={menu.name}
                 className={styles.menuImage}
               />
@@ -72,8 +72,7 @@ const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
 export default MenuList;
 
 MenuList.propTypes = {
-
-  onMenusLoaded: PropTypes.func.isRequired, 
+  onMenusLoaded: PropTypes.func.isRequired,
   selectedMenus: PropTypes.array.isRequired,
-  onMenuToggle: PropTypes.func.isRequired,   
+  onMenuToggle: PropTypes.func.isRequired,
 };
