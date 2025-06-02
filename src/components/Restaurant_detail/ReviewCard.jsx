@@ -6,6 +6,7 @@ const ReviewCard = ({
   reviewText = '',
   waitingScore = '',
   visitTime = '',
+  waitingTime = '',
   imageList = [],
 }) => {
   return (
@@ -31,8 +32,9 @@ const ReviewCard = ({
 
       {/* 정보 */}
       <div className={styles.details}>
-        <span>리뷰 작성 시각 : {visitTime || '정보 없음'}</span>
-        <span>별점 : {waitingScore || '정보 없음'}점</span>
+        <span>방문 시각 : {visitTime || '정보 없음'}</span>
+        <span>대기 시간 : {waitingTime || '정보 없음'}</span>
+        <span>별점 : {waitingScore || '0.0'}</span>
       </div>
 
       {/* 리뷰 텍스트 */}
@@ -46,6 +48,7 @@ ReviewCard.propTypes = {
   reviewText: PropTypes.string,
   waitingScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   visitTime: PropTypes.string,
+  waitingTime: PropTypes.string,
   imageList: PropTypes.arrayOf(PropTypes.string),
 };
 

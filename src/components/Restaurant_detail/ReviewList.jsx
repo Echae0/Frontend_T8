@@ -40,11 +40,8 @@ const ReviewList = () => {
             nickname={review.memberName || '익명'}
             reviewText={review.comment || ''}
             waitingScore={review.rating || ''}
-            // visitTime={
-            //   review.createdAt
-            //     ? new Date(review.createdAt).toLocaleString()
-            //     : '정보 없음'
-            // }
+            visitTime={ review.reservedAt || ''}
+            waitingTime={review.waitingTime || ''}
             // imageList={[]} // 이미지 데이터 없음
           />
         ))}
