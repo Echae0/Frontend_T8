@@ -54,7 +54,7 @@ function App() {
               리뷰 작성 페이지로 이동
             </Link>
           </li>
-          <li>
+          <li style={{ marginBottom: '20px' }}> 
             <Link to="/signUp" style={{
               textDecoration: 'none',
               color: '#FFD700',
@@ -66,6 +66,20 @@ function App() {
               transition: 'all 0.2s ease-in-out'
             }}>
               회원 가입 페이지로 이동
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" style={{
+              textDecoration: 'none',
+              color: '#FFD700',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              padding: '10px 20px',
+              border: '1px solid #FFD700',
+              borderRadius: '5px',
+              transition: 'all 0.2s ease-in-out'
+            }}>
+              로그인 페이지로 이동
             </Link>
           </li>
         </ul>

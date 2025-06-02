@@ -6,6 +6,7 @@ import App from './App.jsx';
 import WaitingFormPage from './components/WaitingFormPage.jsx';
 import ReviewFormPage from './components/ReviewFormPage.jsx';
 import SignUpPage from './components/SignUpPage.jsx';
+import LoginPage from './components/LoginPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/restaurants/:restaurantId/reservations" element={<WaitingFormPage />} />
         <Route path="/review" element={<ReviewFormPage />} />
         <Route path="/signUp" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
