@@ -1,0 +1,44 @@
+.restaurant-section {
+  margin-bottom: var(--spacing-xxl);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 992px) {
+  .restaurant-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .restaurant-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .restaurant-section {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+  }
+}
