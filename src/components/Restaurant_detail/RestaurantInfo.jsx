@@ -31,10 +31,10 @@ const RestaurantInfo = () => {
       </div>
 
       {/* 소개란: 필요한 경우 주석 해제 */}
-      {/* <div className={styles.column_section}>
+      <div className={styles.column_section}>
         <p className={styles.label}>소개</p>
         <p className={styles.detail}>{restaurant.description || "소개 정보 없음"}</p>
-      </div> */}
+      </div>
 
       <div className={styles.row_section}>
         <p className={styles.label}>영업시간</p>
