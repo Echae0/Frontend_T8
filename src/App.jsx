@@ -25,9 +25,8 @@ function App() {
       <nav style={{ marginTop: '30px' }}>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           <li style={{ marginBottom: '10px' }}>
-            {/* Link 컴포넌트로 변경 및 to 속성 동적 경로 설정 */}
             <Link 
-              to={`/restaurants/${restaurantId}/reservations`} // restaurantId를 사용하여 경로 구성
+              to={`/restaurants/${restaurantId}/reservations`} 
               style={{
                 textDecoration: 'none',
                 color: '#FFD700',
@@ -42,7 +41,6 @@ function App() {
             </Link>
           </li>
           <li style={{ marginBottom: '20px' }}> 
-            {/* Link 컴포넌트로 변경 */}
             <Link to="/review" style={{
               textDecoration: 'none',
               color: '#FFD700',
@@ -57,7 +55,6 @@ function App() {
             </Link>
           </li>
           <li>
-            {/* Link 컴포넌트로 변경 */}
             <Link to="/signUp" style={{
               textDecoration: 'none',
               color: '#FFD700',
