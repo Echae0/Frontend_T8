@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ReviewFormPage.module.css';
-// import { FaBell, FaUser } from 'react-icons/fa'; // These icons are no longer needed if the header is removed
+
 
 export default function ReviewFormPage() {
   const [reviewContent, setReviewContent] = useState('');
