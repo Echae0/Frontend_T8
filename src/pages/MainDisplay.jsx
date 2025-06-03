@@ -29,10 +29,15 @@ export default function MainDisplay() {
   }, []);
 
   const handleCategorySelect = (category) => {
-    const result = restaurants.filter(
-      (r) => r.categoryCode && r.categoryCode === category
-    );
-    setFilteredRestaurants(result);
+    if (!category) {
+      // category가 null이면 전체 보여주기
+      setFilteredRestaurants(restaurants);
+    } else {
+      const result = restaurants.filter(
+        (r) => r.categoryCode && r.categoryCode === category
+      );
+      setFilteredRestaurants(result);
+    }
   };
 
   return (
@@ -44,15 +49,12 @@ export default function MainDisplay() {
             📢 신규 맛집 등록 이벤트! 최대 50% 할인 🍽️
           </div>
 
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <Link to="/restaurant" className={styles.linkButton}>
-              식당 상세 페이지 보기 →
-            </Link>
-          </div>
-
           <CategoryBar onCategorySelect={handleCategorySelect} />
 
-          <RestaurantSection title="식당 목록" restaurants={filteredRestaurants} />
+          <RestaurantSection
+            title="식당 목록"
+            restaurants={filteredRestaurants}
+          />
         </div>
       </main>
     </div>
