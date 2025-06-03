@@ -14,7 +14,12 @@ export default function ReviewFormPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   // ─────────────────────────────────────────────────────────
-  // 1) 리뷰 폼 상태 (대략 주문금액 관련은 삭제됨)
+  // 0-1) 회원 정보를 담을 state
+  // ─────────────────────────────────────────────────────────
+  const [memberInfo, setMemberInfo] = useState(null);
+
+  // ─────────────────────────────────────────────────────────
+  // 1) 리뷰 폼 상태
   // ─────────────────────────────────────────────────────────
   const [reviewContent, setReviewContent] = useState('');
   const [waitingScore, setWaitingScore] = useState(0);
@@ -22,9 +27,10 @@ export default function ReviewFormPage() {
   const [errors, setErrors] = useState({});
 
   // ─────────────────────────────────────────────────────────
-  // 2) 예시로 식당 ID = 1 고정
+  // 2) 예시로 식당 ID = 1, 회원 ID = 1 고정
   // ─────────────────────────────────────────────────────────
   const restaurantId = 1;
+  const memberId = 1;
 
   // ─────────────────────────────────────────────────────────
   // 3) “식당 정보 조회” useEffect
@@ -47,7 +53,21 @@ export default function ReviewFormPage() {
   }, [restaurantId]);
 
   // ─────────────────────────────────────────────────────────
-  // 4) “예약 정보 조회” useEffect
+  // 4) “회원 정보 조회” useEffect
+  // ─────────────────────────────────────────────────────────
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/members/${memberId}`)
+      .then((res) => {
+        setMemberInfo(res.data);
+      })
+      .catch((err) => {
+        console.error('▶ 회원 정보 조회 실패:', err);
+      });
+  }, [memberId]);
+
+  // ─────────────────────────────────────────────────────────
+  // 5) “예약 정보 조회” useEffect
   //    restaurantInfo가 있으면 실행
   // ─────────────────────────────────────────────────────────
   useEffect(() => {
@@ -56,7 +76,6 @@ export default function ReviewFormPage() {
     axios
       .get(`http://localhost:8080/api/reservations`)
       .then((res) => {
-        // 예시: res.data가 [ { restaurantId: 1, predictedWait: 10, joinedAt: "...", partySize: 3 }, ... ] 형태라고 가정
         const matched = res.data.filter(
           (item) => item.restaurantId === restaurantId
         );
@@ -68,7 +87,7 @@ export default function ReviewFormPage() {
   }, [restaurantInfo, restaurantId]);
 
   // ─────────────────────────────────────────────────────────
-  // 5) 이미지 업로드 핸들러
+  // 6) 이미지 업로드 핸들러
   // ─────────────────────────────────────────────────────────
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -91,7 +110,7 @@ export default function ReviewFormPage() {
   };
 
   // ─────────────────────────────────────────────────────────
-  // 6) 웨이팅 점수 클릭 핸들러
+  // 7) 웨이팅 점수 클릭 핸들러
   // ─────────────────────────────────────────────────────────
   const handleScoreClick = (score) => {
     setWaitingScore(score);
@@ -99,7 +118,7 @@ export default function ReviewFormPage() {
   };
 
   // ─────────────────────────────────────────────────────────
-  // 7) 리뷰 제출 핸들러
+  // 8) 리뷰 제출 핸들러
   // ─────────────────────────────────────────────────────────
   const handleSubmit = () => {
     const newErrors = {};
@@ -119,6 +138,7 @@ export default function ReviewFormPage() {
 
     const reviewData = {
       restaurantName: restaurantInfo.restaurantName,
+      memberName: memberInfo?.name, // 회원 정보에서 닉네임
       reviewContent: reviewContent,
       waitingScore: waitingScore,
       uploadedImage: uploadedImage,
@@ -135,7 +155,7 @@ export default function ReviewFormPage() {
   };
 
   // ─────────────────────────────────────────────────────────
-  // 8) 렌더링: 로딩, 에러, 그리고 실제 폼
+  // 9) 렌더링: 로딩, 에러, 그리고 실제 폼
   // ─────────────────────────────────────────────────────────
   if (loading) {
     return (
@@ -158,7 +178,7 @@ export default function ReviewFormPage() {
     <div className={styles.pageContainer}>
       <div className={styles.contentArea}>
         {/* ──────────────────────────────────────────────────────── */}
-        {/* 8-1) 식당 정보 + 방문 정보 섹션 (좌: 가게 정보, 우: 방문 정보) */}
+        {/* 9-1) 식당 정보 + 방문 정보 섹션 (좌: 가게 정보, 우: 방문 정보) */}
         {/* ──────────────────────────────────────────────────────── */}
         <div className={styles.restaurantInfoSection}>
           {/* 좌측: 가게 이미지 + 기본 정보 */}
@@ -227,13 +247,16 @@ export default function ReviewFormPage() {
         </div>
 
         {/* ──────────────────────────────────────────────────────── */}
-        {/* 8-2) 리뷰 작성 섹션 */}
+        {/* 9-2) 리뷰 작성 섹션 */}
         {/* ──────────────────────────────────────────────────────── */}
         <div className={styles.reviewSection}>
           <div className={styles.reviewCard}>
+            {/* ─ 프로필 헤더 (회원 닉네임) */}
             <div className={styles.profileHeader}>
               <div className={styles.avatar}></div>
-              <div className={styles.nickname}>닉네임</div>
+              <div className={styles.nickname}>
+                {memberInfo?.name || '닉네임 정보 없음'}
+              </div>
             </div>
 
             <div className={styles.reviewContentArea}>
@@ -309,7 +332,7 @@ export default function ReviewFormPage() {
         </div>
 
         {/* ──────────────────────────────────────────────────────── */}
-        {/* 8-3) 작성 완료 버튼 */}
+        {/* 9-3) 작성 완료 버튼 */}
         {/* ──────────────────────────────────────────────────────── */}
         <button className={styles.submitButton} onClick={handleSubmit}>
           작성 완료
