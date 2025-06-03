@@ -36,7 +36,7 @@ const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
 
   return (
     <div className={styles.menuListContainer}>
-      <div className={styles.menuList}> {/* 이전에 menuGrid 였으나, CSS와 일치시키기 위해 menuList로 변경 */}
+      <div className={styles.menuList}>
         {menus.length > 0 ? (
           menus.map((menu) => (
             <div
