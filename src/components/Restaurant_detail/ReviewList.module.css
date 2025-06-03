@@ -30,3 +30,31 @@
 .reviewsList::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+.sortButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.sortButtons button {
+  padding: 8px 12px;
+  background-color: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.sortButtons button:hover {
+  background-color: #ddd;
+}
+
+.sortButtons .active {
+  background-color: #4caf50; /* 선택된 버튼 색상 (초록) */
+  color: white;
+  font-weight: bold;
+}
+
+

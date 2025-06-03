@@ -1,6 +1,30 @@
 import PropTypes from 'prop-types';
 import styles from './ReviewCard.module.css';
 
+const formatVisitTime = (isoString) => {
+  if (!isoString) return '정보 없음';
+  const date = new Date(isoString);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  const hh = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+  return `${yyyy}/${mm}/${dd} ${hh}:${min}`;
+};
+
+const formatWaitingTime = (duration) => {
+  if (!duration) return '정보 없음';
+  const match = duration.match(/P(?:([0-9]+)D)?T?(?:([0-9]+)H)?(?:([0-9]+)M)?/);
+  if (!match) return '정보 없음';
+  const [, days, hours, minutes] = match.map((x) => (x ? parseInt(x, 10) : 0));
+  let result = '';
+  if (days) result += `${days * 24}시간 `;
+  if (hours) result += `${hours}시간 `;
+  if (minutes) result += `${minutes}분`;
+  return result.trim() || '정보 없음';
+};
+
+
 const ReviewCard = ({
   nickname = '익명 사용자',
   reviewText = '',
@@ -32,8 +56,8 @@ const ReviewCard = ({
 
       {/* 정보 */}
       <div className={styles.details}>
-        <span>방문 시각 : {visitTime || '정보 없음'}</span>
-        <span>대기 시간 : {waitingTime || '정보 없음'}</span>
+        <span>방문 일시 : {formatVisitTime(visitTime)}</span>
+        <span>대기 시간 : {formatWaitingTime(waitingTime)}</span>
         <span>별점 : {waitingScore || '0.0'}</span>
       </div>
 

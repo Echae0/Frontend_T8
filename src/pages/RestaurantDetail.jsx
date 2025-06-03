@@ -10,7 +10,7 @@ import MenuList from '../components/Restaurant_detail/MenuList';
 import MenuPreview from '../components/Restaurant_detail/MenuPreview';
 
 import ReviewList from '../components/Restaurant_detail/ReviewList';
-import ReviewList_select from '../components/Restaurant_detail/ReviewList_select';
+// import ReviewList_select from '../components/Restaurant_detail/ReviewList_select';
 
 const RestaurantDetail = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
@@ -27,11 +27,13 @@ const RestaurantDetail = () => {
       <div className={styles.contentWrapper}>
         <div className={styles.leftColumn}>
           {selectedMenu && <MenuPreview menu={selectedMenu} />}
-          <MenuList setSelectedMenu={setSelectedMenu} />
+          {/* <MenuList setSelectedMenu={setSelectedMenu} /> */}
         </div>
 
         <div className={styles.rightColumn}>
-          <ReviewList_select />
+          
+          <MenuList setSelectedMenu={setSelectedMenu} />
+          {/* <ReviewList_select /> */}
         </div>
       </div>
 

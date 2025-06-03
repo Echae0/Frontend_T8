@@ -28,7 +28,12 @@ const MenuList = ({ setSelectedMenu }) => {
   };
 
   return (
+    // <div className={styles.menuListHeaderContainer}>
+    //   <h2 className={styles.menuListHeader}>메뉴 목록</h2>
+    // </div>
     <div className={styles.menuListContainer}>
+      <h2 className={styles.menuListHeader}>메뉴 목록</h2>
+      
       <div className={styles.menuList}>
         {menus.map((menu) => (
           <div 
