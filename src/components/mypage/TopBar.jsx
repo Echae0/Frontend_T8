@@ -8,7 +8,7 @@ const TopBar = () => {
 
   return (
     <div className="top-bar">
-      <button className="icon-button" onClick={() => navigate("/")}>
+      <button className="icon-button" onClick={() => navigate("/maindisplay")}>
         <FaArrowLeft size={20} />
       </button>
       <div className="top-icons">
