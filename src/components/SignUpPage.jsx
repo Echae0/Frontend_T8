@@ -76,6 +76,7 @@ export default function SignUpPage() {
     const userData = {
       name,
       email,
+      password, // 비밀번호는 보안상 암호화 후 전송하는 것이 좋음
       phoneNumber,
       address,
       birthDate, // YYYY-MM-DD 형식의 문자열
@@ -85,7 +86,7 @@ export default function SignUpPage() {
 
     try {
       // 실제 API 호출 
-      const response = await fetch('http://localhost:8080/api/members', {
+      const response = await fetch('http://localhost:8080/api/userinfos/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,6 +100,7 @@ export default function SignUpPage() {
         // 폼 초기화
         setName('');
         setEmail('');
+        setPassword('');
         setPassword(''); 
         setPhoneNumber('');
         setAddress('');
