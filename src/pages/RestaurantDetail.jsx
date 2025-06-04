@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './RestaurantDetail.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import RestaurantImageSlider from '../components/Restaurant_detail/RestaurantImageSlider.jsx';
 import RestaurantInfo from '../components/Restaurant_detail/RestaurantInfo';
@@ -14,6 +14,7 @@ import ReviewList from '../components/Restaurant_detail/ReviewList';
 
 const RestaurantDetail = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
+  const { restaurantId } = useParams();
 
   return (
     <div className={styles.container}>
@@ -43,7 +44,7 @@ const RestaurantDetail = () => {
 
       <div className={styles.waitingButtonContainer}>
         {/* ✅ Link로 감싸기 */}
-        <Link to="/restaurant/waiting">
+        <Link to={`/restaurant/${restaurantId}/waiting`}>
           <button className={styles.waitingButton}>웨이팅</button>
         </Link>
       </div>
