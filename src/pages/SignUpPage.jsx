@@ -101,7 +101,6 @@ export default function SignUpPage() {
         setName('');
         setEmail('');
         setPassword('');
-        setPassword(''); 
         setPhoneNumber('');
         setAddress('');
         setBirthYear('');
