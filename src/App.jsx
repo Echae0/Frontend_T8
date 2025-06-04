@@ -18,7 +18,8 @@ return (
 
 {/* 아래 경로들도 그대로 두되, 인증 검증이 필요 없으므로 RequireAuth 제거 */}
 <Route path="/maindisplay" element={<MainDisplay />} />
-<Route path="/restaurant" element={<RestaurantDetail />} />
+{/* <Route path="/restaurant" element={<RestaurantDetail />} /> */}
+<Route path="/restaurant/:restaurantId" element={<RestaurantDetail />} />
 <Route path="/restaurant/waiting" element={<WaitingFormPage />} />
 <Route path="/mypage" element={<MyPage />} />
 <Route path="/reviewformpage" element={<ReviewFormPage />} />
