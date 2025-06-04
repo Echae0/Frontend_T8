@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import styles from './SignUpPage.module.css';
 
 export default function SignUpPage() {
@@ -11,6 +12,8 @@ export default function SignUpPage() {
   const [birthMonth, setBirthMonth] = useState('');
   const [birthDay, setBirthDay] = useState('');
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate(); 
 
   const handlePhoneNumberChange = (e) => {
     let value = e.target.value;
@@ -37,7 +40,7 @@ export default function SignUpPage() {
     }
   };
 
-  const handleSubmit = async (e) => { 
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -72,10 +75,11 @@ export default function SignUpPage() {
     const formattedDay = birthDay.padStart(2, '0');
     const birthDate = `${birthYear}-${formattedMonth}-${formattedDay}`;
 
-    // 백엔드로 전송할 데이터 객체 
+    // 백엔드로 전송할 데이터 객체
     const userData = {
       name,
       email,
+      password, // 비밀번호도 회원가입 시 필요하므로 추가
       phoneNumber,
       address,
       birthDate, // YYYY-MM-DD 형식의 문자열
@@ -84,30 +88,30 @@ export default function SignUpPage() {
     console.log("백엔드로 전송될 회원가입 데이터:", userData);
 
     try {
-      // 실제 API 호출 
+      // 실제 API 호출
       const response = await fetch('http://localhost:8080/api/members', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           // 필요하다면 여기에 'Authorization' 등 추가 헤더를 넣을 수 있음.
         },
-        body: JSON.stringify(userData), 
+        body: JSON.stringify(userData),
       });
 
-      if (response.ok) { 
+      if (response.ok) {
         alert('회원가입이 성공적으로 완료되었습니다!');
-        // 폼 초기화
         setName('');
         setEmail('');
-        setPassword(''); 
+        setPassword('');
         setPhoneNumber('');
         setAddress('');
         setBirthYear('');
         setBirthMonth('');
         setBirthDay('');
-        setErrors({}); 
+        setErrors({});
+        navigate('/login'); 
       } else {
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         console.error('회원가입 실패:', errorData);
         alert(`회원가입 실패: ${errorData.message || '서버 오류가 발생했습니다.'}`);
       }
@@ -132,7 +136,7 @@ export default function SignUpPage() {
               onChange={(e) => { setName(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, name: '' })); }}
               required
             />
-             {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
+              {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>이메일</label>
@@ -144,7 +148,7 @@ export default function SignUpPage() {
               onChange={(e) => { setEmail(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, email: '' })); }}
               required
             />
-             {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
+              {errors.email && <p className={styles.errorMessage}>{errors.email}</p>}
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="password" className={styles.formLabel}>비밀번호</label>
@@ -156,7 +160,7 @@ export default function SignUpPage() {
               onChange={(e) => { setPassword(e.target.value); setErrors((prevErrors) => ({ ...prevErrors, password: '' })); }}
               required
             />
-             {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
+              {errors.password && <p className={styles.errorMessage}>{errors.password}</p>}
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="phoneNumber" className={styles.formLabel}>전화번호</label>
