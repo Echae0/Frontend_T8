@@ -15,7 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />  
         <Route path="/maindisplay" element={<MainDisplay />} />
-        <Route path="/restaurant" element={<RestaurantDetail />} />
+        <Route path="/restaurant/:restaurantId" element={<RestaurantDetail />} />
         <Route path="/restaurant/waiting" element={<WaitingFormPage />} /> {/* ✅ 추가 */}
         <Route path="/mypage" element={<MyPage />} /> {/* ✅ 마이페이지 추가 */}
         <Route path="/reviewformpage" element={<ReviewFormPage />} />
