@@ -9,7 +9,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   const handleClick = () => {
     localStorage.setItem("selectedRestaurant", JSON.stringify(restaurant));
-    navigate(`/restaurant/${id}`); // 백틱으로 감싸기!
+    navigate(`/restaurant/${id}`);
   };
 
 
