@@ -1,0 +1,118 @@
+/* src/components/WaitingStatusPage.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 중앙 정렬 */
+  padding: 40px 20px;
+  background-color: #f0f2f5; /* 이미지와 유사한 배경색 */
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.restaurantName {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.currentOrder,
+.expectedTime {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #555;
+  text-align: center;
+}
+
+.orderNumber {
+  font-weight: bold;
+  color: #007bff; /* 파란색 강조 */
+  margin-left: 5px;
+}
+
+.timeValue {
+  font-weight: bold;
+  color: #28a745; /* 초록색 강조 */
+  margin-left: 5px;
+}
+
+.detailsContainer {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 500px; /* 적절한 너비 설정 */
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between; /* 라벨과 값 양쪽 정렬 */
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1.1em;
+}
+
+.detailItem:last-child {
+  border-bottom: none; /* 마지막 항목 하단 선 제거 */
+}
+
+.detailLabel {
+  font-weight: bold;
+  color: #333;
+  min-width: 90px; /* 라벨의 최소 너비 설정 */
+}
+
+.detailValue {
+  color: #666;
+  text-align: right; /* 값 우측 정렬 */
+  flex-grow: 1; /* 남은 공간 차지 */
+  padding-left: 20px; /* 라벨과의 간격 */
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 20px; /* 버튼 사이 간격 */
+  margin-top: 40px;
+  width: 100%;
+  max-width: 500px; /* detailContainer와 동일한 너비 */
+  justify-content: center;
+}
+
+.cancelButton,
+.enteredButton {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1; /* 두 버튼이 동일한 너비로 공간을 차지 */
+  max-width: 220px; /* 개별 버튼 최대 너비 */
+}
+
+.cancelButton {
+  background-color: #6c757d; /* 회색 */
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.enteredButton {
+  background-color: #ffc107; /* 노란색 */
+  color: #333; /* 글자색 진하게 */
+}
+
+.enteredButton:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}

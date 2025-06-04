@@ -44,7 +44,7 @@ const RestaurantDetail = () => {
 
       <div className={styles.waitingButtonContainer}>
         {/* ✅ Link로 감싸기 */}
-        <Link to={`/restaurant/${restaurantId}/waiting`}>
+        <Link to={`/restaurant/${restaurantId}/waitingform`}>
           <button className={styles.waitingButton}>웨이팅</button>
         </Link>
       </div>

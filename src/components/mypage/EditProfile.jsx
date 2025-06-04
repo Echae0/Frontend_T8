@@ -3,10 +3,10 @@ import './EditProfile.css';
 
 export default function EditProfile() {
   const [form, setForm] = useState({
-    name: '홍길동',
-    id: 'jungho123',
+    name: '',
+    id: '',
     password: '',
-    email: 'hong@example.com'
+    email: ''
   });
 
   const handleChange = (e) => {

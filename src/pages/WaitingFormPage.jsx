@@ -96,7 +96,7 @@ export default function WaitingFormPage() {
         setForm({ people: 1, request: '' }); // ✅ 'name' 초기화 제거
         setSelectedMenus([]);
         setErrors({});
-        navigate(`/restaurant/${restaurantId}`); // 웨이팅 완료 후 해당 음식점 상세 페이지로 이동
+        navigate(`/restaurant/${restaurantId}/waiting`); // 웨이팅 완료 후 해당 음식점 상세 페이지로 이동
       } else {
         const errorData = await response.json();
         console.error('대기 등록 실패:', errorData);
