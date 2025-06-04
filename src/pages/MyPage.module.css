@@ -1,0 +1,79 @@
+/* MyPage.module.css */
+
+.layout {
+  display: flex;
+  width: 100%;             /* ✅ 전체 가로폭을 사용 */
+  height: calc(100vh - 60px);  /* TopBar 높이 제외 (필요시 조정) */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.sidebar {
+  width: 240px;
+  background-color: #f0f0f0;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid #ccc;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.sidebar button:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar button.active {
+  background-color: #dcd7ff;
+  font-weight: bold;
+  border-color: #888;
+}
+
+.main-content {
+  flex: 1;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentBox {
+  width: calc(1280px - 264px);
+  height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}

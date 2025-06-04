@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainDisplay from "./pages/MainDisplay";
+import RestaurantDetail from "./pages/RestaurantDetail";
+import WaitingFormPage from "./pages/WaitingFormPage";
+import MyPage from "./pages/MyPage";
+import LoginPage from "./pages/LoginPage";
+import ReviewFormPage from "./pages/ReviewFormPage";
+import SignUpPage from './pages/SignUpPage.jsx';
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+return (
+<BrowserRouter>
+<Routes>
+{/* 루트(“/”)로 접속하면 바로 MainDisplay 렌더링 */}
+<Route path="/" element={<MainDisplay />} />
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+{/* 아래 경로들도 그대로 두되, 인증 검증이 필요 없으므로 RequireAuth 제거 */}
+<Route path="/maindisplay" element={<MainDisplay />} />
+<Route path="/restaurant" element={<RestaurantDetail />} />
+<Route path="/restaurant/waiting" element={<WaitingFormPage />} />
+<Route path="/mypage" element={<MyPage />} />
+<Route path="/reviewformpage" element={<ReviewFormPage />} />
+<Route path="/login" element={<LoginPage />} />
+<Route path="/signUp" element={<SignUpPage />} />
+</Routes>
+</BrowserRouter>
+);
 }
-
-export default App

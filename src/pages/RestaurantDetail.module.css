@@ -1,0 +1,56 @@
+.detailcontainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.infoSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 16px 0;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.leftColumn {
+  width: 60%;
+}
+
+.rightColumn {
+  width: 40%;
+}
+
+.bottomReviewSection {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.waitingButtonContainer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.waitingButton {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.waitingButton:hover {
+  background-color: #ff5252;
+}
