@@ -15,17 +15,16 @@
 }
 
 .restaurant-image-container {
-  width: 100%;
-  height: 0;
-  padding-bottom: 70%; /* Aspect ratio */
   position: relative;
   overflow: hidden;
+  height: 200px; /* 고정 높이로 카드 정렬 안정화 */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .restaurant-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -34,6 +33,12 @@
 
 .restaurant-card:hover .restaurant-image {
   transform: scale(1.05);
+}
+
+.no-image-text {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
 }
 
 .restaurant-info {
@@ -76,15 +81,22 @@
   font-size: 0.85rem;
 }
 
+.restaurant-location {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* 반응형 대응 */
 @media (max-width: 768px) {
   .restaurant-info {
     padding: var(--spacing-sm);
   }
-  
+
   .restaurant-name {
     font-size: 1rem;
   }
-  
+
   .restaurant-category,
   .restaurant-rating {
     font-size: 0.8rem;

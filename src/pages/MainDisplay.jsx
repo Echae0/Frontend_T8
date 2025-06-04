@@ -1,36 +1,44 @@
 // src/pages/MainDisplay.jsx
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-import styles from './MainDisplay.module.css';
-import '../App.css';
+import styles from "./MainDisplay.module.css";
+import "../App.css";
 
-import Header from '../components/main/Header/Header';
-import CategoryBar from '../components/main/CategoryBar/CategoryBar';
-import RestaurantSection from '../components/main/RestaurantSection/RestaurantSection';
-
-import mosuImg from '../assets/trending1.png';
-import dragonHoleImg from '../assets/trending2.png';
-import gangnamExcellentImg from '../assets/trending3.png';
-import resto1Img from '../assets/resto1.png';
-import resto2Img from '../assets/resto2.png';
-import resto3Img from '../assets/resto3.png';
-
+import Header from "../components/main/Header/Header";
+import CategoryBar from "../components/main/CategoryBar/CategoryBar";
+import RestaurantSection from "../components/main/RestaurantSection/RestaurantSection";
 
 export default function MainDisplay() {
-  const [location, setLocation] = useState('강남구')
+  const [location, setLocation] = useState("강남구");
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  const openRestaurants = [
-    { id: 1, name: '모수', image: mosuImg, category: '한식', rating: 4.5, isOpen: true },
-    { id: 2, name: '드레곤 홀', image: dragonHoleImg, category: '중식', rating: 4.3, isOpen: true },
-    { id: 3, name: '강남 엑셀런트', image: gangnamExcellentImg, category: '양식', rating: 4.7, isOpen: true },
-  ]
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/restaurants")
+      .then((res) => {
+        console.log("✅ 받은 데이터:", res.data);
+        setRestaurants(res.data);
+        setFilteredRestaurants(res.data); // 처음엔 전체 출력
+      })
+      .catch((err) => {
+        console.error("❌ 데이터 가져오기 실패:", err);
+      });
+  }, []);
 
-  const recommendedRestaurants = [
-    { id: 4, name: '맛있는 식당 1', image: resto1Img, category: '한식', rating: 4.8, isRecommended: true },
-    { id: 5, name: '맛있는 식당 2', image: resto2Img, category: '일식', rating: 4.6, isRecommended: true },
-    { id: 6, name: '맛있는 식당 3', image: resto3Img, category: '카페', rating: 4.4, isRecommended: true },
-  ]
+  const handleCategorySelect = (category) => {
+    if (!category) {
+      // category가 null이면 전체 보여주기
+      setFilteredRestaurants(restaurants);
+    } else {
+      const result = restaurants.filter(
+        (r) => r.categoryCode && r.categoryCode === category
+      );
+      setFilteredRestaurants(result);
+    }
+  };
 
   return (
     <div className="app">
@@ -41,21 +49,14 @@ export default function MainDisplay() {
             📢 신규 맛집 등록 이벤트! 최대 50% 할인 🍽️
           </div>
 
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link to="/restaurant" className={styles.linkButton}>
-            식당 상세 페이지 보기 →
-          </Link>
-          </div>
+          <CategoryBar onCategorySelect={handleCategorySelect} />
 
-          <CategoryBar />
-
-          <h2 className={styles.sectionTitle}>지금 가는 식당</h2>
-          <RestaurantSection title="" restaurants={openRestaurants} />
-
-          <h2 className={styles.sectionTitle}>추천 식당</h2>
-          <RestaurantSection title="" restaurants={recommendedRestaurants} />
+          <RestaurantSection
+            title="식당 목록"
+            restaurants={filteredRestaurants}
+          />
         </div>
       </main>
     </div>
-  )
+  );
 }
