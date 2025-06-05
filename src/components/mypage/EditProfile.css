@@ -39,7 +39,7 @@
 }
 
 .edit-form input:focus {
-  border-color: #888;
+  border-color: #c52222;
   background-color: #fff;
 }
 
@@ -52,7 +52,7 @@
 
 .save-button {
   flex: 1;
-  background-color: #000;
+  background-color: #FFB22C;
   color: #fff;
   border: none;
   padding: 12px 0;
@@ -61,16 +61,7 @@
   cursor: pointer;
 }
 
-.cancel-button {
-  flex: 1;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  padding: 12px 0;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
+
 
 .cancel-button:hover,
 .save-button:hover {

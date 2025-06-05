@@ -1,21 +1,21 @@
 /* MainDisplay.module.css */
 
 .banner {
-  background-color: #fff4e6;
+  background-color: #FEF3E2;
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
   text-align: center;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #333;
+  color: #050404;
 }
 
 .sectionTitle {
   font-size: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #222;
+  color: #970000;
   font-weight: 600;
 }
 

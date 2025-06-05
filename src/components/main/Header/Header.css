@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--color-primary-light);
+  background-color: #FA812F;
   padding: var(--spacing-md) 0;
   position: sticky;
   top: 0;
@@ -31,6 +31,12 @@
 
 .location-button:hover {
   color: var(--color-primary);
+}
+
+.site-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fffffdee;
 }
 
 .icon {
@@ -111,6 +117,12 @@
   transition: var(--transition-default);
 }
 
+.icon-gap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .notification-button:hover {
   color: var(--color-primary);
   transform: scale(1.1);
@@ -142,3 +154,4 @@
 }
 header-icons button + button {
   margin-left: var(--spacing-md);
+}

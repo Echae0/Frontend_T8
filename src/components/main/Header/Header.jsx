@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { FaKey, FaChevronDown, FaBell, FaUser } from 'react-icons/fa';
-import './Header.css';
+import { FaKey, FaChevronDown, FaBell, FaUser } from "react-icons/fa";
+import "./Header.css";
 
 const Header = ({ location, setLocation }) => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -25,9 +25,14 @@ const Header = ({ location, setLocation }) => {
   };
 
   const locations = [
-    '강남구', '서초구', '송파구',
-    '마포구', '용산구', '종로구',
-    '중구', '영등포구'
+    "강남구",
+    "서초구",
+    "송파구",
+    "마포구",
+    "용산구",
+    "종로구",
+    "중구",
+    "영등포구",
   ];
 
   const handleLocationChange = (loc) => {
@@ -36,8 +41,8 @@ const Header = ({ location, setLocation }) => {
   };
 
   const handleSearch = (e) => {
-    if (e.key === 'Enter') {
-      console.log('검색어:', searchQuery);
+    if (e.key === "Enter") {
+      console.log("검색어:", searchQuery);
       // TODO: 검색 결과 페이지 이동 또는 필터링 로직
     }
   };
@@ -52,14 +57,16 @@ const Header = ({ location, setLocation }) => {
             onClick={() => setIsLocationOpen(!isLocationOpen)}
           >
             {location}
-            <FaChevronDown className={`icon ${isLocationOpen ? 'open' : ''}`} />
+            <FaChevronDown className={`icon ${isLocationOpen ? "open" : ""}`} />
           </button>
           {isLocationOpen && (
             <div className="location-dropdown">
               {locations.map((loc) => (
                 <button
                   key={loc}
-                  className={`location-option ${loc === location ? 'active' : ''}`}
+                  className={`location-option ${
+                    loc === location ? "active" : ""
+                  }`}
                   onClick={() => handleLocationChange(loc)}
                 >
                   {loc}
@@ -80,16 +87,18 @@ const Header = ({ location, setLocation }) => {
             onKeyDown={handleSearch}
           />
         </div>
-        <button className="icon-button" onClick={handleLogout}>
-          <FaKey size={20} />
-        </button>
-        {/* 마이페이지 */}
-          <Link to="/mypage">
-            <button className="icon-button">
-              <FaUser size={30} />
-            </button>
-          </Link>
+        <div className="top-icons">
+          <button className="icon-button" onClick={handleLogout}>
+            <FaKey size={30} />
+          </button>
+          <button
+            className="icon-button"
+            onClick={() => navigate("/mypage")}
+          >
+            <FaUser size={30} />
+          </button>
         </div>
+      </div>
     </header>
   );
 };

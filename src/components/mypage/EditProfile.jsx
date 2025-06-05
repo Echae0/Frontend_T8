@@ -111,7 +111,6 @@ export default function EditProfile() {
 
         <div className="edit-buttons">
           <button type="submit" className="save-button">수정</button>
-          <button type="button" className="cancel-button" onClick={handleCancel}>취소</button>
         </div>
       </form>
     </div>

@@ -26,11 +26,11 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <button className="icon-button" onClick={() => navigate("/maindisplay")}>
-        <FaArrowLeft size={20} />
+        <FaArrowLeft size={30} />
       </button>
       <div className="top-icons">
         <button className="icon-button" onClick={handleLogout}>
-          <FaKey size={20} />
+          <FaKey size={30} />
         </button>
         <button
           className="icon-button"
@@ -38,7 +38,7 @@ const TopBar = () => {
             window.location.href = "/mypage"; // 강제 새로고침 포함 이동
           }}
         >
-          <FaUser size={20} />
+          <FaUser size={30} />
         </button>
       </div>
     </div>
