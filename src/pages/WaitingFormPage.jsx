@@ -23,7 +23,6 @@ export default function WaitingFormPage() {
     }
   }, [user]);
 
-  // ⭐ 식당 웨이팅 정보를 불러오는 useEffect (WaitingInfo.jsx의 내용을 가져옴)
   useEffect(() => {
     axios.get(`http://localhost:8080/api/restaurants/${restaurantId}`)
       .then((res) => {

@@ -1,22 +1,38 @@
-// src/components/WaitingStatusPage.jsx
 import React, { useState, useEffect } from 'react';
 import styles from './WaitingPage.module.css';
-
-import { useNavigate } from 'react-router-dom'; // 필요 시 주석 해제
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function WaitingStatusPage() {
-  const [restaurantName, setRestaurantName] = useState('새마을 식당');
+  const { restaurantId } = useParams();
+  const navigate = useNavigate();
+
+  const [restaurantName, setRestaurantName] = useState('식당 이름을 불러오는 중...');
+  const [loadingRestaurantName, setLoadingRestaurantName] = useState(true);
+
   const [myOrder, setMyOrder] = useState(3);
   const [expectedWaitTime, setExpectedWaitTime] = useState(15);
-  const [reservationDate, setReservationDate] = useState('2025.05.27');
   const [specialRequests, setSpecialRequests] = useState('토마토 못먹어요');
   const [totalGuests, setTotalGuests] = useState(2);
 
-  const navigate = useNavigate();
+  const today = new Date();
+  const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1).toString().padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
 
   useEffect(() => {
-    // API 호출 로직 (생략 가능)
-  }, []);
+    const fetchRestaurantName = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/restaurants/${restaurantId}`);
+        setRestaurantName(response.data.restaurantName || '알 수 없는 식당');
+      } catch (err) {
+        console.error("식당 이름 불러오기 오류:", err);
+        setRestaurantName('식당 이름 로드 실패');
+      } finally {
+        setLoadingRestaurantName(false);
+      }
+    };
+
+    fetchRestaurantName();
+  }, [restaurantId]);
 
   const handleCancelWaiting = () => {
     if (window.confirm('정말로 웨이팅을 취소하시겠습니까?')) {
@@ -30,13 +46,16 @@ export default function WaitingStatusPage() {
     if (window.confirm('입장 처리하시겠습니까?')) {
       console.log('✅ 입장이 완료되었습니다.');
       alert('✅ 입장이 완료되었습니다.'); 
-      navigate('/maindisplay');  // ✅ 메인 페이지로 이동
+      navigate('/maindisplay');
     }
   };
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.restaurantName}>{restaurantName}</h1>
+      <h1 className={styles.restaurantName}>
+        {loadingRestaurantName ? '식당 이름을 불러오는 중...' : restaurantName}
+      </h1>
+      
       <p className={styles.currentOrder}>
         현재 나의 순서: <span className={styles.orderNumber}>{myOrder}번째 팀</span>
       </p>
