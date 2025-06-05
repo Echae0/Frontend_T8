@@ -2,37 +2,65 @@ import React, { useState, useEffect } from 'react';
 import styles from './WaitingPage.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function WaitingStatusPage() {
   const { restaurantId } = useParams();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const [restaurantName, setRestaurantName] = useState('식당 이름을 불러오는 중...');
-  const [loadingRestaurantName, setLoadingRestaurantName] = useState(true);
-
-  const [myOrder, setMyOrder] = useState(3);
-  const [expectedWaitTime, setExpectedWaitTime] = useState(15);
-  const [specialRequests, setSpecialRequests] = useState('토마토 못먹어요');
-  const [totalGuests, setTotalGuests] = useState(2);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [myOrder, setMyOrder] = useState(0);
+  const [expectedWaitTime, setExpectedWaitTime] = useState(0);
+  const [specialRequests, setSpecialRequests] = useState('요청사항 없음');
+  const [totalGuests, setTotalGuests] = useState(0);
 
   const today = new Date();
-  const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1).toString().padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
+    const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
 
   useEffect(() => {
-    const fetchRestaurantName = async () => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await axios.get(`http://localhost:8080/api/restaurants/${restaurantId}`);
-        setRestaurantName(response.data.restaurantName || '알 수 없는 식당');
+        const restaurantResponse = await axios.get(
+          `http://localhost:8080/api/restaurants/${restaurantId}`
+        );
+        setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당');
+
+        if (user && user.id) {
+          const reservationResponse = await axios.get(
+            `http://localhost:8080/api/members/${user.id}/reservations`
+          );
+          const reservationData = reservationResponse.data.find(
+            (reservation) => reservation.restaurantId === parseInt(restaurantId)
+          );
+
+          if (reservationData) {
+            setMyOrder(reservationData.turnTime || 0);
+            setExpectedWaitTime(reservationData.predictedWait || 0);
+            setSpecialRequests(reservationData.requestDetail || '요청사항 없음');
+            setTotalGuests(reservationData.partySize || 0);
+          } else {
+            setError('해당 식당에 대한 예약 정보가 없습니다.');
+          }
+        } else {
+          setError('로그인 정보가 없습니다.');
+        }
       } catch (err) {
-        console.error("식당 이름 불러오기 오류:", err);
-        setRestaurantName('식당 이름 로드 실패');
+        console.error('데이터를 불러오는 중 오류 발생:', err);
+        setError('데이터를 불러오는 데 실패했습니다.');
       } finally {
-        setLoadingRestaurantName(false);
+        setLoading(false);
       }
     };
 
-    fetchRestaurantName();
-  }, [restaurantId]);
+    fetchData();
+  }, [restaurantId, user]);
 
   const handleCancelWaiting = () => {
     if (window.confirm('정말로 웨이팅을 취소하시겠습니까?')) {
@@ -45,17 +73,30 @@ export default function WaitingStatusPage() {
   const handleEntered = () => {
     if (window.confirm('입장 처리하시겠습니까?')) {
       console.log('✅ 입장이 완료되었습니다.');
-      alert('✅ 입장이 완료되었습니다.'); 
+      alert('✅ 입장이 완료되었습니다.');
       navigate('/maindisplay');
     }
   };
 
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.restaurantName}>
-        {loadingRestaurantName ? '식당 이름을 불러오는 중...' : restaurantName}
-      </h1>
-      
+      <h1 className={styles.restaurantName}>{restaurantName}</h1>
       <p className={styles.currentOrder}>
         현재 나의 순서: <span className={styles.orderNumber}>{myOrder}번째 팀</span>
       </p>
