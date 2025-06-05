@@ -1,3 +1,4 @@
+// src/components/WaitingForm/WaitingInfo.jsxAdd commentMore actions
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
@@ -13,20 +14,20 @@ const WaitingInfo = ({ onDataLoaded }) => {
         setRestaurant(res.data);
         setLoading(false);
         if (onDataLoaded) {
-          onDataLoaded(res.data.currentWaitingTeams, res.data.predictedWaitingTime, res.data);
+          onDataLoaded(res.data.currentWaitingTeams, res.data.predictedWaitingTime);
         }
       })
       .catch((err) => {
-        console.error("Error fetching waiting info:", err);
+        console.error("웨이팅 정보를 불러오는 중 오류 발생:", err);
         setLoading(false);
         if (onDataLoaded) {
-          onDataLoaded(0, 0, null);
+          onDataLoaded(0, 0);
         }
       });
   }, [restaurantId, onDataLoaded]);
 
-  if (loading) return <p style={{ display: 'none' }}>Loading...</p>;
-  if (!restaurant) return <p style={{ display: 'none' }}>Restaurant info not found.</p>;
+  if (loading) return <p style={{ display: 'none' }}>불러오는 중...</p>;
+  if (!restaurant) return <p style={{ display: 'none' }}>식당 정보를 불러올 수 없습니다.</p>;
 
   return (
     <div style={{ display: 'none' }}>
