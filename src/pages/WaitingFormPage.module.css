@@ -57,7 +57,7 @@
 .selectField,
 .readOnlyField,
 .textareaField {
-  width: calc(100% - 20px);
+  width: calc(100% - 20px); 
   padding: 10px;
   margin-bottom: 1.5rem;
   border: 1px solid #ddd;
@@ -100,7 +100,7 @@
   gap: 1rem;
   max-height: 480px;
   overflow-y: scroll;
-  padding-right: 15px;
+  padding-right: 15px; 
   box-sizing: border-box;
   margin-bottom: 1.5rem;
 }
@@ -131,8 +131,8 @@
 }
 
 .menuItem.selected {
-  border: 2px solid #FFD700;
-  background-color: #FFFBE6;
+  border: 2px solid #FFD700; 
+  background-color: #FFFBE6; 
   box-shadow: 0 0 8px rgba(255,215,0,0.5);
 }
 
@@ -146,7 +146,7 @@
 
 .checkbox {
   margin-right: 0.5rem;
-  transform: scale(1.2);
+  transform: scale(1.2); 
 }
 
 .menuName {
@@ -190,13 +190,21 @@
   width: 100%;
   max-width: 1200px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; 
+  align-items: center; 
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin-top: 2rem;
+  position: sticky; 
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+/* WaitingInfo 컴포넌트의 UI를 숨기기 위한 클래스 */
+.hiddenWaitingInfoContainer {
+  display: none;
 }
 
 .waitingInfo {
@@ -210,13 +218,13 @@
 
 .waitingNumber,
 .waitingTime {
-  color: #FFB22C;
+  color: #FFB22C; 
   font-size: 1.2rem;
 }
 
 .submitButton {
-  background-color: #FFB22C;
-  color: #333;
+  background-color: #FFB22C; 
+  color: #333; 
   border: none;
   padding: 1rem 2.5rem;
   border-radius: 8px;
@@ -227,19 +235,19 @@
 }
 
 .submitButton:hover {
-  background-color: #e39f28;
+  background-color: #e39f28; 
 }
 
 .errorMessage {
   color: red;
   font-size: 0.85rem;
-  margin-top: -1rem;
+  margin-top: -1rem; 
   margin-bottom: 1.5rem;
   text-align: left;
 }
 
 .inputError {
-  border-color: red !important;
+  border-color: red !important; 
 }
 
 .menusError {

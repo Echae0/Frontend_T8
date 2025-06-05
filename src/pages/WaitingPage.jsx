@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './WaitingPage.module.css';
 
-import { useNavigate } from 'react-router-dom'; // 필요 시 주석 해제
+import { useNavigate } from 'react-router-dom'; 
 
 export default function WaitingStatusPage() {
   const [restaurantName, setRestaurantName] = useState('새마을 식당');
