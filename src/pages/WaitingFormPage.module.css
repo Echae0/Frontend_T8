@@ -1,0 +1,248 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.headerTitle {
+  margin: 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.contentArea {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  gap: 2rem;
+}
+
+.formSection,
+.menuSection {
+  flex: 1;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  color: #555;
+}
+
+.inputField,
+.selectField,
+.readOnlyField,
+.textareaField {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.selectField {
+  background-color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23666' d='M10 12l-6-6h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.readOnlyField {
+  background-color: #eee;
+  color: #777;
+}
+
+.textareaField {
+  resize: vertical;
+  height: 120px;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+.infoText {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-height: 480px;
+  overflow-y: scroll;
+  padding-right: 15px;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+
+.menuGrid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.menuGrid::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.menuGrid::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease-in-out;
+}
+
+.menuItem.selected {
+  border: 2px solid #FFD700;
+  background-color: #FFFBE6;
+  box-shadow: 0 0 8px rgba(255,215,0,0.5);
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+  transform: scale(1.2);
+}
+
+.menuName {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.menuImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.menuPrice {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.totalPriceContainer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.totalPriceLabel {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.totalPriceValue {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.bottomBar {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.waitingInfo {
+  font-size: 1rem;
+  color: #555;
+}
+
+.waitingText {
+  margin-right: 1rem;
+}
+
+.waitingNumber,
+.waitingTime {
+  color: #FFB22C;
+  font-size: 1.2rem;
+}
+
+.submitButton {
+  background-color: #FFB22C;
+  color: #333;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submitButton:hover {
+  background-color: #e39f28;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.inputError {
+  border-color: red !important;
+}
+
+.menusError {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}

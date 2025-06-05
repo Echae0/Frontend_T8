@@ -1,0 +1,384 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Remove the following header-related styles */
+/*
+.mainHeader {
+  width: 100%;
+  background-color: #FFD700;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.locationText {
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  width: 250px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.headerIcon {
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.headerIcon:hover {
+  color: #555;
+}
+*/
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  gap: 2rem;
+  margin-top: 0; /* Change this from 5rem to 0 or a smaller value as needed */
+}
+
+.restaurantInfoSection,
+.amountSelectSection {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reviewCard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding-bottom: 1.5rem;
+}
+
+.restaurantInfoSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.restaurantImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.restaurantDetails {
+  flex-grow: 1;
+}
+
+.restaurantName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.restaurantAddress,
+.restaurantHours {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.visitDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #555;
+  border-left: 1px solid #eee;
+  padding-left: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.amountSelectSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.amountTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #555;
+  width: 100%;
+  text-align: left;
+}
+
+.amountOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.amountButton {
+  background-color: #f0f0f0;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 0.7rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.amountButton:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.amountButton.selectedAmount {
+  background-color: #fdbe52;
+  color: #333;
+  border-color: #fdbe52;
+  font-weight: bold;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 12px 20px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #ccc;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.nickname {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.reviewContentArea {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.imageUploadContainer {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.uploadPlaceholder {
+  text-align: center;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.fileInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadedImagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.reviewTextareaWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.reviewTextarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 150px;
+  margin-bottom: 0;
+}
+
+.waitingScoreSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.scoreIcons {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 5px;
+}
+
+.scoreIcon {
+  color: #ccc;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.scoreIcon:hover {
+  opacity: 0.7;
+}
+
+.scoreIcon.filledScore {
+  color: #FFD700;
+  opacity: 1;
+}
+
+.scoreLabel {
+  font-size: 0.95rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.submitButton {
+  background-color: #FFB22C;
+  color: #333;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+}
+
+.submitButton:hover {
+  background-color: #e39f28;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.inputError {
+  border-color: red !important;
+}
+
+.amountErrorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+.reviewContentErrorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+.waitingScoreSection .errorMessage {
+  text-align: center;
+  width: 100%;
+}
+
+.imageErrorMessage {
+  text-align: center;
+  margin-top: 0.5rem;
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  width: 150px;
+}
