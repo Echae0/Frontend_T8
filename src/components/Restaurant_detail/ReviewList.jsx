@@ -9,6 +9,10 @@ const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortOption, setSortOption] = useState('latest');
+  const averageRating =
+  reviews.length > 0
+    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
+    : 'N/A';
 
   useEffect(() => {
     axios
@@ -64,6 +68,9 @@ const ReviewList = () => {
         >
           별점 낮은순
         </button>
+      </div>
+      <div className={styles.averageRating}>
+        평균 별점: <strong>{averageRating}</strong>
       </div>
 
 
