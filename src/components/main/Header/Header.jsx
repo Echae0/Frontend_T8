@@ -10,10 +10,6 @@ const Header = ({ location, setLocation }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // accessToken 확인 (디버깅용 로그)
-    const token = localStorage.getItem("token");
-    console.log("📦 token:", token);
-
     // 사용자에게 안내 메시지
     alert("✅ 로그아웃합니다.");
 

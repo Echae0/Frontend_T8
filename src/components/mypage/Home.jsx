@@ -43,36 +43,6 @@ export default function Home() {
             </ul>
           )}
         </div>
-
-        {/* ───────────────────────────────────────────────────────────── */}
-        {/* 2) 관심 가게 카드 */}
-        {/* ───────────────────────────────────────────────────────────── */}
-        <div
-          style={{
-            flex: 1,
-            backgroundColor: '#f9f9f9',
-            borderRadius: '10px',
-            padding: '30px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-            minHeight: '200px'
-          }}
-        >
-          <h3>최근 관심있는 가게</h3>
-
-          {likedRestaurants.length === 0 ? (
-            <p style={{ color: '#777', marginTop: '12px' }}>
-              찜한 내역이 없습니다.
-            </p>
-          ) : (
-            <ul style={{ listStyle: 'none', padding: 0, marginTop: '12px' }}>
-              {likedRestaurants.map((store, idx) => (
-                <li key={idx} style={{ marginBottom: '8px' }}>
-                  {store.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
       </div>
     </div>
   );
