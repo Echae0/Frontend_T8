@@ -14,7 +14,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />  
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />  
         <Route path="/maindisplay" element={<MainDisplay />} />
         <Route path="/restaurant/:restaurantId" element={<RestaurantDetail />} />
         <Route path="/restaurant/:restaurantId/waitingform" element={<WaitingFormPage />} /> {/* ✅ 추가 */}
