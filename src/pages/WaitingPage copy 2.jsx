@@ -16,9 +16,8 @@ export default function WaitingStatusPage() {
   const [expectedWaitTime, setExpectedWaitTime] = useState(0);
   const [specialRequests, setSpecialRequests] = useState('요청사항 없음');
   const [totalGuests, setTotalGuests] = useState(0);
-  const [currentReservationId, setCurrentReservationId] = useState(null);
-  // ⭐ 여기에 현재 활성화된 예약의 전체 데이터를 저장할 상태를 추가합니다.
-  const [activeReservationData, setActiveReservationData] = useState(null);
+  // ⭐ 'currentReservationId' 변수 추가는 기능 구현을 위해 필요하므로 유지합니다.
+  const [currentReservationId, setCurrentReservationId] = useState(null); 
 
   const today = new Date();
   const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1)
@@ -30,15 +29,18 @@ export default function WaitingStatusPage() {
       setLoading(true);
       setError(null);
       try {
+        // 1. 식당 이름 가져오기: restaurantResponse.data.restaurantName 사용 유지
         const restaurantResponse = await axios.get(
           `http://localhost:8080/api/restaurants/${restaurantId}`
         );
         setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
 
+        // 2. 사용자 웨이팅 정보 가져오기
         if (user && user.id) {
           const reservationResponse = await axios.get(
             `http://localhost:8080/api/members/${user.id}/reservations`
           );
+          // 회원의 모든 예약 중, 현재 식당 ID와 일치하고 'REQUESTED' 상태인 예약을 찾습니다.
           const reservationData = reservationResponse.data.find(
             (reservation) => 
               reservation.restaurantId === parseInt(restaurantId) &&
@@ -46,56 +48,44 @@ export default function WaitingStatusPage() {
           );
 
           if (reservationData) {
+            // ⭐ reservationId 저장 (상태 업데이트에 필요)
             setCurrentReservationId(reservationData.id); 
             setMyOrder(reservationData.turnTime || 0);
             setExpectedWaitTime(reservationData.predictedWait || 0);
             setSpecialRequests(reservationData.requestDetail || '요청사항 없음');
             setTotalGuests(reservationData.partySize || 0);
-            // ⭐ 활성화된 예약의 전체 데이터를 저장합니다.
-            setActiveReservationData(reservationData); 
           } else {
             setError('해당 식당에 활성화된 예약 정보가 없습니다.'); 
-            setCurrentReservationId(null); 
-            setActiveReservationData(null); // 예약 없으면 데이터도 초기화
+            setCurrentReservationId(null); // 활성화된 예약이 없으면 ID 초기화
           }
         } else {
           setError('로그인 정보가 없습니다.');
-          setCurrentReservationId(null); 
-          setActiveReservationData(null); // 로그인 없으면 데이터도 초기화
+          setCurrentReservationId(null); // 로그인 정보 없으면 ID 초기화
         }
       } catch (err) {
         console.error('데이터를 불러오는 중 오류 발생:', err);
         setError('데이터를 불러오는 데 실패했습니다.');
-        setCurrentReservationId(null); 
-        setActiveReservationData(null); // 오류 발생 시 데이터 초기화
+        setCurrentReservationId(null); // 오류 발생 시 ID 초기화
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [restaurantId, user]); 
+  }, [restaurantId, user]); // restaurantId나 user 정보가 변경될 때마다 다시 호출
 
   const handleCancelWaiting = async () => {
-    if (!currentReservationId || !activeReservationData) { // 전체 데이터도 있는지 확인
+    if (!currentReservationId) {
       alert('취소할 예약 정보가 없습니다.');
       return;
     }
 
     if (window.confirm('정말로 웨이팅을 취소하시겠습니까?')) {
       try {
-        // ⭐ 핵심 수정: 기존 예약 데이터 복사 후 status만 변경하여 전송
-        const updatedReservation = { 
-          ...activeReservationData, // 기존 예약 정보 전체 복사
-          status: 'CANCELLED'       // status만 'CANCELLED'로 변경
-        };
-
-        await axios.put(
-          `http://localhost:8080/api/members/${user.id}/reservations`,
-          updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
-        );
+        // 백엔드 API로 예약 상태를 CANCELLED로 변경 요청
+        await axios.put(`http://localhost:8080/api/members/${user.id}/reservations`, { status: 'CANCELLED' });
         alert('✅ 웨이팅 취소가 완료되었습니다.');
-        navigate('/maindisplay'); 
+        navigate('/maindisplay'); // 취소 후 메인 페이지로 이동
       } catch (error) {
         console.error('웨이팅 취소 실패:', error);
         alert('웨이팅 취소에 실패했습니다. 다시 시도해주세요.');
@@ -104,25 +94,17 @@ export default function WaitingStatusPage() {
   };
 
   const handleEntered = async () => {
-    if (!currentReservationId || !activeReservationData) { // 전체 데이터도 있는지 확인
+    if (!currentReservationId) {
       alert('입장 처리할 예약 정보가 없습니다.');
       return;
     }
 
     if (window.confirm('입장 처리하시겠습니까?')) {
       try {
-        // ⭐ 핵심 수정: 기존 예약 데이터 복사 후 status만 변경하여 전송
-        const updatedReservation = { 
-          ...activeReservationData, // 기존 예약 정보 전체 복사
-          status: 'JOINED'          // status만 'JOINED'로 변경
-        };
-
-        await axios.put(
-          `http://localhost:8080/api/members/${user.id}/reservations`,
-          updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
-        );
+        // 백엔드 API로 예약 상태를 JOINED로 변경 요청
+        await axios.put(`http://localhost:8080/api/members/${user.id}/reservations`, { status: 'JOINED' });
         alert('✅ 입장이 완료되었습니다.');
-        navigate('/maindisplay'); 
+        navigate('/maindisplay'); // 입장 처리 후 메인 페이지로 이동
       } catch (error) {
         console.error('입장 처리 실패:', error);
         alert('입장 처리에 실패했습니다. 다시 시도해주세요.');
@@ -130,6 +112,7 @@ export default function WaitingStatusPage() {
     }
   };
 
+  // 로딩 중이거나 오류 발생 시 UI
   if (loading) {
     return (
       <div className={styles.container}>
