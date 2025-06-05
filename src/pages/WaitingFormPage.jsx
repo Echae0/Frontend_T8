@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './WaitingFormPage.module.css';
 import { useParams, useNavigate } from 'react-router-dom'; // navigate도 필요할 수 있어 추가했습니다.
 import MenuList from '../components/WaitingForm/MenuList';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+
 
 export default function WaitingFormPage() {
   const { restaurantId } = useParams(); // URL 파라미터에서 restaurantId를 가져옵니다.
   const navigate = useNavigate(); // 페이지 이동을 위해 navigate 훅 추가
+  const user = useSelector((state) => state.user); // state.user가 userSlice에 있는 데이터라고 가정
 
+  useEffect(() => {
+    if (user && user.id) {
+      console.log("현재 로그인한 유저 ID:", user.id);
+    } else {
+      console.log("유저 정보가 없습니다.");
+    }
+  }, [user]);
+  
   // 폼 입력 값 상태 관리: 이름(제거됨), 인원수, 요청 사항
   const [form, setForm] = useState({
     // name: '', // ✅ 'name' 상태 제거
@@ -69,7 +82,7 @@ export default function WaitingFormPage() {
 
     // 백엔드로 전송할 대기 등록 데이터 객체 구성
     const reservationData = {
-      // customerName: form.name, // ✅ 'customerName' 속성 제거
+      customerName: user.id, // ✅ 'customerName' 속성 제거
       numberOfPeople: form.people,
       requestedMenus: selectedMenus.map(menu => ({
         menuId: menu.id,
