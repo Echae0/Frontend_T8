@@ -7,24 +7,23 @@ const TopBar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-  // accessToken 확인 (디버깅용 로그)
-  const token = localStorage.getItem("accessToken");
-  console.log("📦 accessToken:", token);
+    // accessToken 확인 (디버깅용 로그)
+    const token = localStorage.getItem("token");
+    console.log("📦 token:", token);
 
-  // 사용자에게 안내 메시지
-  alert("✅ 로그아웃합니다.");
+    // 사용자에게 안내 메시지
+    alert("✅ 로그아웃합니다.");
 
-  // 토큰 제거
-  localStorage.setItem("token", token); 
-  console.log("삭제 후:", localStorage.getItem("accessToken")); // null 이어야 정상
+    // 토큰 제거
+    localStorage.removeItem("token"); // ✅ 삭제
+    console.log("삭제 후:", localStorage.getItem("token")); // null 이어야 정상
 
-  console.log("🗑️ Token 삭제 완료");
+    console.log("🗑️ Token 삭제 완료");
 
-  // 로그인 페이지로 이동
-  navigate("/login");
-  console.log("➡️ 로그인 페이지로 이동");
-};
-
+    // 로그인 페이지로 이동
+    navigate("/login");
+    console.log("➡️ 로그인 페이지로 이동");
+  };
 
   return (
     <div className="top-bar">

@@ -1,11 +1,32 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaChevronDown, FaBell, FaUser } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+import { FaKey, FaChevronDown, FaBell, FaUser } from 'react-icons/fa';
 import './Header.css';
 
 const Header = ({ location, setLocation }) => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // accessToken 확인 (디버깅용 로그)
+    const token = localStorage.getItem("token");
+    console.log("📦 token:", token);
+
+    // 사용자에게 안내 메시지
+    alert("✅ 로그아웃합니다.");
+
+    // 토큰 제거
+    localStorage.removeItem("token"); // ✅ 삭제
+    console.log("삭제 후:", localStorage.getItem("token")); // null 이어야 정상
+
+    console.log("🗑️ Token 삭제 완료");
+
+    // 로그인 페이지로 이동
+    navigate("/login");
+    console.log("➡️ 로그인 페이지로 이동");
+  };
 
   const locations = [
     '강남구', '서초구', '송파구',
@@ -63,7 +84,9 @@ const Header = ({ location, setLocation }) => {
             onKeyDown={handleSearch}
           />
         </div>
-
+        <button className="icon-button" onClick={handleLogout}>
+          <FaKey size={20} />
+        </button>
         {/* 마이페이지 */}
           <Link to="/mypage">
             <button className="icon-button">
