@@ -1,10 +1,13 @@
 // src/components/LoginPage.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
+import { useDispatch } from "react-redux"; // 🔴
+import { setUser } from "../features/user/userSlice"; // 🔴
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // 🔴
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -44,8 +47,26 @@ export default function LoginPage() {
           axios.default.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         });
 
-        alert("로그인이 성공적으로 완료되었습니다!");
-        navigate("/maindisplay");
+        // 🔴 유저 정보 가져오기
+        const userInfoResponse = await fetch("http://localhost:8080/api/userinfos/me", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        if (userInfoResponse.ok) {
+          const userData = await userInfoResponse.json();
+
+          // 🔴 Redux에 저장
+          dispatch(setUser(userData));  // Redux에 저장
+          localStorage.setItem("user", JSON.stringify(userData));  // localStorage에 저장
+
+          alert("로그인이 성공적으로 완료되었습니다!");
+          navigate("/maindisplay");
+        } else {
+          alert("유저 정보를 가져오지 못했습니다.");
+        }
       } else {
         const errorText = await response.text();
         alert(`로그인 실패: ${errorText || "이메일 또는 비밀번호가 올바르지 않습니다."}`);
