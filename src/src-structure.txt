@@ -1,0 +1,93 @@
+Windows 볼륨에 대한 폴더 경로의 목록입니다.
+볼륨 일련 번호는 70C2-D8E3입니다.
+C:.
+|   App.css
+|   App.jsx
+|   index.css
+|   main.jsx
+|   src-structure.txt
+|   
++---app
+|       store.js
+|       
++---assets
+|       react.svg
+|       
++---components
+|   +---main
+|   |   +---CategoryBar
+|   |   |       CategoryBar.css
+|   |   |       CategoryBar.jsx
+|   |   |       
+|   |   +---Header
+|   |   |       Header.css
+|   |   |       Header.jsx
+|   |   |       
+|   |   +---RestaurantCard
+|   |   |       RestaurantCard.css
+|   |   |       RestaurantCard.jsx
+|   |   |       
+|   |   \---RestaurantSection
+|   |           RestaurantSection.css
+|   |           RestaurantSection.jsx
+|   |           
+|   +---mypage
+|   |       EditProfile.css
+|   |       EditProfile.jsx
+|   |       Home.jsx
+|   |       MyReviews.jsx
+|   |       ReservationHistory.css
+|   |       ReservationHistory.jsx
+|   |       Sidebar.jsx
+|   |       Sidebar.module.css
+|   |       TopBar.css
+|   |       TopBar.jsx
+|   |       
+|   +---Restaurant_detail
+|   |       MenuList.jsx
+|   |       MenuList.module.css
+|   |       MenuPreview.jsx
+|   |       MenuPreview.module.css
+|   |       RestaurantImageSlider.jsx
+|   |       RestaurantImageSlider.module.css
+|   |       RestaurantInfo.jsx
+|   |       RestaurantInfo.module.css
+|   |       ReviewCard.jsx
+|   |       ReviewCard.module.css
+|   |       ReviewCard_select.jsx
+|   |       ReviewCard_select.module.css
+|   |       ReviewList.jsx
+|   |       ReviewList.module.css
+|   |       ReviewList_select.jsx
+|   |       ReviewList_select.module.css
+|   |       WaitingInfo.jsx
+|   |       WaitingInfo.module.css
+|   |       
+|   \---WaitingForm
+|           MenuList.jsx
+|           MenuList.module.css
+|           WaitingInfo.jsx
+|           WaitingInfo.module.css
+|           
++---features
+|   \---user
+|           userSlice.js
+|           
+\---pages
+        LoginPage.jsx
+        LoginPage.module.css
+        MainDisplay.jsx
+        MainDisplay.module.css
+        MyPage.jsx
+        MyPage.module.css
+        RestaurantDetail.jsx
+        RestaurantDetail.module.css
+        ReviewFormPage.jsx
+        ReviewFormPage.module.css
+        SignUpPage.jsx
+        SignUpPage.module.css
+        WaitingFormPage.jsx
+        WaitingFormPage.module.css
+        WaitingPage.jsx
+        WaitingPage.module.css
+        
