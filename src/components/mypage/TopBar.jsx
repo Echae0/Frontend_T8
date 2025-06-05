@@ -27,7 +27,7 @@ const TopBar = () => {
             window.location.href = "/mypage"; // 새로고침 포함 이동
           }}
         >
-          <FaUser size={20} />
+          <FaUser size={30} />
         </button>
       </div>
     </div>

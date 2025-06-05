@@ -20,10 +20,6 @@ export default function EditProfile() {
     // TODO: 서버에 저장 요청 보내기
   };
 
-  const handleCancel = () => {
-    console.log('수정 취소');
-    // TODO: 원래 정보로 되돌리거나 홈으로 이동
-  };
 
   return (
     <div className="edit-profile-wrapper">
@@ -43,7 +39,6 @@ export default function EditProfile() {
 
         <div className="edit-buttons">
           <button type="submit" className="save-button">수정</button>
-          <button type="button" className="cancel-button" onClick={handleCancel}>취소</button>
         </div>
       </form>
     </div>

@@ -20,7 +20,7 @@ export default function Home() {
         <div
           style={{
             flex: 1,
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#F5F7FA',
             borderRadius: '10px',
             padding: '30px',
             boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
@@ -50,10 +50,10 @@ export default function Home() {
         <div
           style={{
             flex: 1,
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#F5F7FA',
             borderRadius: '10px',
             padding: '30px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+            boxShadow: '0 2px 6px rgba(114, 39, 39, 0.1)',
             minHeight: '200px'
           }}
         >
