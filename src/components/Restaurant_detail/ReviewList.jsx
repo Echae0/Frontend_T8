@@ -14,6 +14,24 @@ const ReviewList = () => {
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : 'N/A';
 
+  const renderStars = (score) => {
+    const rating = parseFloat(score);
+    if (isNaN(rating)) return '정보 없음';
+
+    const fullStars = Math.floor(rating);
+    const hasHalf = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
+    const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+
+    return (
+      <span className={styles.stars}>
+        {'★'.repeat(fullStars)}
+        {hasHalf ? '⯨' : ''}
+        {'☆'.repeat(emptyStars)}
+      </span>
+    );
+  };
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/restaurants/${restaurantId}/reviews`)
@@ -50,28 +68,31 @@ const ReviewList = () => {
       <h2 className={styles.title}>전체 리뷰</h2>
 
       <div className={styles.sortButtons}>
-        <button
-          className={sortOption === 'latest' ? styles.active : ''}
-          onClick={() => setSortOption('latest')}
-        >
-          최신순
-        </button>
-        <button
-          className={sortOption === 'highest' ? styles.active : ''}
-          onClick={() => setSortOption('highest')}
-        >
-          별점 높은순
-        </button>
-        <button
-          className={sortOption === 'lowest' ? styles.active : ''}
-          onClick={() => setSortOption('lowest')}
-        >
-          별점 낮은순
-        </button>
+        <div className={styles.sortButtonsGroup}>
+          <button
+            className={sortOption === 'latest' ? styles.active : ''}
+            onClick={() => setSortOption('latest')}
+          >
+            최신순
+          </button>
+          <button
+            className={sortOption === 'highest' ? styles.active : ''}
+            onClick={() => setSortOption('highest')}
+          >
+            별점 높은순
+          </button>
+          <button
+            className={sortOption === 'lowest' ? styles.active : ''}
+            onClick={() => setSortOption('lowest')}
+          >
+            별점 낮은순
+          </button>
+        </div>
+        <div className={styles.averageRating}>
+          평균 별점: <strong>{renderStars(averageRating)} ({averageRating})</strong>
+        </div>
       </div>
-      <div className={styles.averageRating}>
-        평균 별점: <strong>{averageRating}</strong>
-      </div>
+
 
 
       <div className={styles.reviewsList}>

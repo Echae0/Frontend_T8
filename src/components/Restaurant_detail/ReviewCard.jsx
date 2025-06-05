@@ -24,6 +24,22 @@ const formatWaitingTime = (duration) => {
   return result.trim() || '정보 없음';
 };
 
+const renderStars = (score) => {
+  const rating = parseFloat(score);
+  if (isNaN(rating)) return '정보 없음';
+
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
+  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+
+  return (
+    <span className={styles.stars}>
+      {'★'.repeat(fullStars)}
+      {hasHalf ? '⯨' : ''}
+      {'☆'.repeat(emptyStars)}
+    </span>
+  );
+};
 
 const ReviewCard = ({
   nickname = '익명 사용자',
@@ -58,7 +74,9 @@ const ReviewCard = ({
       <div className={styles.details}>
         <span>방문 일시 : {formatVisitTime(visitTime)}</span>
         <span>대기 시간 : {formatWaitingTime(waitingTime)}</span>
-        <span>별점 : {waitingScore || '0.0'}</span>
+        <span>
+          {renderStars(waitingScore)}
+        </span>
       </div>
 
       {/* 리뷰 텍스트 */}
