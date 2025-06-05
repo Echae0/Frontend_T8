@@ -24,9 +24,11 @@ const WaitingInfo = () => {
   if (!restaurant) return <p>식당 정보를 불러올 수 없습니다.</p>;
 
   return (
-    <div className={styles.container}>
-      <p className={styles.waitingInfo}>현재 대기 인원: {restaurant.currentWaitingTeams}팀</p>
-      <p className={styles.waitingInfo}>예상 대기시간: {restaurant.predictedWaitingTime}분</p>
+    <div className={styles.waitingBox}>
+      <div className={styles.label}>현재 대기 팀</div>
+      <div className={styles.value}>{restaurant.currentWaitingTeams} 팀</div>
+      <div className={styles.label}>예상 대기 시간</div>
+      <div className={styles.value}>{restaurant.predictedWaitingTime} 분</div>
     </div>
   );
 };
