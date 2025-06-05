@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+main 페이지 header 주소 필터 제거 ,검색창 제거 및 베너 css 수정,main categories 버튼 가운데 정렬 및 액티브/호버 css 수정,restaurants card 배경 css 수정,mypage top bar 크기 조정 및 알람 아이콘 삭제 마이페이지 아이콘 크기조정,sidebar 배경색 css 수정,myreviewers.profilelnfo.wishlist.editprofile.favoritestores  css수정
