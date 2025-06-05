@@ -1,0 +1,29 @@
+.container {Add commentMore actions
+  text-align: right;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.waitingInfo {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-top: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #ff5252;
+}

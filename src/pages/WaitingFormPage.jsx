@@ -1,10 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './WaitingFormPage.module.css';
-import { useParams, useNavigate } from 'react-router-dom'; // navigate도 필요할 수 있어 추가했습니다.
+import { useParams, useNavigate } from 'react-router-dom';
 import MenuList from '../components/WaitingForm/MenuList';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
 
 
 export default function WaitingFormPage() {
@@ -19,11 +17,11 @@ export default function WaitingFormPage() {
       console.log("유저 정보가 없습니다.");
     }
   }, [user]);
-  
+
   // 폼 입력 값 상태 관리: 이름(제거됨), 인원수, 요청 사항
   const [form, setForm] = useState({
-    // name: '', // ✅ 'name' 상태 제거
-    people: 1,
+    // name: '', // 'name' 상태 제거됨
+    people: 1, // 초기값을 숫자 1로 설정
     request: '',
   });
 
@@ -35,6 +33,7 @@ export default function WaitingFormPage() {
 
   const handleMenusLoaded = () => {
     // MenuList에서 메뉴 데이터 로드 완료!
+    // 필요하다면 여기서 추가 로직을 구현할 수 있습니다.
   };
 
   const handleMenuToggle = (menu) => {
@@ -50,7 +49,8 @@ export default function WaitingFormPage() {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    // ⭐ 'people' 필드는 숫자로 명시적으로 변환하여 저장합니다.
+    setForm({ ...form, [name]: name === 'people' ? Number(value) : value });
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
@@ -60,14 +60,12 @@ export default function WaitingFormPage() {
     const newErrors = {};
 
     // 폼 유효성 검사 로직
-    // if (!form.name.trim()) { // ✅ 'name' 유효성 검사 로직 제거
-    //   newErrors.name = '성함을 입력해주세요.';
-    // }
     if (form.people < 1) {
       newErrors.people = '인원수를 선택해주세요.';
     }
     if (selectedMenus.length === 0) {
       newErrors.menus = '메뉴를 하나 이상 선택해주세요.';
+    
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -82,14 +80,10 @@ export default function WaitingFormPage() {
 
     // 백엔드로 전송할 대기 등록 데이터 객체 구성
     const reservationData = {
-      customerName: user.id, // ✅ 'customerName' 속성 제거
-      numberOfPeople: form.people,
-      requestedMenus: selectedMenus.map(menu => ({
-        menuId: menu.id,
-        menuName: menu.name,
-        price: menu.price
-      })),
-      specialRequests: form.request,
+      memberId: user.id, 
+      partySize: form.people, 
+      requestDetail: form.request,
+      restaurantId: restaurantId
     };
 
     console.log("백엔드로 전송될 대기 등록 데이터:", reservationData);
@@ -106,14 +100,15 @@ export default function WaitingFormPage() {
       if (response.ok) {
         alert('대기 등록이 성공적으로 완료되었습니다!');
         // 폼 초기화 및 에러 메시지 초기화
-        setForm({ people: 1, request: '' }); // ✅ 'name' 초기화 제거
+        setForm({ people: 1, request: '' });
         setSelectedMenus([]);
         setErrors({});
         navigate(`/restaurant/${restaurantId}/waiting`); // 웨이팅 완료 후 해당 음식점 상세 페이지로 이동
       } else {
         const errorData = await response.json();
         console.error('대기 등록 실패:', errorData);
-        alert(`대기 등록 실패: ${errorData.message || '서버 오류가 발생했습니다.'}`);
+        // 에러 메시지를 더 상세하게 출력하여 백엔드 오류 확인에 도움을 줍니다.
+        alert(`대기 등록 실패: ${errorData.message || JSON.stringify(errorData) || '서버 오류가 발생했습니다.'}`);
       }
     } catch (error) {
       console.error('네트워크 오류 또는 요청 실패:', error);
@@ -135,19 +130,6 @@ export default function WaitingFormPage() {
       <div className={styles.contentArea}>
         {/* 대기자 정보 입력 섹션 */}
         <div className={styles.formSection}>
-          {/* ✅ '성함' 입력 필드 및 관련 에러 메시지 제거 */}
-          {/* <h2 className={styles.sectionTitle}>대기자 성함</h2>
-          <input
-            type="text"
-            placeholder="성함을 입력해주세요."
-            className={`${styles.inputField} ${errors.name ? styles.inputError : ''}`}
-            name="name"
-            value={form.name}
-            onChange={handleFormChange}
-            required
-          />
-          {errors.name && <p className={styles.errorMessage}>{errors.name}</p>} */}
-
           <h2 className={styles.sectionTitle}>인원 수</h2>
           <select
             className={`${styles.selectField} ${errors.people ? styles.inputError : ''}`}
