@@ -116,3 +116,25 @@
   background-color: #e0a800;
   transform: translateY(-2px);
 }
+
+.homeButton {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1; /* 두 버튼이 동일한 너비로 공간을 차지 */
+  max-width: 220px;
+}
+
+.homeButton {
+  background-color: #f99b2f; /* 회색 */
+  color: white;
+}
+
+.homeButton:hover {
+  background-color: #7c7d6c; /* 회색 */
+  color: white;
+}

@@ -114,11 +114,11 @@ export default function WaitingStatusPage() {
         // ⭐ 핵심 수정: 기존 예약 데이터 복사 후 status만 변경하여 전송
         const updatedReservation = { 
           ...activeReservationData, // 기존 예약 정보 전체 복사
-          status: 'JOINED'          // status만 'JOINED'로 변경
+          status: "JOINED"          // status만 'JOINED'로 변경
         };
 
         await axios.put(
-          `http://localhost:8080/api/members/${user.memberId}/reservations`,
+          `http://localhost:8080/api/reservations/${currentReservationId}`,
           updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
         );
         alert('✅ 입장이 완료되었습니다.');
@@ -176,9 +176,13 @@ export default function WaitingStatusPage() {
         <button className={styles.cancelButton} onClick={handleCancelWaiting}>
           웨이팅 취소
         </button>
+      <button className={styles.homeButton} onClick={() => navigate('/maindisplay')}>
+        홈으로 이동
+      </button>
         <button className={styles.enteredButton} onClick={handleEntered}>
           입장했어요!
         </button>
+
       </div>
     </div>
   );
