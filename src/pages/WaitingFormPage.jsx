@@ -82,14 +82,10 @@ export default function WaitingFormPage() {
 
     // 백엔드로 전송할 대기 등록 데이터 객체 구성
     const reservationData = {
-      customerName: user.id, // ✅ 'customerName' 속성 제거
-      numberOfPeople: form.people,
-      requestedMenus: selectedMenus.map(menu => ({
-        menuId: menu.id,
-        menuName: menu.name,
-        price: menu.price
-      })),
-      specialRequests: form.request,
+      partySize: form.people,
+      requestDetail: form.request,
+      memberId: user.id, // ✅ 'customerName' 속성 제거
+      restaurantId: restaurantId
     };
 
     console.log("백엔드로 전송될 대기 등록 데이터:", reservationData);
