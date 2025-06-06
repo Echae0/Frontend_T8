@@ -1,18 +1,23 @@
-// src/components/main/CategoryBar/CategoryBar.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./CategoryBar.css";
 
 const CategoryBar = ({ onCategorySelect }) => {
+  const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
 
-  const categories = [
-    { categoryCode: "KOREAN", categoryName: "한식" },
-    { categoryCode: "CHINESE", categoryName: "중식" },
-    { categoryCode: "JAPANESE", categoryName: "일식" },
-    { categoryCode: "WESTERN", categoryName: "양식" },
-    { categoryCode: "ASIAN", categoryName: "아시안" },
-    { categoryCode: "DESSERT", categoryName: "디저트" },
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("카테고리 불러오기 실패:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleClick = (code) => {
     setActiveCategory(code);
