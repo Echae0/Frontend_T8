@@ -6,7 +6,7 @@ import "./Header.css";
 
 
 const Header = ({ location, setLocation, restaurants, onSearch }) => {
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [setFilteredRestaurants] = useState([]);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
