@@ -15,6 +15,10 @@
 
 .location-selector {
   position: relative;
+  background-color: #ffffff;
+  border-radius: var(--border-radius-sm);
+  padding: 4px 5px;
+
 }
 
 .location-button {
@@ -61,8 +65,10 @@
   padding: var(--spacing-xs) var(--spacing-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: var(--transition-default);
+  
+  padding: 11px;
 }
 .search-input:focus {
   outline: none;
@@ -200,4 +206,18 @@ header-icons button + button {
   margin: 4px 0 0;
   font-size: 14px;
   color: #666;
+}
+
+.username-box {
+  display: inline-block;
+  background-color: #ffe0b2; /* 부드러운 밝은 오렌지 */
+  color: #5d4037; /* 진한 갈색 텍스트 */
+  padding: 10px 14px;
+  border-radius: 20px; /* 둥근 모서리 */
+  font-weight: 500;
+  font-size: 1rem;
+  margin-right: 12px;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  white-space: nowrap;
 }

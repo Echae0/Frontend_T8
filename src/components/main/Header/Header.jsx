@@ -4,7 +4,7 @@ import { FaKey, FaChevronDown, FaUser } from "react-icons/fa";
 import PropTypes from "prop-types";
 import "./Header.css";
 
-const Header = ({ location, setLocation, searchQuery, setSearchQuery }) => {
+const Header = ({ location, setLocation, searchQuery, setSearchQuery, username }) => {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -81,6 +81,9 @@ const Header = ({ location, setLocation, searchQuery, setSearchQuery }) => {
 
         {/* 아이콘 */}
         <div className="top-icons">
+          <div className="username-box">
+            {username}님, 환영합니다 !
+          </div>
           <button className="icon-button" onClick={handleLogout}>
             <FaKey size={30} />
           </button>
@@ -100,4 +103,6 @@ Header.propTypes = {
   setLocation: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  onSearch: PropTypes.func,
 };
