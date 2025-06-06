@@ -73,7 +73,7 @@ const Header = ({ location, setLocation, searchQuery, setSearchQuery, username }
           <input
             type="text"
             className="search-input"
-            placeholder="식당을 검색해 보세요..."
+            placeholder="검색어를 입력하세요..."
             value={searchQuery}
             onChange={handleSearchChange}
           />

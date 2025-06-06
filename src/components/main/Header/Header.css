@@ -213,7 +213,7 @@ header-icons button + button {
   background-color: #ffe0b2; /* 부드러운 밝은 오렌지 */
   color: #5d4037; /* 진한 갈색 텍스트 */
   padding: 10px 14px;
-  border-radius: 20px; /* 둥근 모서리 */
+  border-radius: 25px; /* 둥근 모서리 */
   font-weight: 500;
   font-size: 1rem;
   margin-right: 12px;
