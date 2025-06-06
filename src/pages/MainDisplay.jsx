@@ -47,6 +47,11 @@ export default function MainDisplay() {
         setLocation={setLocation}
         restaurants={restaurants}
         onSearch={(query) => {
+          if (!query) {
+            setFilteredRestaurants(restaurants);
+            return;
+          }
+
           const result = restaurants.filter(
             (r) =>
               r.name?.toLowerCase().includes(query.toLowerCase()) ||
@@ -55,6 +60,7 @@ export default function MainDisplay() {
           setFilteredRestaurants(result);
         }}
       />
+
       <main className="main-content">
         <div className="container">
           <div className={styles.banner}>

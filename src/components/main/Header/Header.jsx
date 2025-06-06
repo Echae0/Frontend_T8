@@ -12,55 +12,60 @@ const Header = ({ location, setLocation, restaurants, onSearch }) => {
   const navigate = useNavigate();
 
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      console.log("🔍 검색어:", searchQuery);
-      onSearch?.(searchQuery);
-    }
-  };
-
+  
   useEffect(() => {
     const filtered = restaurants.filter((restaurant) =>
       restaurant.restaurantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      restaurant.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredRestaurants(filtered);
-  }, [searchQuery, restaurants]);
+    restaurant.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  setFilteredRestaurants(filtered);
+}, [searchQuery, restaurants]);
 
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("로그아웃하시겠습니까?");
-    if (confirmLogout) {
-      // 사용자에게 안내 메시지
-      alert("✅ 로그아웃합니다.");
+const handleLogout = () => {
+  const confirmLogout = window.confirm("로그아웃하시겠습니까?");
+  if (confirmLogout) {
+    // 사용자에게 안내 메시지
+    alert("✅ 로그아웃합니다.");
+    
+    // 토큰 제거
+    localStorage.removeItem("token");
+    console.log("삭제 후:", localStorage.getItem("token")); // null 이어야 정상
+    console.log("🗑️ Token 삭제 완료");
+    
+    // 로그인 페이지로 이동
+    navigate("/login");
+    console.log("➡️ 로그인 페이지로 이동");
+  } else {
+    console.log("❎ 로그아웃 취소됨");
+  }
+};
 
-      // 토큰 제거
-      localStorage.removeItem("token");
-      console.log("삭제 후:", localStorage.getItem("token")); // null 이어야 정상
-      console.log("🗑️ Token 삭제 완료");
+const locations = [
+  "강남구",
+  "서초구",
+  "송파구",
+  "마포구",
+  "용산구",
+  "종로구",
+  "중구",
+  "영등포구",
+];
 
-      // 로그인 페이지로 이동
-      navigate("/login");
-      console.log("➡️ 로그인 페이지로 이동");
-    } else {
-      console.log("❎ 로그아웃 취소됨");
-    }
-  };
-
-  const locations = [
-    "강남구",
-    "서초구",
-    "송파구",
-    "마포구",
-    "용산구",
-    "종로구",
-    "중구",
-    "영등포구",
-  ];
-
-  const handleLocationChange = (loc) => {
-    setLocation(loc);
-    setIsLocationOpen(false);
-  };
+const handleSearch = (e) => {
+  if (e.key === "Enter") {
+    console.log("🔍 검색어:", searchQuery);
+    onSearch?.(searchQuery);
+  }
+};
+const handleChange = (e) => {
+  const query = e.target.value;
+  setSearchQuery(query);
+  onSearch?.(query); // 🔴 여기서 실시간 호출
+};
+const handleLocationChange = (loc) => {
+  setLocation(loc);
+  setIsLocationOpen(false);
+};
 
 
   return (
@@ -99,8 +104,9 @@ const Header = ({ location, setLocation, restaurants, onSearch }) => {
             className="search-input"
             placeholder="식당을 검색해 보세요..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            // onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
+            onChange={handleChange}
           />
         </div>
         <div className="top-icons">
@@ -115,7 +121,7 @@ const Header = ({ location, setLocation, restaurants, onSearch }) => {
           </button>
         </div>
       </div>
-      {searchQuery && (
+      {/* {searchQuery && (
         <div className="search-results">
           {filteredRestaurants.length > 0 ? (
             filteredRestaurants.map((restaurant) => (
@@ -128,7 +134,7 @@ const Header = ({ location, setLocation, restaurants, onSearch }) => {
             <p>검색 결과가 없습니다.</p>
           )}
         </div>
-      )}
+      )} */}
     </header>
     
   );
