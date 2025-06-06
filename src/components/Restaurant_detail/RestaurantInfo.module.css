@@ -10,7 +10,9 @@
   justify-content: flex-start;
   flex-wrap: nowrap;
   overflow-x: auto; /* 넘칠 경우 가로 스크롤 */
-
+  gap: 20px; /* 자식 요소 사이의 간격 */
+  margin: 15px auto;
+  padding: 30px; /* 좌우 패딩 추가 */
 }
 
 .column_section {

@@ -64,9 +64,15 @@
 }
 
 .reviewText {
-  font-size: 14px;
+  font-size: 15px;
   color: #222;
   line-height: 1.4;
   padding: 4px;
   white-space: pre-line;
+}
+
+.stars {
+  font-size: 1.1rem;
+  color: #f5a623;
+  letter-spacing: 0.05em;
 }

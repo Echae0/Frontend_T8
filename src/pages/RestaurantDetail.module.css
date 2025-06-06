@@ -40,7 +40,7 @@
 }
 
 .waitingButton {
-  background-color: #FFB22C;
+  background-color: #ff6b6b;
   color: white;
   border: none;
   padding: 12px 32px;
@@ -53,4 +53,29 @@
 
 .waitingButton:hover {
   background-color: #ff5252;
+}
+
+.topSection {
+  position: relative;
+  display: flex;
+  justify-content: center; /* 중앙에 이미지 슬라이더 배치 */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 이미지 슬라이더를 항상 가운데에 유지 */
+.sliderWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.waitingInfoWrapper {
+  position: absolute;
+  right: 30px;           /* 오른쪽에서 20px 떨어짐 */
+  top: 50%;              /* 상단에서 50% 내려오고 */
+  transform: translateY(-50%);  /* 자기 높이의 절반만큼 위로 이동해 정확히 중앙 정렬 */
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
 }

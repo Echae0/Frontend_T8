@@ -1,73 +1,154 @@
-// src/components/WaitingStatusPage.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './WaitingPage.module.css';
-import { useNavigate, useParams } from 'react-router-dom';
-import WaitingInfo from '../components/WaitingForm/WaitingInfo';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function WaitingStatusPage() {
   const { restaurantId } = useParams();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
-  // 현재 날짜를 YYYY.MM.DD 형식으로 가져오는 헬퍼 함수
-  const getTodayDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
-  };
-
-  const [restaurantName, setRestaurantName] = useState('새마을 식당');
+  const [restaurantName, setRestaurantName] = useState('식당 이름을 불러오는 중...');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [myOrder, setMyOrder] = useState(0);
   const [expectedWaitTime, setExpectedWaitTime] = useState(0);
-  const [reservationDate, setReservationDate] = useState(getTodayDate());
-  const [specialRequests, setSpecialRequests] = useState('토마토 못먹어요');
-  const [totalGuests, setTotalGuests] = useState(2);
+  const [specialRequests, setSpecialRequests] = useState('요청사항 없음');
+  const [totalGuests, setTotalGuests] = useState(0);
+  const [currentReservationId, setCurrentReservationId] = useState(null);
+  // ⭐ 여기에 현재 활성화된 예약의 전체 데이터를 저장할 상태를 추가합니다.
+  const [activeReservationData, setActiveReservationData] = useState(null);
 
-  // WaitingInfo로부터 데이터를 받을 콜백 함수
-  const handleWaitingInfoLoaded = (currentWaitingTeams, predictedTime) => {
-    // predictedTime (예상 대기 시간)은 WaitingInfo에서 받은 값을 그대로 사용
-    setExpectedWaitTime(predictedTime);
-
-    // currentWaitingTeams (현재 대기팀 수)를 myOrder에 설정합니다.
-    // 만약 '내 앞에 대기 중인 팀 수'가 currentWaitingTeams라면,
-    // 나의 순서는 'currentWaitingTeams + 1'이 됩니다. (이전 제안)
-    // 현재 코드에서는 '나를 포함한 현재 대기팀의 총 수'로 해석하거나,
-    // 백엔드에서 받은 currentWaitingTeams가 이미 '나의 순서'를 의미한다고 가정합니다.
-    setMyOrder(currentWaitingTeams);
-  };
+  const today = new Date();
+  const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
 
   useEffect(() => {
-    // 이펙트는 그대로 유지됩니다.
-    // 여기에 실제 식당 이름, 예약 날짜, 요청 사항, 총 입장 인원 등
-    // 나의 고유한 예약 정보를 불러오는 API 호출 로직을 추가할 수 있습니다.
-    // (예: /api/members/{memberId}/reservations/{reservationId} 등)
-  }, [restaurantId]);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const restaurantResponse = await axios.get(
+          `http://localhost:8080/api/restaurants/${restaurantId}`
+        );
+        setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
 
-  const handleCancelWaiting = () => {
+        if (user && user.memberId) {
+          const reservationResponse = await axios.get(
+            `http://localhost:8080/api/members/${user.memberId}/reservations`
+          );
+          const reservationData = reservationResponse.data.find(
+            (reservation) => 
+              reservation.restaurantId === parseInt(restaurantId) &&
+              reservation.status === 'REQUESTED' 
+          );
+
+          if (reservationData) {
+            setCurrentReservationId(reservationData.id); 
+            setMyOrder(reservationData.turnTime || 0);
+            setExpectedWaitTime(reservationData.predictedWait || 0);
+            setSpecialRequests(reservationData.requestDetail || '요청사항 없음');
+            setTotalGuests(reservationData.partySize || 0);
+            // ⭐ 활성화된 예약의 전체 데이터를 저장합니다.
+            setActiveReservationData(reservationData); 
+          } else {
+            setError('해당 식당에 활성화된 예약 정보가 없습니다.'); 
+            setCurrentReservationId(null); 
+            setActiveReservationData(null); // 예약 없으면 데이터도 초기화
+          }
+        } else {
+          setError('로그인 정보가 없습니다.');
+          setCurrentReservationId(null); 
+          setActiveReservationData(null); // 로그인 없으면 데이터도 초기화
+        }
+      } catch (err) {
+        console.error('데이터를 불러오는 중 오류 발생:', err);
+        setError('데이터를 불러오는 데 실패했습니다.');
+        setCurrentReservationId(null); 
+        setActiveReservationData(null); // 오류 발생 시 데이터 초기화
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [restaurantId, user]); 
+
+  const handleCancelWaiting = async () => {
+    if (!currentReservationId || !activeReservationData) { // 전체 데이터도 있는지 확인
+      alert('취소할 예약 정보가 없습니다.');
+      return;
+    }
+
     if (window.confirm('정말로 웨이팅을 취소하시겠습니까?')) {
-      console.log('웨이팅 취소 처리');
-      // 여기에 백엔드 웨이팅 취소 API 호출 로직 추가
-      alert('✅ 웨이팅 취소가 완료되었습니다.');
-      navigate('/maindisplay');
+      try {
+        // ⭐ 핵심 수정: 기존 예약 데이터 복사 후 status만 변경하여 전송
+        const updatedReservation = { 
+          ...activeReservationData, // 기존 예약 정보 전체 복사
+          status: 'CANCELLED'       // status만 'CANCELLED'로 변경
+        };
+
+        await axios.put(
+          `http://localhost:8080/api/members/${user.memberId}/reservations`,
+          updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
+        );
+        alert('✅ 웨이팅 취소가 완료되었습니다.');
+        navigate('/maindisplay'); 
+      } catch (error) {
+        console.error('웨이팅 취소 실패:', error);
+        alert('웨이팅 취소에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
-  const handleEntered = () => {
+  const handleEntered = async () => {
+    if (!currentReservationId || !activeReservationData) { // 전체 데이터도 있는지 확인
+      alert('입장 처리할 예약 정보가 없습니다.');
+      return;
+    }
+
     if (window.confirm('입장 처리하시겠습니까?')) {
-      console.log('✅ 입장이 완료되었습니다.');
-      // 여기에 백엔드 입장 처리 API 호출 로직 추가
-      alert('✅ 입장이 완료되었습니다.');
-      navigate('/maindisplay');
+      try {
+        // ⭐ 핵심 수정: 기존 예약 데이터 복사 후 status만 변경하여 전송
+        const updatedReservation = { 
+          ...activeReservationData, // 기존 예약 정보 전체 복사
+          status: 'JOINED'          // status만 'JOINED'로 변경
+        };
+
+        await axios.put(
+          `http://localhost:8080/api/members/${user.memberId}/reservations`,
+          updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
+        );
+        alert('✅ 입장이 완료되었습니다.');
+        navigate('/maindisplay'); 
+      } catch (error) {
+        console.error('입장 처리 실패:', error);
+        alert('입장 처리에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <p>{error}</p>
+        <button className={styles.refreshButton} onClick={() => window.location.reload()}>다시 시도</button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
-      {/* WaitingInfo 컴포넌트를 숨겨진 채로 렌더링하여 데이터만 가져오도록 합니다. */}
-      {/* restaurantId가 필요하므로 useParams로 가져온 값을 전달합니다. */}
-      {restaurantId && <WaitingInfo onDataLoaded={handleWaitingInfoLoaded} />}
-
       <h1 className={styles.restaurantName}>{restaurantName}</h1>
       <p className={styles.currentOrder}>
         현재 나의 순서: <span className={styles.orderNumber}>{myOrder}번째 팀</span>

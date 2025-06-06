@@ -1,32 +1,44 @@
-.container {
+.sortButtons {
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* 수직 중앙 정렬 */
-  width: 100%;
-  padding: 16px 0;
-  gap: 30px;
-  max-height: 700px;
-  overflow-x: cover;
-  background-color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
+.sortButtonsGroup {
+  display: flex;
+  gap: 10px;
+}
 
-.title {
-  font-size: 18px;
+.sortButtonsGroup button {
+  padding: 8px 12px;
+  background-color: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.sortButtonsGroup button:hover {
+  background-color: #ddd;
+}
+
+.sortButtonsGroup .active {
+  background-color: #4caf50; /* 선택된 버튼 색상 (초록) */
+  color: white;
   font-weight: bold;
-  margin-bottom: 16px;
-  padding: 0 16px;
 }
 
-.reviewsList {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2열 */
-  gap: 16px;
-  padding: 0 16px;
-  overflow-y: auto;
-  -ms-overflow-style: none; /* IE and Edge */
+.averageRating {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
 }
 
-.reviewsList::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+.stars {
+  font-size: 1.2rem;
+  color: #f5a623; /* 밝은 노랑 계열 */
+  letter-spacing: 0.05em;
 }

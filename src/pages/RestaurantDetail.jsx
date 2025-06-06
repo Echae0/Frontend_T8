@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import RestaurantImageSlider from '../components/Restaurant_detail/RestaurantImageSlider.jsx';
 import RestaurantInfo from '../components/Restaurant_detail/RestaurantInfo';
-// import WaitingInfo from '../components/main/Restaurant_detail/WaitingInfo';
+import WaitingInfo from '../components/Restaurant_detail/WaitingInfo';
 
 import MenuList from '../components/Restaurant_detail/MenuList';
 import MenuPreview from '../components/Restaurant_detail/MenuPreview';
@@ -18,11 +18,17 @@ const RestaurantDetail = () => {
 
   return (
     <div className={styles.container}>
-      <RestaurantImageSlider />
-      
+      <div className={styles.topSection}>
+        <div className={styles.sliderWrapper}>
+          <RestaurantImageSlider />
+        </div>
+        <div className={styles.waitingInfoWrapper}>
+          <WaitingInfo />
+        </div>
+      </div> 
+
       <div className={styles.infoSection}>
         <RestaurantInfo />
-        {/* <WaitingInfo /> */}
       </div>
 
       <div className={styles.contentWrapper}>
