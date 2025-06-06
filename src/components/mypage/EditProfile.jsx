@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./EditProfile.css";
+import { useSelector } from "react-redux";
 
 export default function EditProfile() {
+  const user = useSelector((state) => state.user); // ✅ Redux에서 memberId 사용
   const [form, setForm] = useState({
     name: "",
     phoneNumber: "",
@@ -11,37 +13,27 @@ export default function EditProfile() {
   });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-
-    if (!storedUser) {
+    if (!user || !user.memberId) {
       alert("로그인이 필요합니다.");
       return;
     }
 
-    try {
-      const parsedUser = JSON.parse(storedUser);
-      const memberId = parsedUser.id;
-
-      axios
-        .get(`http://localhost:8080/api/members/${memberId}`)
-        .then((res) => {
-          const data = res.data;
-          setForm({
-            name: data.name || "",
-            phoneNumber: data.phoneNumber || "",
-            address: data.address || "",
-            birthDate: data.birthDate?.slice(0, 10) || "",
-          });
-        })
-        .catch((err) => {
-          console.error("회원 정보 불러오기 실패:", err);
-          alert("회원 정보를 불러오는 데 실패했습니다.");
+    axios
+      .get(`http://localhost:8080/api/members/${user.memberId}`)
+      .then((res) => {
+        const data = res.data;
+        setForm({
+          name: data.name || "",
+          phoneNumber: data.phoneNumber || "",
+          address: data.address || "",
+          birthDate: data.birthDate?.slice(0, 10) || "",
         });
-    } catch (err) {
-      console.error("user 파싱 실패:", err);
-      alert("로그인 정보가 손상되었습니다.");
-    }
-  }, []);
+      })
+      .catch((err) => {
+        console.error("회원 정보 불러오기 실패:", err);
+        alert("회원 정보를 불러오는 데 실패했습니다.");
+      });
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,16 +43,13 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const storedUser = localStorage.getItem("user");
-    if (!storedUser) {
+    if (!user || !user.memberId) {
       alert("로그인이 필요합니다.");
       return;
     }
 
-    const memberId = JSON.parse(storedUser).id;
-
     try {
-      await axios.put(`http://localhost:8080/api/members/${memberId}`, form);
+      await axios.put(`http://localhost:8080/api/members/${user.memberId}`, form);
       alert("회원 정보가 성공적으로 수정되었습니다!");
     } catch (err) {
       console.error("회원 정보 수정 실패:", err);
@@ -111,6 +100,7 @@ export default function EditProfile() {
 
         <div className="edit-buttons">
           <button type="submit" className="save-button">수정</button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>취소</button>
         </div>
       </form>
     </div>
