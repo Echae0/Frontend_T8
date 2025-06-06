@@ -44,7 +44,7 @@ export default function App() {
         <Route path="/mypage" element={<PrivateRoute><MyPage /></PrivateRoute>} /> {/* 마이페이지 */}
         <Route path="/reviewformpage" element={<PrivateRoute><ReviewFormPage /></PrivateRoute>} /> {/* 리뷰 작성 */}
         <Route path="/restaurant/:restaurantId" element={<PrivateRoute><RestaurantDetail /></PrivateRoute>} /> {/* 식당 상세 */}
-        <Route path="/restaurant/:restaurantId/waiting" element={<PrivateRoute><WaitingPage /></PrivateRoute>} /> {/* 웨이팅 현황 */}
+        <Route path="/waiting/:reservationId" element={<PrivateRoute><WaitingPage /></PrivateRoute>} />
         <Route path="/restaurant/:restaurantId/waitingform" element={<PrivateRoute><WaitingFormPage /></PrivateRoute>} /> {/* 웨이팅 신청 */}
       </Routes>
     </BrowserRouter>

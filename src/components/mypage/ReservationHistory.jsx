@@ -1,6 +1,6 @@
 // src/components/mypage/ReservationHistory.jsx
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -73,8 +73,8 @@ export default function ReservationHistory() {
     ).padStart(2, "0")}`;
   };
 
-  const handleCardClick = (id) => {
-    navigate(`/reservation/${id}`);
+  const handleCardClick = (reservationId) => {
+    navigate(`/waiting/${reservationId}`);
   };
 
   const handleReview = (id) => {
@@ -85,8 +85,8 @@ export default function ReservationHistory() {
     switch (status) {
       case "REQUESTED":
         return "예약중";
-      case "COMPLETED":
-        return "예약 종료";
+      case "JOINED":
+        return "입장 완료";
       case "CANCELLED":
         return "예약 취소";
       default:
@@ -164,8 +164,8 @@ export default function ReservationHistory() {
 
                   {/* ✅ 오른쪽 버튼/상태 세로 정렬 */}
                   <div className="card-right-actions">
-                    {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 COMPLETED일 때만 표시 */}
-                    {item.status === "COMPLETED" && (
+                    {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 JOINED 때만 표시 */}
+                    {(item.status === "JOINED") && (
                       <button
                         className="review-button"
                         onClick={(e) => {
@@ -176,7 +176,6 @@ export default function ReservationHistory() {
                         리뷰 쓰기
                       </button>
                     )}
-
                     {/* ✅ 상단 상태 라벨 버튼 (동작은 REQUESTED일 때만) */}
                     <button
                       className={`status-label ${item.status.toLowerCase()}`}
@@ -184,7 +183,7 @@ export default function ReservationHistory() {
                       onClick={(e) => {
                         e.stopPropagation();
                         if (item.status === "REQUESTED") {
-                          navigate(`/restaurant/{item.id}/waiting`);
+                          navigate(`/waiting/${item.id}`);
                         }
                       }}
                     >

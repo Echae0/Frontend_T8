@@ -4,8 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
+
 export default function WaitingStatusPage() {
-  const { restaurantId } = useParams();
+  const { reservationId, restaurantId } = useParams();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -25,26 +26,38 @@ export default function WaitingStatusPage() {
     .toString()
     .padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const restaurantResponse = await axios.get(
-          `http://localhost:8080/api/restaurants/${restaurantId}`
-        );
-        setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
-
-        if (user && user.memberId) {
-          const reservationResponse = await axios.get(
-            `http://localhost:8080/api/members/${user.memberId}/reservations`
+    
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          const restaurantResponse = await axios.get(
+            `http://localhost:8080/api/restaurants/${restaurantId}`
           );
-          const reservationData = reservationResponse.data.find(
-            (reservation) => 
-              reservation.restaurantId === parseInt(restaurantId) &&
-              reservation.status === 'REQUESTED' 
-          );
+          setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
+          
+          if (user && user.memberId) {
+            const reservationResponse = await axios.get(
+              `http://localhost:8080/api/reservations/${reservationId}`
+            );
+            const reservationData = reservationResponse.data;
 
+            if (reservationData.status === 'REQUESTED') {
+              console.log('가져온 예약정보:', reservationData);
+              setCurrentReservationId(reservationData.id); 
+              setMyOrder(reservationData.turnTime || 0);
+              setExpectedWaitTime(reservationData.predictedWait || 0);
+              setSpecialRequests(reservationData.requestDetail || '요청사항 없음');
+              setTotalGuests(reservationData.partySize || 0);
+              setActiveReservationData(reservationData); 
+            } else {
+              setError('해당 식당에 활성화된 예약 정보가 없습니다.');
+              setCurrentReservationId(null);
+              setActiveReservationData(null);
+            }
+                      
           if (reservationData) {
             setCurrentReservationId(reservationData.id); 
             setMyOrder(reservationData.turnTime || 0);
@@ -91,7 +104,7 @@ export default function WaitingStatusPage() {
         };
 
         await axios.put(
-          `http://localhost:8080/api/members/${user.memberId}/reservations`,
+          `http://localhost:8080/api/reservations/${currentReservationId}`,
           updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
         );
         alert('✅ 웨이팅 취소가 완료되었습니다.');

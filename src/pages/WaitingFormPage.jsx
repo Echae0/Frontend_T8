@@ -118,7 +118,10 @@ export default function WaitingFormPage() {
         setForm({ people: 1, request: '' });
         setSelectedMenus([]);
         setErrors({});
-        navigate(`/restaurant/${restaurantId}/waiting`);
+        const result = await response.json();
+        const reservationId = result.reservationId || result.id;
+        navigate(`/waiting/${reservationId}`);
+        console.log("예약 ID:", reservationId);
       } else {
         const errorData = await response.json();
         console.error('대기 등록 실패:', errorData);

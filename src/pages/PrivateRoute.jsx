@@ -1,5 +1,5 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -12,6 +12,10 @@ const PrivateRoute = ({ children }) => {
 
   // 로그인 되어 있으면 children 컴포넌트 출력
   return children;
+};
+
+PrivateRoute.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default PrivateRoute;

@@ -188,3 +188,24 @@
 .status-label.cancelled {
   background-color: #e74c3c;
 }
+
+.status-label.cancelled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.review-button {
+  background-color: #ff914d; /* 주황색 */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.review-button:hover {
+  background-color: #e57c2e;
+}
