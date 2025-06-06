@@ -84,7 +84,7 @@ export default function WaitingFormPage() {
     const reservationData = {
       partySize: form.people,
       requestDetail: form.request,
-      memberId: user.id, // ✅ 'customerName' 속성 제거
+      memberId: user.memberId,
       restaurantId: restaurantId
     };
 

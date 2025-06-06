@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+// src/features/user/userSlice.js
 
 const initialState = {
-  id: null,
+  userInfoId: null,
+  memberId: null,
   isLoggedIn: false,
 };
 
@@ -10,11 +12,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      state.id = action.payload.id;
+      state.userInfoId = action.payload.userInfoId;
+      state.memberId = action.payload.memberId;
       state.isLoggedIn = true;
     },
     clearUser(state) {
-      state.id = null;
+      state.userInfoId = null;
+      state.memberId = null;
       state.isLoggedIn = false;
     },
   },

@@ -55,18 +55,31 @@ export default function LoginPage() {
           }
         });
 
+        // src/components/LoginPage.jsx (중 일부)
+
         if (userInfoResponse.ok) {
           const userData = await userInfoResponse.json();
+          
+          console.log("🔥 /me 응답 데이터:", userData);
 
-          // 🔴 Redux에 저장
-          dispatch(setUser(userData));  // Redux에 저장
-          localStorage.setItem("user", JSON.stringify(userData));  // localStorage에 저장
+          // ✅ Redux에 저장
+          dispatch(setUser({
+            userInfoId: userData.userInfoId,
+            memberId: userData.memberId,
+          }));
+
+          // ✅ localStorage에 저장
+          localStorage.setItem("user", JSON.stringify({
+            userInfoId: userData.userInfoId,
+            memberId: userData.memberId,
+          }));
 
           alert("로그인이 성공적으로 완료되었습니다!");
           navigate("/maindisplay");
         } else {
           alert("유저 정보를 가져오지 못했습니다.");
         }
+      
       } else {
         const errorText = await response.text();
         alert(`로그인 실패: ${errorText || "이메일 또는 비밀번호가 올바르지 않습니다."}`);
