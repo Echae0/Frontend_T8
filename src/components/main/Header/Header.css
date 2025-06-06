@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
 .location-selector {
@@ -55,7 +56,8 @@
 }
 .search-input {
   width: 100%;
-  max-width: 300px;
+  max-width: 500px;
+  height: 100%;
   padding: var(--spacing-xs) var(--spacing-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
@@ -154,4 +156,48 @@
 }
 header-icons button + button {
   margin-left: var(--spacing-md);
+}
+
+/* 🔽 실시간 검색 결과 영역 스타일 */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-height: 300px;
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔽 개별 검색 결과 아이템 스타일 */
+.search-result-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #f9f9f9;
+}
+
+.search-result-item h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.search-result-item p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #666;
 }

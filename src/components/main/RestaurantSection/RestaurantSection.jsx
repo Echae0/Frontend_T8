@@ -1,6 +1,7 @@
 // src/components/main/RestaurantSection/RestaurantSection.jsx
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import "./RestaurantSection.css";
+import PropTypes from "prop-types"; 
 
 const RestaurantSection = ({ title, restaurants }) => {
   return (
@@ -18,3 +19,17 @@ const RestaurantSection = ({ title, restaurants }) => {
 };
 
 export default RestaurantSection;
+
+RestaurantSection.propTypes = {
+  title: PropTypes.string,
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      categoryCode: PropTypes.string,
+      imageUrl: PropTypes.string,
+      rating: PropTypes.number,})
+    ).isRequired,
+  onSearch: PropTypes.func,
+};

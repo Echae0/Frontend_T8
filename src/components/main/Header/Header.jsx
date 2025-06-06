@@ -1,13 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { FaKey, FaChevronDown, FaBell, FaUser } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
+import { FaKey, FaChevronDown, FaUser } from "react-icons/fa";
+import PropTypes from "prop-types"; 
 import "./Header.css";
 
-const Header = ({ location, setLocation }) => {
+
+const Header = ({ location, setLocation, restaurants, onSearch }) => {
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      console.log("🔍 검색어:", searchQuery);
+      onSearch?.(searchQuery);
+    }
+  };
+
+  useEffect(() => {
+    const filtered = restaurants.filter((restaurant) =>
+      restaurant.restaurantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      restaurant.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredRestaurants(filtered);
+  }, [searchQuery, restaurants]);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("로그아웃하시겠습니까?");
@@ -44,12 +62,6 @@ const Header = ({ location, setLocation }) => {
     setIsLocationOpen(false);
   };
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      console.log("검색어:", searchQuery);
-      // TODO: 검색 결과 페이지 이동 또는 필터링 로직
-    }
-  };
 
   return (
     <header className="header">
@@ -103,8 +115,38 @@ const Header = ({ location, setLocation }) => {
           </button>
         </div>
       </div>
+      {searchQuery && (
+        <div className="search-results">
+          {filteredRestaurants.length > 0 ? (
+            filteredRestaurants.map((restaurant) => (
+              <div key={restaurant.id} className="search-result-item">
+                <h4>{restaurant.name}</h4>
+                <p>{restaurant.description}</p>
+              </div>
+            ))
+          ) : (
+            <p>검색 결과가 없습니다.</p>
+          )}
+        </div>
+      )}
     </header>
+    
   );
 };
 
 export default Header;
+
+Header.propTypes = {
+  location: PropTypes.string.isRequired,
+  setLocation: PropTypes.func.isRequired,
+  restaurants: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      onSearch: PropTypes.func.isRequired,
+      restaurantName: PropTypes.string.isRequired,
+    })
+  ),
+  onSearch: PropTypes.func.isRequired,
+};

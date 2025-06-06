@@ -41,7 +41,20 @@ export default function MainDisplay() {
 
   return (
     <div className="app">
-      <Header location={location} setLocation={setLocation} />
+      {/* <Header location={location} setLocation={setLocation} restaurants={restaurants}/> */}
+      <Header
+        location={location}
+        setLocation={setLocation}
+        restaurants={restaurants}
+        onSearch={(query) => {
+          const result = restaurants.filter(
+            (r) =>
+              r.name?.toLowerCase().includes(query.toLowerCase()) ||
+              r.description?.toLowerCase().includes(query.toLowerCase())
+          );
+          setFilteredRestaurants(result);
+        }}
+      />
       <main className="main-content">
         <div className="container">
           <div className={styles.banner}>
