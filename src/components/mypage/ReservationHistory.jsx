@@ -87,20 +87,6 @@ export default function ReservationHistory() {
     navigate(`/reviewformpage?reservationId=${reservationId}`);
   };
 
-
-  const getStatusLabel = (status) => {
-    switch (status) {
-      case "REQUESTED":
-        return "예약중";
-      case "JOINED":
-        return "입장 완료";
-      case "CANCELLED":
-        return "예약 취소";
-      default:
-        return "알 수 없음";
-    }
-  };
-
   return (
     <div className="reservation-container">
       <h2 className="reservation-title">내 예약 내역</h2>

@@ -1,6 +1,7 @@
 // src/components/common/TopBar.jsx
 import { useNavigate } from "react-router-dom";
 import { FaKey, FaUser, FaArrowLeft } from "react-icons/fa";
+import PropTypes from 'prop-types';
 import "./TopBar.css";
 
 const TopBar = ({username}) => {
@@ -51,3 +52,7 @@ const TopBar = ({username}) => {
 };
 
 export default TopBar;
+
+TopBar.propTypes = {
+  username: PropTypes.string.isRequired, // username은 문자열이며 필수입니다
+};
