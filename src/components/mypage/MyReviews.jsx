@@ -101,13 +101,13 @@ export default function MyReviews() {
     
   };
   
-  const handleImageCancel = () => {
-    setUploadedImage(null);
-    const fileInput = document.getElementById('imageUploadInput');
-    if (fileInput) {
-      fileInput.value = '';
-    }
-  };
+  // const handleImageCancel = () => {
+  //   setUploadedImage(null);
+  //   const fileInput = document.getElementById('imageUploadInput');
+  //   if (fileInput) {
+  //     fileInput.value = '';
+  //   }
+  // };
 
   return (
     <div className="review-container">

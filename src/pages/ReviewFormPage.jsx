@@ -200,6 +200,17 @@ export default function ReviewFormPage() {
       navigate('/mypage');
       localStorage.removeItem("reviewReservation");
 
+
+      // 2. 리뷰 상태 변경 (PUT)
+      await fetch(`http://localhost:8080/api/reservations/${reservationId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'REVIEWED' }),
+      });
+
+      navigate('/mypage');
+      localStorage.removeItem("reviewReservation");
+
       setReviewContent('');
       setWaitingScore(0);
       setUploadedImage(null);
