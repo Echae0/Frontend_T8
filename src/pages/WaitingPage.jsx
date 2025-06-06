@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 
 export default function WaitingStatusPage() {
-  const { reservationId, restaurantId } = useParams();
+  const { reservationId } = useParams();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -25,24 +25,24 @@ export default function WaitingStatusPage() {
   const reservationDate = `${today.getFullYear()}.${(today.getMonth() + 1)
     .toString()
     .padStart(2, '0')}.${today.getDate().toString().padStart(2, '0')}`;
-
-    
     
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
         setError(null);
         try {
-          const restaurantResponse = await axios.get(
-            `http://localhost:8080/api/restaurants/${restaurantId}`
-          );
-          setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
           
           if (user && user.memberId) {
             const reservationResponse = await axios.get(
               `http://localhost:8080/api/reservations/${reservationId}`
             );
+            const restaurantResponse = await axios.get(
+              `http://localhost:8080/api/restaurants/${reservationResponse.data.restaurantId}` // 예약 정보에서 restaurantId를 가져옵니다.
+            );
+            setRestaurantName(restaurantResponse.data.restaurantName || '알 수 없는 식당'); 
+
             const reservationData = reservationResponse.data;
+            console.log('가져온 예약 정보:', reservationData);
 
             if (reservationData.status === 'REQUESTED') {
               console.log('가져온 예약정보:', reservationData);
@@ -87,7 +87,7 @@ export default function WaitingStatusPage() {
     };
 
     fetchData();
-  }, [restaurantId, user]); 
+  }, [user]); 
 
   const handleCancelWaiting = async () => {
     if (!currentReservationId || !activeReservationData) { // 전체 데이터도 있는지 확인

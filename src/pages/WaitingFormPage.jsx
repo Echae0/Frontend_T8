@@ -114,14 +114,13 @@ export default function WaitingFormPage() {
       });
 
       if (response.ok) {
-        alert('대기 등록이 성공적으로 완료되었습니다!');
-        setForm({ people: 1, request: '' });
         setSelectedMenus([]);
         setErrors({});
         const result = await response.json();
+        setForm({ people: result.partySize, request: result.requestDetail || '' });
         const reservationId = result.reservationId || result.id;
         navigate(`/waiting/${reservationId}`);
-        console.log("예약 ID:", reservationId);
+        alert('대기 등록이 성공적으로 완료되었습니다!');
       } else {
         const errorData = await response.json();
         console.error('대기 등록 실패:', errorData);

@@ -182,6 +182,9 @@
 .status-label.requested {
   background-color: #5093e6;
 }
+.status-label.requested:hover {
+  background-color: #c0c0c0; /* 호버 시 색상 유지 */
+}
 .status-label.joined {
   background-color: #2ecc71;
 }
@@ -201,16 +204,7 @@
   transition: background-color 0.3s;
 }
 
-.review-button.reviewed {
-  background-color: #f6b04d; /* 회색 톤 (완료 느낌) */
-  color: #ffffff;
-  cursor: default;
-}
 
-.review-button.reviewed:hover {
+.review-button.joined:hover {
   background-color: #c0c0c0; /* 호버 시 색상 유지 */
-}
-
-.review-button:hover {
-  background-color: #e57c2e;
 }
