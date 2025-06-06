@@ -129,7 +129,7 @@ export default function WaitingFormPage() {
       }
     } catch (error) {
       console.error('네트워크 오류 또는 요청 실패:', error);
-      alert('대기 등록 중 오류가 발생했습니다. 네트워크 상태를 확인하거나 잠시 후 다시 시도해주세요.');
+      alert('이미 예약된 내역이 있는지 확인해 주세요.');
     }
   };
 

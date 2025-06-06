@@ -1,6 +1,7 @@
 // src/components/WaitingForm/WaitingInfo.jsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from "axios";
 
 const WaitingInfo = ({ onDataLoaded }) => {
@@ -33,6 +34,9 @@ const WaitingInfo = ({ onDataLoaded }) => {
     <div style={{ display: 'none' }}>
     </div>
   );
+};
+WaitingInfo.propTypes = {
+  onDataLoaded: PropTypes.func,
 };
 
 export default WaitingInfo;

@@ -183,7 +183,7 @@ export default function ReservationHistory() {
                       onClick={(e) => {
                         e.stopPropagation();
                         if (item.status === "REQUESTED") {
-                          navigate(`/waiting/${item.id}`);
+                          handleCardClick(item.id);
                         }
                       }}
                     >

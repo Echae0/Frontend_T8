@@ -135,7 +135,7 @@ export default function WaitingStatusPage() {
           updatedReservation // 변경된 전체 예약 객체를 본문으로 전송
         );
         alert('✅ 입장이 완료되었습니다.');
-        navigate('/maindisplay'); 
+        navigate('/mypage'); 
       } catch (error) {
         console.error('입장 처리 실패:', error);
         alert('입장 처리에 실패했습니다. 다시 시도해주세요.');
