@@ -134,6 +134,31 @@ export default function ReviewFormPage() {
     }
   };
 
+  // 이미지 업로드 핸들러 수정
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // 파일 크기 검증 (예: 5MB 이하)
+      if (file.size > 5 * 1024 * 1024) {
+        setErrors((prev) => ({ ...prev, image: '이미지 크기는 5MB 이하로 해주세요.' }));
+        return;
+      }
+      
+      // 파일 타입 검증
+      if (!file.type.match('image.*')) {
+        setErrors((prev) => ({ ...prev, image: '이미지 파일만 업로드 가능합니다.' }));
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setErrors((prev) => ({ ...prev, image: '' }));
+    }
+  };
+
   const handleScoreClick = (score) => {
     setWaitingScore(score);
     setErrors((prev) => ({ ...prev, score: '' }));
@@ -219,7 +244,7 @@ export default function ReviewFormPage() {
                     <input
                       type="file"
                       accept="image/*"
-                      // onChange={handleImageUpload}
+                      onChange={handleImageUpload}
                       className={styles.fileInput}
                       id="imageUploadInput"
                     />

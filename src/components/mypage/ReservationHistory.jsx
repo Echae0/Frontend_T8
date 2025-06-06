@@ -9,6 +9,8 @@ import "./ReservationHistory.css";
 export default function ReservationHistory() {
   const navigate = useNavigate();
   const memberId = useSelector((state) => state.user.memberId);
+  const [currentReservationId, setCurrentReservationId] = useState(null);
+  const [activeReservationData, setActiveReservationData] = useState(null);
 
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,9 +79,30 @@ export default function ReservationHistory() {
     navigate(`/waiting/${reservationId}`);
   };
 
-  const handleReview = (id) => {
-    navigate(`/reviewformpage?reservationId=${id}`);
+  const handleReview = async (reservationId) => {
+    if (!currentReservationId || !activeReservationData) {
+      alert('입장 처리할 예약 정보가 없습니다.');
+      return;
+    }
+
+    const updatedReservation = { 
+      ...activeReservationData,
+      status: "REVIEWED"
+    };
+
+    try {
+      await axios.put(
+        `http://localhost:8080/api/reservations/${reservationId}`,
+        updatedReservation
+      );
+      alert('리뷰 작성이 완료되었습니다.');
+      navigate('/mypage');
+    } catch (error) {
+      console.error('리뷰 작성 실패:', error);
+      alert('리뷰 작성에 실패했습니다. 다시 시도해주세요.');
+    }
   };
+
 
   const getStatusLabel = (status) => {
     switch (status) {
@@ -164,15 +187,20 @@ export default function ReservationHistory() {
                   {/* ✅ 오른쪽 버튼/상태 세로 정렬 */}
                   <div className="card-right-actions">
                     {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 JOINED 때만 표시 */}
-                    {(item.status === "JOINED") && (
-                      <button
+                    {(item.status === "JOINED" || item.status === "REVIEWED") && (
+                     <button
                         className="review-button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleReview(item.id);
+                          setCurrentReservationId(item.id);         // 현재 클릭한 예약 ID 저장
+                          setActiveReservationData(item);           // 현재 예약 데이터 전체 저장
+                          if (item.status === "JOINED") {
+                            handleReview(item.id);
+                          }
                         }}
+                        disabled={item.status === "REVIEWED"}
                       >
-                        리뷰 쓰기
+                        {item.status === "REVIEWED" ? "리뷰 작성 완료" : "리뷰 쓰기"}
                       </button>
                     )}
                     {/* ✅ 상단 상태 라벨 버튼 (동작은 REQUESTED일 때만) */}
