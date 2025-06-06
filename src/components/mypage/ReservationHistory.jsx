@@ -158,8 +158,7 @@ export default function ReservationHistory() {
                         </p>
                       </div>
                     ) : (
-                      <p className="no-visit-info">방문 정보가 없습니다.</p>
-                    )}
+                      <p className="no-visit-info"></p>)}
                   </div>
 
                   {/* ✅ 오른쪽 버튼/상태 세로 정렬 */}
