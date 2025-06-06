@@ -180,23 +180,18 @@
 }
 
 .status-label.requested {
-  background-color: #3498db;
+  background-color: #5093e6;
 }
-.status-label.completed {
+.status-label.joined {
   background-color: #2ecc71;
 }
 .status-label.cancelled {
-  background-color: #e74c3c;
+  background-color: #dbdbdb;
 }
 
-.status-label.cancelled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
 
 .review-button {
-  background-color: #ff914d; /* 주황색 */
+  background-color: #ffb143; /* 주황색 */
   color: white;
   border: none;
   padding: 8px 14px;
@@ -204,6 +199,16 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.review-button.reviewed {
+  background-color: #f6b04d; /* 회색 톤 (완료 느낌) */
+  color: #ffffff;
+  cursor: default;
+}
+
+.review-button.reviewed:hover {
+  background-color: #c0c0c0; /* 호버 시 색상 유지 */
 }
 
 .review-button:hover {

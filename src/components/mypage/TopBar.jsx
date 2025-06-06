@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { FaKey, FaUser, FaArrowLeft } from "react-icons/fa";
 import "./TopBar.css";
 
-const TopBar = () => {
+const TopBar = ({username}) => {
   const navigate = useNavigate();
-
+  
   const handleLogout = () => {
     const confirmLogout = window.confirm("로그아웃하시겠습니까?");
     if (confirmLogout) {
@@ -31,6 +31,9 @@ const TopBar = () => {
         <FaArrowLeft size={30} />
       </button>
       <div className="top-icons">
+        <div className="username-box">
+          {username}님, 환영합니다 !
+        </div>
         <button className="icon-button" onClick={handleLogout}>
           <FaKey size={30} />
         </button>

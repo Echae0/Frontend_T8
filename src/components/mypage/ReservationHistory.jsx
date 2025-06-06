@@ -141,13 +141,13 @@ export default function ReservationHistory() {
                       {item.restaurantInfo?.location || "위치 정보 없음"}
                     </p>
                     <p className="reservation-date">
-                      예약일: {formatDate(item.reservedAt)}{" "}
+                      방문일: {formatDate(item.reservedAt)}{" "}
                       <span className="reservation-time">
                         ({formatTime(item.reservedAt)})
                       </span>
                     </p>
 
-                    {item.visitInfo ? (
+                    {/* {item.visitInfo ? (
                       <div className="visit-info">
                         <p>
                           <strong>대기 시간:</strong>{" "}
@@ -165,28 +165,38 @@ export default function ReservationHistory() {
                         </p>
                       </div>
                     ) : (
-                      <p className="no-visit-info"></p>)}
+                      <p className="no-visit-info"></p>)} */}
                   </div>
 
                   {/* ✅ 오른쪽 버튼/상태 세로 정렬 */}
                   <div className="card-right-actions">
                     {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 JOINED 때만 표시 */}
-                    {(item.status === "JOINED" || item.status === "REVIEWED") && (
+                    {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 JOINED일 때만 표시 */}
+                    {item.status === "JOINED" && (
                       <button
                         className="review-button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (item.status === "JOINED") {
-                            handleReview(item.id);
-                          }
+                          handleReview(item.id);
                         }}
-                        disabled={item.status === "REVIEWED"}
                       >
-                        {item.status === "REVIEWED" ? "리뷰 작성완료" : "리뷰 쓰기"}
+                        리뷰 쓰기
+                      </button>
+                    )}
+
+                    {/* ✅ 리뷰 완료 상태일 때만 회색 버튼 표시 */}
+                    {item.status === "REVIEWED" && (
+                      <button
+                        className="review-button reviewed"
+                        onClick={(e) => e.stopPropagation()}
+                        disabled
+                      >
+                        리뷰 작성 완료
                       </button>
                     )}
 
                     {/* ✅ 상단 상태 라벨 버튼 (동작은 REQUESTED일 때만) */}
+                    {item.status === "REQUESTED" && (
                     <button
                       className={`status-label ${item.status.toLowerCase()}`}
                       disabled={item.status !== "REQUESTED"}
@@ -197,8 +207,24 @@ export default function ReservationHistory() {
                         }
                       }}
                     >
-                      {getStatusLabel(item.status)}
+                      예약중
                     </button>
+                    )}
+
+                    {item.status === "CANCELLED" && (
+                      <button
+                        className={`status-label ${item.status.toLowerCase()}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleReview(item.id);
+                        }}
+                        disabled
+                      >
+                        예약 취소
+                      </button>
+                    )}
+
+
                   </div>
                 </div>
               </div>
