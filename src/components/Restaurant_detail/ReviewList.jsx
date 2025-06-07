@@ -18,8 +18,16 @@ const ReviewList = () => {
     const rating = parseFloat(score);
     if (isNaN(rating)) return '정보 없음';
 
-    const fullStars = Math.floor(rating);
-    const hasHalf = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
+    let fullStars = Math.floor(rating);
+    let hasHalf = false;
+
+    const decimal = rating - fullStars;
+    if (decimal >= 0.75) {
+      fullStars += 1;
+    } else if (decimal >= 0.25) {
+      hasHalf = true;
+    }
+
     const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
 
     return (
@@ -30,6 +38,7 @@ const ReviewList = () => {
       </span>
     );
   };
+
 
 
   useEffect(() => {
@@ -79,17 +88,17 @@ const ReviewList = () => {
             className={sortOption === 'highest' ? styles.active : ''}
             onClick={() => setSortOption('highest')}
           >
-            별점 높은순
+            점수 높은순
           </button>
           <button
             className={sortOption === 'lowest' ? styles.active : ''}
             onClick={() => setSortOption('lowest')}
           >
-            별점 낮은순
+            점수 낮은순
           </button>
         </div>
         <div className={styles.averageRating}>
-          평균 별점: <strong>{renderStars(averageRating)} ({averageRating})</strong>
+          평균 웨이팅 점수: <strong>{renderStars(averageRating)} ({averageRating})</strong>
         </div>
       </div>
 

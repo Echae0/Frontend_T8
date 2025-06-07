@@ -3,6 +3,9 @@
   --max-content-width: 100%;
 }
 
+
+
+
 /* 전체 컨테이너 */
 .reservation-container {
   flex: 1;
@@ -42,11 +45,24 @@
 }
 
 /* 카드 리스트 */
-.reservation-list {
+/* .reservation-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
+} */
+.reservation-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row; /* 수직 카드 배치 */
+  gap: 20px;
+  max-height: 700px; /* 원하는 높이로 설정 (예: 60vh 등) */
+  overflow-y: auto;
+  padding-right: 8px; /* 스크롤 숨김 시 공간 확보 */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent; /* Firefox */
+  padding : 10px 8px; /* 좌우 패딩 추가 */
 }
 
 /* 카드 전체 */
