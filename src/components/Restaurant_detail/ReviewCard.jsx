@@ -41,14 +41,22 @@ const renderStars = (score) => {
   );
 };
 
+
 const ReviewCard = ({
   nickname = '익명 사용자',
   reviewText = '',
   waitingScore = '',
   visitTime = '',
   waitingTime = '',
-  imageList = [],
+  image = '',
 }) => {
+
+  // const imageUrl = imagePath
+  // ? `${IMAGE_BASE_URL}${encodeURIComponent(imagePath)}`
+  // : '';
+  // console.log("ReviewCard image prop:", imagePath);  // 여기서 찍어보기
+
+
   return (
     <div className={styles.card}>
       {/* 상단: 프로필 + 닉네임 */}
@@ -61,22 +69,14 @@ const ReviewCard = ({
 
       {/* 이미지 영역 */}
       <div className={styles.imageScroll}>
-        {imageList.length > 0 ? (
-          imageList.map((src, i) => (
-            <img key={i} src={src} alt={`리뷰 이미지 ${i + 1}`} className={styles.image} />
-          ))
-        ) : (
-          <span className={styles.reviewText}>이미지 정보 없음</span>
-        )}
+        <img src={`http://localhost:8080/images/${image}`} alt="리뷰 이미지" />
       </div>
 
       {/* 정보 */}
       <div className={styles.details}>
         <span>방문 일시 : {formatVisitTime(visitTime)}</span>
         <span>대기 시간 : {formatWaitingTime(waitingTime)}</span>
-        <span>
-          {renderStars(waitingScore)}
-        </span>
+        <span>{renderStars(waitingScore)}</span>
       </div>
 
       {/* 리뷰 텍스트 */}
@@ -91,7 +91,7 @@ ReviewCard.propTypes = {
   waitingScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   visitTime: PropTypes.string,
   waitingTime: PropTypes.string,
-  imageList: PropTypes.arrayOf(PropTypes.string),
+  image: PropTypes.string, // ✅ 이미지 파일명
 };
 
 export default ReviewCard;

@@ -13,6 +13,7 @@ export default function ReviewFormPage() {
   const [reviewContent, setReviewContent] = useState('');
   const [waitingScore, setWaitingScore] = useState(0);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [setLoading] = useState(true);
   const [setReservation] = useState(null);
@@ -60,7 +61,6 @@ export default function ReviewFormPage() {
       if (!restaurantRes.ok) throw new Error("레스토랑 정보 불러오기 실패");
       const restaurantData = await restaurantRes.json();
       
-      console.log("예약 데이터:", reservationData.joinedAt);
       // 3. 화면 상태 구성
       // 올바르게 적용
       setRestaurantInfo({
@@ -138,26 +138,27 @@ export default function ReviewFormPage() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // 파일 크기 검증 (예: 5MB 이하)
       if (file.size > 5 * 1024 * 1024) {
         setErrors((prev) => ({ ...prev, image: '이미지 크기는 5MB 이하로 해주세요.' }));
         return;
       }
-      
-      // 파일 타입 검증
       if (!file.type.match('image.*')) {
         setErrors((prev) => ({ ...prev, image: '이미지 파일만 업로드 가능합니다.' }));
         return;
       }
 
+      setUploadedFile(file);
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImage(reader.result);
+        setUploadedImage(reader.result); // 미리보기 용도
       };
       reader.readAsDataURL(file);
+
       setErrors((prev) => ({ ...prev, image: '' }));
     }
   };
+
 
   const handleScoreClick = (score) => {
     setWaitingScore(score);
@@ -165,61 +166,53 @@ export default function ReviewFormPage() {
   };
 
   const handleSubmit = async () => {
-    const newErrors = {};
+  const newErrors = {};
 
-    if (!reviewContent.trim()) {
-      newErrors.reviewContent = '리뷰를 작성해주세요.';
+  if (!reviewContent.trim()) newErrors.reviewContent = '리뷰를 작성해주세요.';
+  if (waitingScore === 0) newErrors.score = '웨이팅 점수를 선택해주세요.';
+
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    alert('필수 입력/선택 사항을 확인해주세요.');
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append('comment', reviewContent);
+    formData.append('rating', waitingScore);
+    if (uploadedFile) {
+      formData.append('imageFile', uploadedFile);
     }
-    if (waitingScore === 0) {
-      newErrors.score = '웨이팅 점수를 선택해주세요.';
-    }
+    const response = await fetch(`http://localhost:8080/api/reservations/${reservationId}/reviews`, {
+      method: 'POST',
+      body: formData,
+    });
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      alert('필수 입력/선택 사항을 확인해주세요.');
-      return;
-    }
-    try {
+    if (!response.ok) throw new Error('업로드 실패');
 
-      const reviewData = {
-        comment: reviewContent,
-        rating: waitingScore,
-        imgeUrl: uploadedImage ? uploadedImage : null, // 이미지 URL이 있을 때만 포함
-      }
+    alert('리뷰가 성공적으로 작성되었습니다!');
+    navigate('/mypage');
+    localStorage.removeItem('reviewReservation');
 
-      const response = await fetch(`http://localhost:8080/api/reservations/${reservationId}/reviews`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reviewData),
-      });
+    // 리뷰 상태 변경
+    await fetch(`http://localhost:8080/api/reservations/${reservationId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'REVIEWED' }),
+    });
 
-      console.log('리뷰 데이터:', response.data);
-      alert('리뷰가 성공적으로 작성되었습니다!');
-      navigate('/mypage');
-      localStorage.removeItem("reviewReservation");
+    setReviewContent('');
+    setWaitingScore(0);
+    setUploadedImage(null);
+    setUploadedFile(null);
+    setErrors({});
+  } catch (err) {
+    console.error('❌ 리뷰 업로드 실패:', err);
+    alert('리뷰 작성 중 오류가 발생했습니다.');
+  }
+};
 
-
-      // 2. 리뷰 상태 변경 (PUT)
-      await fetch(`http://localhost:8080/api/reservations/${reservationId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'REVIEWED' }),
-      });
-
-      navigate('/mypage');
-      localStorage.removeItem("reviewReservation");
-
-      setReviewContent('');
-      setWaitingScore(0);
-      setUploadedImage(null);
-      setErrors({});
-      } catch (err) {
-      console.error('❌ 리뷰 업로드 실패:', err);
-      alert('리뷰 작성 중 오류가 발생했습니다.');
-    }
-  };
 
   return (
     

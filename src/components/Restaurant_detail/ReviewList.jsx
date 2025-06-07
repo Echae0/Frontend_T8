@@ -45,6 +45,8 @@ const ReviewList = () => {
     axios
       .get(`http://localhost:8080/api/restaurants/${restaurantId}/reviews`)
       .then((res) => {
+      console.log('백엔드 리뷰 데이터:', res.data);  // 여기 추가
+
         setReviews(res.data);
         setLoading(false);
       })
@@ -52,7 +54,9 @@ const ReviewList = () => {
         console.error('❌ 리뷰 불러오기 실패:', err);
         setLoading(false);
       });
+      
   }, [restaurantId]);
+  
 
   const sortReviews = (reviews, option) => {
     const sorted = [...reviews];
@@ -105,15 +109,17 @@ const ReviewList = () => {
 
 
       <div className={styles.reviewsList}>
-        {sortedReviews.map((review, index) => (
+        {sortedReviews.map((review, index, ) => (
           <ReviewCard
             key={review.id || index}
             nickname={review.memberName || '익명'}
             reviewText={review.comment || ''}
             waitingScore={review.rating || ''}
             visitTime={review.reservedAt || ''}
-            waitingTime={review.waitingTime || ''}
+            waitingTime={review.waitingTime || ''}  
+            image={review.imagePath || ""}
           />
+          
         ))}
       </div>
     </div>
