@@ -40,7 +40,7 @@
 }
 
 .waitingButton {
-  background-color: #ff6b6b;
+  background-color: #FA812F;
   color: white;
   border: none;
   padding: 12px 32px;
@@ -52,7 +52,7 @@
 }
 
 .waitingButton:hover {
-  background-color: #ff5252;
+  background-color: #dd6b20;
 }
 
 .topSection {
