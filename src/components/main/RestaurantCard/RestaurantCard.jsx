@@ -1,6 +1,5 @@
 // src/components/main/RestaurantCard/RestaurantCard.jsx
 import { useNavigate } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
 import "./RestaurantCard.css";
 
 const RestaurantCard = ({ restaurant }) => {

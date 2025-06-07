@@ -106,7 +106,7 @@ export default function ReservationHistory() {
             reservations.map((item) => (
               <div key={item.id} className="reservation-card">
                 <div className="reservation-image">
-                  {item.imageUrl ? (
+                  {/* {item.imageUrl ? (
                     <img
                       src={item.imageUrl}
                       alt="식당 이미지"
@@ -114,7 +114,9 @@ export default function ReservationHistory() {
                     />
                   ) : (
                     <div className="no-image-text">이미지 없음</div>
-                  )}
+                  )} */}
+                    <img src={`http://localhost:8080${item.restaurantInfo?.imageUrl}`} className="reservation-img" />
+
                 </div>
 
                 {/* ✅ 좌우 레이아웃으로 구성 */}
@@ -160,7 +162,7 @@ export default function ReservationHistory() {
                     {/* ✅ 하단 리뷰 쓰기 버튼: 상태가 JOINED일 때만 표시 */}
                     {item.status === "JOINED" && (
                       <button
-                        className="review-button"
+                        className={`status-label ${item.status.toLowerCase()}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleReview(item.id);
@@ -173,7 +175,7 @@ export default function ReservationHistory() {
                     {/* ✅ 리뷰 완료 상태일 때만 회색 버튼 표시 */}
                     {item.status === "REVIEWED" && (
                       <button
-                        className="review-button reviewed"
+                        className={`status-label ${item.status.toLowerCase()}`}
                         onClick={(e) => e.stopPropagation()}
                         disabled
                       >

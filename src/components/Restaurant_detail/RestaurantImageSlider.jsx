@@ -23,11 +23,7 @@ const RestaurantImageSlider = () => {
 
   return (
     <div className={styles.singleImageContainer}>
-      <img
-        src={imageUrl}
-        alt="식당 대표 사진"
-        className={styles.singleImage}
-      />
+      <img src={`http://localhost:8080${imageUrl}`} className="singleImage" />
     </div>
   );
 };

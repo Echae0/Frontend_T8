@@ -83,6 +83,7 @@
   height: 120px;
   flex-shrink: 0;
   overflow: hidden;
+  margin : 13px;
 }
 
 .reservation-img {
@@ -101,13 +102,16 @@
   width: 100%;
   box-sizing: border-box;
   gap: 16px;
+  
 }
 
 /* 왼쪽 정보 */
 .reservation-info {
+  margin-top: 9px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap : 8px;
 }
 
 /* 텍스트 정보 */
@@ -196,16 +200,19 @@
 }
 
 .status-label.requested {
-  background-color: #5093e6;
+  background-color: #a4c2e8;
 }
 .status-label.requested:hover {
   background-color: #c0c0c0; /* 호버 시 색상 유지 */
 }
 .status-label.joined {
-  background-color: #2ecc71;
+  background-color: #ffca39;
 }
 .status-label.cancelled {
   background-color: #dbdbdb;
+}
+.status-label.reviewed {
+  background-color: #9a9a9a;
 }
 
 

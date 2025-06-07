@@ -41,11 +41,13 @@ const MenuList = ({ setSelectedMenu }) => {
             className={styles.menuItem}
             onClick={() => handleMenuClick(menu)}
           >
-            <img 
+            {/* <img 
               src={menu.imageUrl || '/assets/sample-images/menu-thumb.jpg'} 
               alt={menu.name} 
               className={styles.menuImage}
-            />
+            /> */}
+            <img src={`http://localhost:8080${menu.imageUrl}`} className="menyImage" />
+
             <p className={styles.menuName}>{menu.name}</p>
             <p className={styles.menuPrice}>
               {menu.price?.toLocaleString()}원
