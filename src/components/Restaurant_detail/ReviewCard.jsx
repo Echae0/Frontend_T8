@@ -65,7 +65,7 @@ const ReviewCard = ({
       <div className={styles.reviewImagebox}>
         <img
       className={styles.reviewImage}
-      src={`http://localhost:8080/images/${image}`}
+      src={image ? `http://localhost:8080/images/${image}` : "/assets/default.png"}
       alt="리뷰 이미지"
     />
         {/* 리뷰 텍스트 */}

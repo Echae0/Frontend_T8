@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MenuPreview = ({ menu }) => {
   return (
       <div className={styles.menuPreview}>      
-        <img src={menu.img} alt={menu.name} className={styles.menuMainImg_pv} />
+        <img src={`http://localhost:8080${menu.imageUrl}`} alt={menu.name} className={styles.menuMainImg_pv} />
         <p className={styles.menuCaption_pv}>{menu.name}</p>
         <p className={styles.menuPrice_pv}>{menu.price?.toLocaleString()}원</p>
         <p className={styles.menuDescription_pv}> {menu.description}</p>

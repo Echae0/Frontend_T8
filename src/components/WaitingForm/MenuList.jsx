@@ -54,7 +54,7 @@ const MenuList = ({ onMenusLoaded, selectedMenus, onMenuToggle }) => {
                 <span className={styles.menuName}>{menu.name}</span>
               </div>
               <img
-                src={menu.imageUrl || '/assets/sample-images/menu-thumb.jpg'}
+                src={`http://localhost:8080${menu.imageUrl}` || '/assets/sample-images/menu-thumb.jpg'}
                 alt={menu.name}
                 className={styles.menuImage}
               />

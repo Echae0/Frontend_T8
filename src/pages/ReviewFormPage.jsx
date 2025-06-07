@@ -220,7 +220,7 @@ export default function ReviewFormPage() {
     <div className={styles.pageContainer}>
       <div className={styles.contentArea}>
         <div className={styles.restaurantInfoSection}>
-          <img src={restaurantInfo.image} alt="가게 사진" className={styles.restaurantImage} />
+          <img src={`http://localhost:8080/images/${restaurantInfo.image?.replace(/^\/?images\//, '')}`} alt="가게 사진" className={styles.restaurantImage} />
           <div className={styles.restaurantDetails}>
             <h2 className={styles.restaurantName}>{restaurantInfo.name}</h2>
             <p className={styles.restaurantAddress}>{restaurantInfo.address}</p>
