@@ -86,6 +86,12 @@ export default function ReservationHistory() {
     // 리뷰 폼 페이지로 이동
     navigate(`/reviewformpage?reservationId=${reservationId}`);
   };
+  useEffect(() => {
+    // 방문일 기준 내림차순 정렬
+    setReservations((prev) =>
+      [...prev].sort((a, b) => new Date(b.reservedAt) - new Date(a.reservedAt))
+    );
+  }, [reservations.length]);
 
   return (
     <div className="reservation-container">
