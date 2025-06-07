@@ -33,7 +33,7 @@ const renderStars = (score) => {
   const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
 
   return (
-    <span className={styles.stars}>
+    <span className={styles.reviewStars}>
       {'★'.repeat(fullStars)}
       {hasHalf ? '⯨' : ''}
       {'☆'.repeat(emptyStars)}
@@ -51,36 +51,32 @@ const ReviewCard = ({
   image = '',
 }) => {
 
-  // const imageUrl = imagePath
-  // ? `${IMAGE_BASE_URL}${encodeURIComponent(imagePath)}`
-  // : '';
-  // console.log("ReviewCard image prop:", imagePath);  // 여기서 찍어보기
-
-
   return (
-    <div className={styles.card}>
+    <div className={styles.reviewCard}>
       {/* 상단: 프로필 + 닉네임 */}
-      <div className={styles.header}>
-        <div className={styles.profile}>
-          <div className={styles.avatar} />
-          <span className={styles.nickname}>{nickname}</span>
+      <div className={styles.reviewHeader}>
+        <div className={styles.reviewProfile}>
+          <div className={styles.reviewAvatar} />
+          <span className={styles.reviewNickname}>{nickname}</span>
         </div>
       </div>
 
-      {/* 이미지 영역 */}
-      <div className={styles.imageScroll}>
-        <img src={`http://localhost:8080/images/${image}`} alt="리뷰 이미지" />
+      {/* 이미지 + 정보 영역 */}
+      <div className={styles.reviewImagebox}>
+        <img
+          className={styles.reviewImage}
+          src={`http://localhost:8080/images/${image}`}
+          alt="리뷰 이미지"
+        />
+        {/* 리뷰 텍스트 */}
+        <p className={styles.reviewText}>{reviewText}</p>
       </div>
 
-      {/* 정보 */}
-      <div className={styles.details}>
-        <span>방문 일시 : {formatVisitTime(visitTime)}</span>
-        <span>대기 시간 : {formatWaitingTime(waitingTime)}</span>
-        <span>{renderStars(waitingScore)}</span>
-      </div>
-
-      {/* 리뷰 텍스트 */}
-      <p className={styles.reviewText}>{reviewText}</p>
+        <div className={styles.reviewDetails}>
+          <span>방문 일시 : {formatVisitTime(visitTime)}</span>
+          <span>대기 시간 : {formatWaitingTime(waitingTime)}</span>
+          <span>{renderStars(waitingScore)}</span>
+        </div>
     </div>
   );
 };
@@ -91,7 +87,7 @@ ReviewCard.propTypes = {
   waitingScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   visitTime: PropTypes.string,
   waitingTime: PropTypes.string,
-  image: PropTypes.string, // ✅ 이미지 파일명
+  image: PropTypes.string, // 이미지 파일명
 };
 
 export default ReviewCard;

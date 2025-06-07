@@ -1,4 +1,4 @@
-.card {
+.reviewCard {
   width: 100%;
   padding: 16px;
   border: 1px solid #ccc;
@@ -11,67 +11,72 @@
   font-family: sans-serif;
 }
 
-.header {
+.reviewHeader {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.profile {
+.reviewProfile {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.avatar {
+.reviewAvatar {
   width: 40px;
   height: 40px;
   background-color: #ddd;
   border-radius: 50%;
 }
 
-.nickname {
+.reviewNickname {
   font-weight: bold;
   font-size: 16px;
 }
 
-.imagebox {
+.reviewImagebox {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  overflow-x: auto;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  gap: 16px;
   padding-bottom: 4px;
-  border: 2px solid #00aaff;
+  border: 2px solid #cecece;
   border-radius: 4px;
   padding: 8px;
+  height: 150px;
+  flex-direction: row;
+  font-family: sans-serif;
 }
 
-.image {
-  width: 120px;
-  height: 120px;
+
+.reviewImage {
+  height: 100%;   /* 작게 변경 */
+  width : 35%;
   object-fit: cover;
   border-radius: 6px;
-  flex-shrink: 0;
 }
 
-.details {
+.reviewDetails {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between; /* 양 끝부터 균등 분배 */
+  gap: 0;                          /* space-between 쓰면 gap은 0으로 */
   font-size: 14px;
   color: #333;
+  flex: 1;                         /* 남은 공간 차지 */
   padding: 0 4px;
-  flex-wrap: wrap;
 }
+
 
 .reviewText {
   font-size: 15px;
   color: #222;
   line-height: 1.4;
-  padding: 4px;
+  padding: 4px 0 0 0;
   white-space: pre-line;
 }
 
-.stars {
+.reviewStars {
   font-size: 1.1rem;
   color: #f5a623;
   letter-spacing: 0.05em;
