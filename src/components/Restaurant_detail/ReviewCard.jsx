@@ -64,10 +64,10 @@ const ReviewCard = ({
       {/* 이미지 + 정보 영역 */}
       <div className={styles.reviewImagebox}>
         <img
-          className={styles.reviewImage}
-          src={`http://localhost:8080/images/${image}`}
-          alt="리뷰 이미지"
-        />
+      className={styles.reviewImage}
+      src={`http://localhost:8080/images/${image}`}
+      alt="리뷰 이미지"
+    />
         {/* 리뷰 텍스트 */}
         <p className={styles.reviewText}>{reviewText}</p>
       </div>
