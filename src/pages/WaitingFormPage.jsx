@@ -143,8 +143,8 @@ export default function WaitingFormPage() {
         setErrors({});
         const result = await response.json();
         setForm({
-          people: result.partySize,
-          request: result.requestDetail || "",
+          people: result.partySize ?? 1,
+          request: result.requestDetail ?? "요청사항없음",
         });
         const reservationId = result.reservationId || result.id;
         navigate(`/waiting/${reservationId}`);

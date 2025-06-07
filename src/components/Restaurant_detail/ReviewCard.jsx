@@ -17,12 +17,18 @@ const formatWaitingTime = (duration) => {
   const match = duration.match(/P(?:([0-9]+)D)?T?(?:([0-9]+)H)?(?:([0-9]+)M)?/);
   if (!match) return '정보 없음';
   const [, days, hours, minutes] = match.map((x) => (x ? parseInt(x, 10) : 0));
+
+  const totalMinutes = (days * 24 * 60) + (hours * 60) + minutes;
+  if (totalMinutes === 0) return '바로 입장';
+
   let result = '';
   if (days) result += `${days * 24}시간 `;
   if (hours) result += `${hours}시간 `;
   if (minutes) result += `${minutes}분`;
-  return result.trim() || '정보 없음';
+
+  return result.trim();
 };
+
 
 const renderStars = (score) => {
   const rating = parseFloat(score);
