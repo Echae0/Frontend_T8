@@ -93,7 +93,7 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <img src={`http://localhost:8080/images/"/MUCK_logo.png`} alt="MUCK 로고" />
+        <img src={`http://localhost:8080/images/muck-logo.png`} alt="MUCK 로고" />
       </div>
 
       <div className={styles.loginForm}>
