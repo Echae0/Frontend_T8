@@ -1,0 +1,161 @@
+* [33mea90d4e[m[33m ([m[1;31morigin/nahye6[m[33m)[m css 수정
+[31m|[m * [33mb036d95[m[33m ([m[1;31morigin/nahye7[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mnahye7[m[33m, [m[1;32mmain[m[33m)[m final
+[31m|[m[31m/[m  
+* [33md693c3c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnahye6[m[33m)[m modify
+* [33maacd7f9[m merge hyeok
+* [33m66b8850[m add paging
+* [33mbeb496f[m modify reservation null
+[32m|[m * [33md7f9aa5[m[33m ([m[1;31morigin/imgchange[m[33m)[m imgchange
+[32m|[m[32m/[m  
+* [33ma1fd533[m modify
+* [33me68b0a4[m modify
+* [33m439d2c8[m modify reservation latest sort
+* [33m3235126[m modify
+* [33mb6c51e8[m add review image
+* [33mea91264[m add review image
+* [33me631595[m add review image
+* [33meb92a64[m modify design
+* [33mdc6c13f[m[33m ([m[1;31morigin/TopBar[m[33m)[m TopBar
+* [33m9d14337[m[33m ([m[1;31morigin/nahye5[m[33m, [m[1;32mnahye5[m[33m)[m modify
+* [33m59f06c3[m modify topbar username
+* [33m0188d59[m modify reservation button status
+* [33m8464772[m modify review complete button click -> REVIEWED
+* [33m436db2b[m modify review button function
+* [33m4536357[m reivew posting
+* [33m5fe2b54[m[33m ([m[1;32mnahye4[m[33m)[m modify design
+* [33m64e67bc[m[33m ([m[1;31morigin/nahye4[m[33m)[m modify design
+* [33m55a3f0e[m modify header location filtering
+* [33mda50d7a[m modify header to search
+* [33m056cb6f[m modify header to search
+* [33maf1ea00[m modify header to search
+* [33m1637c30[m modify visitInfo
+* [33m353bcb6[m modify reservation history-waiting
+* [33mc1d39de[m modify reservation history-waiting
+* [33me3ee873[m modify waiting page status
+* [33m4f5b2d3[m modify restaurant detail/waiting page
+* [33mb80d033[m[33m ([m[1;31morigin/loginfunction[m[33m)[m 일단 commit
+* [33m9d60006[m 예약 수정
+* [33madbeb03[m 보안 추가
+[33m|[m * [33m567d3aa[m[33m ([m[1;31morigin/nahye3[m[33m, [m[1;32mnahye3[m[33m)[m modify to add memberid
+[33m|[m * [33m52cfd55[m clear Rest API
+[33m|[m[33m/[m  
+* [33m4715a53[m category 코드 자동화
+* [33m2cf177e[m hocsea
+* [33m291da03[m hocsea
+* [33m9d5c80f[m design 수정
+* [33m064af7b[m 내정보 수정
+* [33mdb4cc10[m logout 수정
+* [33mb5ca86c[m loginfunction
+[34m|[m * [33m7e5ba12[m[33m ([m[1;31morigin/nahye2[m[33m, [m[1;32mnahye2[m[33m)[m waitingform securityConfig
+[34m|[m [35m|[m * [33m3ab5890[m[33m ([m[1;31morigin/echae0-v2[m[33m)[m 버튼으로 status 시도
+[34m|[m [35m|[m * [33m926afe0[m 예약대기폼에서 예약자 정보 동기화 완료
+[34m|[m [35m|[m * [33m31624a0[m 식당이름, 현재날짜 받아오기 성공
+[34m|[m [35m|[m * [33m206634d[m 웨이팅 정보 불러오기 성공
+[34m|[m [35m|[m * [33m08b0ca8[m waitingFormpage 등록 성공
+[34m|[m [35m|[m[35m/[m  
+[34m|[m * [33m2fc1886[m add login
+[34m|[m * [33md361427[m modify stars
+[34m|[m * [33mac9a138[m fetch css nahye
+[34m|[m * [33mb6ace54[m modify design
+[34m|[m * [33mce05804[m modify design
+[34m|[m * [33m7e25f25[m add currentWaitingTeams and predictedWaitingTime
+[34m|[m * [33mcc86db9[m[33m ([m[1;31morigin/mergehyeok[m[33m)[m back
+[34m|[m * [33mfc383cb[m waitingpage 수정 마이페이지 결함
+[34m|[m [36m|[m * [33m0e33eb6[m[33m ([m[1;31morigin/jongwon-mainpage[m[33m)[m Update README.md
+[34m|[m [36m|[m * [33m6d65925[m 마이페이지 레이아웃 css 수정 및 레스토랑 디테일 색깔 수정
+[34m|[m [36m|[m * [33m404b9c4[m 메인페이지 수정 및 마이페이지 사이드바 수정
+[34m|[m [36m|[m * [33m655e051[m[33m ([m[1;31morigin/Echae0-merge[m[33m)[m 잠시 오류 수정중
+[34m|[m [36m|[m * [33md720c2d[m 다시 원상복구
+[34m|[m [36m|[m * [33m052f422[m memberId랑 웨이팅 시간 받아오기 연동
+[34m|[m [36m|[m * [33mea58240[m 웨이팅 대기 폼에 레스토랑 이름 연동 성공
+[34m|[m [36m|[m[34m/[m  
+[34m|[m[34m/[m[36m|[m   
+* [36m|[m [33m0a57e08[m 예약대기폼 waitingInfo 연동
+* [36m|[m [33m408bb44[m waitingForm 대기시간, 대기팀 연결완료
+* [36m|[m [33md263c24[m 웨이팅 대기 페이지 합치기
+* [36m|[m [33me98fbd5[m login member id 가져오기 시도중
+[36m|[m[36m/[m  
+* [33m3f32845[m 웨이팅 폼 이름 수정 및 레스토랑과 웨이팅 폼 연결 완료
+* [33m5aaa214[m restaurant_detail 메뉴 연동까지 merge 완료
+* [33m7e053f1[m login page start & login 연동
+* [33m378b5f7[m api 호출 링크 변경
+* [33mdedcf58[m login 페이지 수정 및 회원가입 페이지 연결 완료
+* [33m5a30f2a[m[33m ([m[1;31morigin/nahye-RDconnection[m[33m, [m[1;32mnahye-RDconnection[m[33m)[m modify
+* [33m0b0e5fc[m modify link to restaurantDetail with id
+* [33m0f8126f[m[33m ([m[1;31morigin/merge-jongwon[m[33m)[m 마이페이지 수정
+* [33m6932212[m 토큰 임시제거 버전
+[1;33m|[m * [33m327dd31[m[33m ([m[1;31morigin/nahye-userinfo[m[33m, [m[1;32mnahye-userinfo[m[33m)[m modify to add password and api url
+[1;33m|[m * [33m27ef997[m[33m ([m[1;31morigin/axiostest[m[33m)[m 회원 닉네임 API 연동
+[1;33m|[m * [33m1c9ad79[m reviewpage 수정
+[1;33m|[m * [33m70975eb[m[33m ([m[1;31morigin/Echae0[m[33m)[m login-signup-login 연결
+[1;33m|[m * [33m66febaf[m axiostest original branch remake
+[1;33m|[m * [33m75c84a9[m update message
+[1;33m|[m * [33m6b15ca8[m connect login & signup
+[1;33m|[m * [33mb430321[m signup page 비대칭 해결
+[1;33m|[m * [33m7c29d5a[m waiting status page add
+[1;33m|[m * [33m2913b42[m copy files delete
+[1;33m|[m * [33m8459aaa[m login page edit
+[1;33m|[m * [33mf9ec2ec[m 메뉴2열 정렬 + menulist file update
+[1;33m|[m * [33m566b308[m SignUp page finish (before password)
+[1;33m|[m * [33me98409f[m 메뉴연동 완료
+[1;33m|[m * [33m2affc34[m MenuList add
+[1;33m|[m * [33m213855f[m waitingformpage copy
+[1;33m|[m * [33mb7032aa[m 회원가입 axiostest
+[1;33m|[m * [33m40b11b5[m axios test 이전에 copy 만들어놓기
+[1;33m|[m * [33m93a157b[m 전화번호 포맷 및 날짜 포맷 변경
+[1;33m|[m * [33mfbdacbd[m 인원수 선택지 변경
+[1;33m|[m * [33m427771d[m bring WaitingForm jsx from waitingtest branch
+[1;33m|[m * [33ma9cafa7[m[33m ([m[1;31morigin/Review-C[m[33m)[m 시작페이지 선택지 간격 조정
+[1;33m|[m * [33mde83fbe[m add signup page
+[1;33m|[m * [33m76606d7[m delete header
+[1;33m|[m * [33me8afeef[m button color changed
+[1;33m|[m [1;35m|[m * [33m8139d84[m[33m ([m[1;31morigin/hyeok[m[33m)[m hocsea
+[1;33m|[m [1;35m|[m * [33m2e39c84[m reviews
+[1;33m|[m [1;35m|[m * [33m970a82f[m main 화면 이미지 출력까지
+[1;33m|[m [1;35m|[m [1;36m|[m * [33m968eeb4[m[33m ([m[1;31morigin/merge[m[33m)[m hocsea
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33mb342863[m[33m ([m[1;31morigin/nahye[m[33m, [m[1;32mnahye[m[33m)[m modify menu list and review list and sort buttons
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33macabdd2[m modify review card
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33m76b35be[m add description
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33m4e0b0c3[m modify review card
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33mc3bb293[m connected api restaurants reviews
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33m1589b35[m connected api restaurants review
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33m75df0bf[m connected api restaurants menu
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33ma34ec8f[m connected api restaurants imageurl
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33m291553c[m connected api restaurants
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m * [33md4d2f2d[m connected api restaurants
+[1;33m|[m [1;35m|[m [1;36m|[m [31m|[m[31m/[m  
+[1;33m|[m [1;35m|[m [1;36m|[m * [33mf66228e[m 3페이지 merge
+[1;33m|[m [1;35m|[m [1;36m|[m[1;36m/[m  
+[1;33m|[m [1;35m|[m * [33m540ba85[m 내 정보 수정 추가
+[1;33m|[m [1;35m|[m * [33mb89d91e[m mypage
+[1;33m|[m [1;35m|[m * [33me813461[m mypage 설정
+[1;33m|[m [1;35m|[m[1;33m/[m  
+[1;33m|[m[1;33m/[m[1;35m|[m   
+[1;33m|[m [1;35m|[m * [33m421ab95[m[33m ([m[1;31morigin/jongwon-login,signup[m[33m)[m 로컬 작업물을 jongwon-login,signup
+[1;33m|[m [1;35m|[m * [33mc73aea0[m[33m ([m[1;31morigin/jongwon-login[m[33m)[m 로그인 페이지
+[1;33m|[m [1;35m|[m * [33m0fa26cb[m[33m ([m[1;31morigin/waitingtest[m[33m)[m change color
+[1;33m|[m [1;35m|[m * [33mfdc8c43[m axios download
+[1;33m|[m [1;35m|[m[1;35m/[m  
+[1;33m|[m * [33maf10448[m error message location change
+[1;33m|[m * [33ma676aff[m layout update
+[1;33m|[m * [33mab0fd97[m change icon
+[1;33m|[m * [33m04901d0[m update nickname part
+[1;33m|[m * [33m42295b5[m update
+[1;33m|[m * [33m5461ec3[m error message location update
+[1;33m|[m * [33m143209c[m change icon and image upload update
+[1;33m|[m * [33mac5addb[m add review page and link added
+[1;33m|[m * [33m0e449a6[m[33m ([m[1;31morigin/Chaemin[m[33m)[m add WaitingFormPage
+[1;33m|[m[1;33m/[m  
+[1;33m|[m * [33ma390f73[m[33m ([m[1;31morigin/review-a[m[33m)[m add review
+[1;33m|[m * [33m2293012[m[33m ([m[1;31morigin/jongwon[m[33m)[m 이미지 .gitignore에 추가 및 추적 제거
+[1;33m|[m * [33m9b1bafe[m Initial commit
+[1;33m|[m[1;33m/[m  
+[1;33m|[m * [33md54d05b[m[33m ([m[1;31morigin/feature/restaurant-detail[m[33m, [m[1;32mfeature/restaurant-detail[m[33m)[m modify menu list and preview css
+[1;33m|[m * [33m01e349a[m modify bottom total reviews
+[1;33m|[m * [33m0201938[m modify review card and review list to scroll
+[1;33m|[m * [33mff7b0be[m modify menu list and preview to scroll and scale up
+[1;33m|[m * [33me58d14b[m base structure
+[1;33m|[m * [33m179ebde[m feat: Add restaurant detail page and components
+[1;33m|[m[1;33m/[m  
+* [33mc9807d1[m[33m ([m[1;31morigin/jongwon-restaurantsdetail[m[33m)[m 프론트엔드 시작
+* [33m087562c[m[33m ([m[1;31morigin/jungho[m[33m)[m 초안1
