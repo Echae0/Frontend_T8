@@ -15,61 +15,59 @@ POST http://localhost:8080/api/categories
 
 Content-Type: application/json
 
-	   	[
 	   
-		   	{
-		   
-		   	"categoryCode": "KOREAN",
-		   
-		   	"categoryName": "한식"
-		   
-		   	},
-		   
-		   	{
-		   
-		   	"categoryCode": "CHINESE",
-		   
-		   	"categoryName": "중식"
-		   
-		   	},
-		   
-		   	{
-		   
-		   	"categoryCode": "JAPANESE",
-		   
-		   	"categoryName": "일식"
-		   
-		   	},
-		   
-		   	{
-		   
-		   	"categoryCode": "WESTERN",
-		   
-		   	"categoryName": "양식"
-		   
-		   	},
-		   
-		   	{
-		   
-		   	"categoryCode": "ASIAN",
-		   
-		   	"categoryName": "아시안"
-		   
-		   	},
-		   
-		   	{
-		   
-		   	"categoryCode": "DESSERT",
-		   
-		   	"categoryName": "디저트"
-		   
-		   	}
+    {
+    
+    "categoryCode": "KOREAN",
+    
+    "categoryName": "한식"
+    
+    },
+    
+    {
+    
+    "categoryCode": "CHINESE",
+    
+    "categoryName": "중식"
+    
+    },
+    
+    {
+    
+    "categoryCode": "JAPANESE",
+    
+    "categoryName": "일식"
+    
+    },
+    
+    {
+    
+    "categoryCode": "WESTERN",
+    
+    "categoryName": "양식"
+    
+    },
+    
+    {
+    
+    "categoryCode": "ASIAN",
+    
+    "categoryName": "아시안"
+    
+    },
+    
+    {
+    
+    "categoryCode": "DESSERT",
+    
+    "categoryName": "디저트"
+    
+    }
 	   
-	   	]
 
   
 
-**1. 식당 요청 예시**:
+**2. 식당 요청 예시**:
 
 
 POST http://localhost:8080/api/restaurants
@@ -77,126 +75,125 @@ POST http://localhost:8080/api/restaurants
 Content-Type: application/json
 
   
+    {
 
-		{
+    "restaurantName": "한촌설렁탕",
 
-		"restaurantName": "한촌설렁탕",
+    "location": "서울특별시 종로구 종로5가 195-5",
 
-		"location": "서울특별시 종로구 종로5가 195-5",
+    "description": "뽀얀 사골 국물이 일품인 전통 설렁탕 전문점입니다. 깔끔하고 부담 없는 맛을 제공합니다.",
 
-		"description": "뽀얀 사골 국물이 일품인 전통 설렁탕 전문점입니다. 깔끔하고 부담 없는 맛을 제공합니다.",
+    "parking": "근처 공영주차장 이용 가능 ",
 
-		"parking": "근처 공영주차장 이용 가능 ",
+    "imageUrl": "/images/resto1.png",
 
-		"imageUrl": "/images/resto1.png",
+    "categoryCode": "KOREAN",
 
-		"categoryCode": "KOREAN",
+    "contactNumber": "02-734-1234",
 
-		"contactNumber": "02-734-1234",
+    "openingHours": "07:00-21:00",
 
-		"openingHours": "07:00-21:00",
+    "dailyLimitedTeams": 20,
 
-		"dailyLimitedTeams": 20,
+    "availableTeams": 18
 
-		"availableTeams": 18
+    },
 
-		},
+    {
 
-		{
+    "restaurantName": "전주비빔관",
 
-		"restaurantName": "전주비빔관",
+    "location": "서울특별시 마포구 서교동 358-2",
 
-		"location": "서울특별시 마포구 서교동 358-2",
+    "description": "전주의 맛을 그대로 재현한 비빔밥 전문점입니다. 신선한 나물과 고소한 고추장이 조화를 이룹니다.",
 
-		"description": "전주의 맛을 그대로 재현한 비빔밥 전문점입니다. 신선한 나물과 고소한 고추장이 조화를 이룹니다.",
+    "parking": "주차 가능",
 
-		"parking": "주차 가능",
+    "imageUrl": "/images/resto2.png",
 
-		"imageUrl": "/images/resto2.png",
+    "categoryCode": "KOREAN",
 
-		"categoryCode": "KOREAN",
+    "contactNumber": "02-325-5678",
 
-		"contactNumber": "02-325-5678",
+    "openingHours": "11:00-22:00",
 
-		"openingHours": "11:00-22:00",
+    "dailyLimitedTeams": 15,
 
-		"dailyLimitedTeams": 15,
+    "availableTeams": 15
 
-		"availableTeams": 15
+    },
 
-		},
+    {
 
-		{
+    "restaurantName": "광화문 미진 칼국수",
 
-		"restaurantName": "광화문 미진 칼국수",
+    "location": "서울특별시 종로구 세종로 81-1",
 
-		"location": "서울특별시 종로구 세종로 81-1",
+    "description": "쫄깃한 면발과 깊은 멸치 육수가 특징인 칼국수 전문점입니다. 사리 추가와 직접 담근 김치가 인기 메뉴입니다.",
 
-		"description": "쫄깃한 면발과 깊은 멸치 육수가 특징인 칼국수 전문점입니다. 사리 추가와 직접 담근 김치가 인기 메뉴입니다.",
+    "parking": "근처 공영주차장 이용 가능 ",
 
-		"parking": "근처 공영주차장 이용 가능 ",
+    "imageUrl": "/images/resto3.png",
 
-		"imageUrl": "/images/resto3.png",
+    "categoryCode": "KOREAN",
 
-		"categoryCode": "KOREAN",
+    "contactNumber": "02-720-3344",
 
-		"contactNumber": "02-720-3344",
+    "openingHours": "10:30-20:00",
 
-		"openingHours": "10:30-20:00",
+    "dailyLimitedTeams": 12,
 
-		"dailyLimitedTeams": 12,
+    "availableTeams": 9
 
-		"availableTeams": 9
+    },
 
-		},
+    {
 
-		{
+    "restaurantName": "뚝배기집",
 
-		"restaurantName": "뚝배기집",
+    "location": "서울특별시 강남구 역삼동 678-10",
 
-		"location": "서울특별시 강남구 역삼동 678-10",
+    "description": "다양한 전골과 찌개를 뚝배기에 제공하는 한식당입니다. 점심 특선으로 된장찌개 정식이 인기입니다.",
 
-		"description": "다양한 전골과 찌개를 뚝배기에 제공하는 한식당입니다. 점심 특선으로 된장찌개 정식이 인기입니다.",
+    "parking": "주차 가능 ",
 
-		"parking": "주차 가능 ",
+    "imageUrl": "/images/resto4.png",
 
-		"imageUrl": "/images/resto4.png",
+    "categoryCode": "KOREAN",
 
-		"categoryCode": "KOREAN",
+    "contactNumber": "02-545-7788",
 
-		"contactNumber": "02-545-7788",
+    "openingHours": "11:00-23:00",
 
-		"openingHours": "11:00-23:00",
+    "dailyLimitedTeams": 25,
 
-		"dailyLimitedTeams": 25,
+    "availableTeams": 22
 
-		"availableTeams": 22
+    },
 
-		},
+    {
 
-		{
+    "restaurantName": "청년다방 불고기백반",
 
-		"restaurantName": "청년다방 불고기백반",
+    "location": "서울특별시 서초구 반포동 32-4",
 
-		"location": "서울특별시 서초구 반포동 32-4",
+    "description": "매일 신선한 한우 불고기를 제공하는 백반 전문점입니다. 반찬이 풍성하고 식사 후 디저트 제공도 포함됩니다.",
 
-		"description": "매일 신선한 한우 불고기를 제공하는 백반 전문점입니다. 반찬이 풍성하고 식사 후 디저트 제공도 포함됩니다.",
+    "parking": "근처 공영주차장 이용 가능",
 
-		"parking": "근처 공영주차장 이용 가능",
+    "imageUrl": "/images/resto5.png",
 
-		"imageUrl": "/images/resto5.png",
+    "categoryCode": "KOREAN",
 
-		"categoryCode": "KOREAN",
+    "contactNumber": "02-598-1122",
 
-		"contactNumber": "02-598-1122",
+    "openingHours": "11:30-21:30",
 
-		"openingHours": "11:30-21:30",
+    "dailyLimitedTeams": 18,
 
-		"dailyLimitedTeams": 18,
+    "availableTeams": 18
 
-		"availableTeams": 18
-
-		}
+    }
 
   
 
@@ -208,47 +205,47 @@ POST http://localhost:8080/api/restaurants/${restaurantsId}/menus
 Content-Type: application/json
 
   
-		{
+    {
 
-		"name": "설렁탕",
+    "name": "설렁탕",
 
-		"description": "진한 사골 육수에 밥과 소고기가 듬뿍 들어있는 전통 설렁탕",
+    "description": "진한 사골 육수에 밥과 소고기가 듬뿍 들어있는 전통 설렁탕",
 
-		"price": 9000.00,
+    "price": 9000.00,
 
-		"imageUrl": "/images/resto1-1.png",
+    "imageUrl": "/images/resto1-1.png",
 
-		"available": true
+    "available": true
 
-		}
+    }
 
-		{
+    {
 
-		"name": "특설렁탕",
+    "name": "특설렁탕",
 
-		"description": "고기의 양을 늘리고, 고명으로 양지와 우둔살이 추가된 특별 설렁탕",
+    "description": "고기의 양을 늘리고, 고명으로 양지와 우둔살이 추가된 특별 설렁탕",
 
-		"price": 12000.00,
+    "price": 12000.00,
 
-		"imageUrl": "/images/resto1-2.png",
+    "imageUrl": "/images/resto1-2.png",
 
-		"available": true
+    "available": true
 
-		}
+    }
 
-		{
+    {
 
-		"name": "수육 소",
+    "name": "수육 소",
 
-		"description": "부드러운 양지와 사태 부위를 푹 삶아낸 수육 소사이즈",
+    "description": "부드러운 양지와 사태 부위를 푹 삶아낸 수육 소사이즈",
 
-		"price": 25000.00,
+    "price": 25000.00,
 
-		"imageUrl": "/images/resto1-3.png",
+    "imageUrl": "/images/resto1-3.png",
 
-		"available": true
+    "available": true
 
-		}
+    }
 
   
 
