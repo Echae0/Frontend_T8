@@ -200,10 +200,10 @@
 }
 
 .status-label.requested {
-  background-color: #a4c2e8;
+  background-color: #f3c623;
 }
 .status-label.requested:hover {
-  background-color: #c0c0c0; /* 호버 시 색상 유지 */
+  background-color: #fca871; /* 호버 시 색상 유지 */
 }
 .status-label.joined {
   background-color: #ffca39;
