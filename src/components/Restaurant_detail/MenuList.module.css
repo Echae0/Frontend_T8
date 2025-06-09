@@ -7,7 +7,7 @@
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  max-height: 800px;
+  max-height: 600px;
   padding: 10px 20px; /* 좌우 패딩 추가 */
 }
 
