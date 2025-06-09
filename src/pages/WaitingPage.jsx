@@ -15,6 +15,7 @@ export default function WaitingStatusPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [myOrder, setMyOrder] = useState(0);
+  const [username, setUsername] = useState("");
   const [expectedWaitTime, setExpectedWaitTime] = useState(0);
   const [specialRequests, setSpecialRequests] = useState("요청사항 없음");
   const [totalGuests, setTotalGuests] = useState(0);
@@ -94,6 +95,23 @@ export default function WaitingStatusPage() {
 
     fetchData();
   }, [user]);
+
+  useEffect(() => {
+    if (user && user.memberId) {
+      axios
+        .get(`http://localhost:8080/api/members/${user.memberId}`) // 예: 유저 정보 API
+        .then((res) => {
+          setUsername(res.data.name || "손님");
+        })
+        .catch((err) => {
+          console.error("❌ 유저 이름 가져오기 실패:", err);
+          setUsername("손님");
+        });
+    } else {
+      setUsername("손님");
+    }
+  }, [user]);
+
 
   const handleCancelWaiting = async () => {
     if (!currentReservationId || !activeReservationData) {
@@ -175,7 +193,7 @@ export default function WaitingStatusPage() {
 
   return (
     <div>
-      <TopBar />
+      <TopBar username={username}/>
       <div className={styles.container}>
         <h1 className={styles.restaurantName}>{restaurantName}</h1>
         <p className={styles.currentOrder}>
