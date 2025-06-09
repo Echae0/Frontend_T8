@@ -16,12 +16,18 @@
 
 .contentWrapper {
   display: flex;
+  align-items: center;     /* ✅ 세로 중앙 정렬 */
+  justify-content: space-between;
   gap: 16px;
   margin: 16px 0;
+  height: 600px;           /* ✅ 반드시 있어야 세로 기준 생김 */
 }
 
 .leftColumn {
   width: 40%;
+  display: flex;           /* ✅ 세로 가운데 정렬을 위해 flex */
+  justify-content: center;
+  align-items: center;
 }
 
 .rightColumn {
